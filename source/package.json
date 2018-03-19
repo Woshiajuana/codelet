@@ -1,0 +1,37 @@
+{
+    "name": "wow-react",
+    "version": "0.0.1",
+    "description": "react ui",
+    "main": "dist/index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Woshiajuana/wow-react.git"
+    },
+    "keywords": [
+        "react",
+        "ui"
+    ],
+    "author": {
+        "name": "Ajuan",
+        "email": "zhigang.chen@owulia.com",
+        "url": "http://www.owulia.com/"
+    },
+    "contributors": [{
+        "name": "Ajuan",
+        "email": "zhigang.chen@owulia.com",
+        "url": "http://www.owulia.com/"
+    }],
+    "maintainer": [{
+        "name": "Ajuan",
+        "email": "zhigang.chen@owulia.com",
+        "url": "http://www.owulia.com/"
+    }],
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Woshiajuana/wow-react/issues"
+    },
+    "homepage": "https://github.com/Woshiajuana/wow-react#readme"
+}
