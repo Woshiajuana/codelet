@@ -2,6 +2,7 @@
   "type": "object",
   "properties": {
     "entryPath": {
+      "description": "入口文件",
       "type": "string"
     }
   },

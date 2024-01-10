@@ -5,8 +5,14 @@
   "description": "轻量级微信小程序框架",
   "packageManager": "pnpm@8.7.1",
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
-    "clean": "rimraf --glob **/node_modules"
+    "clean": "rimraf --glob **/node_modules",
+    "build": "npm run build:copy-loader",
+    "build:cli-service": "pnpm -C ./packages/cli-service build",
+    "build:copy-loader": "pnpm -C ./packages/copy-loader build",
+    "build:core": "pnpm -C ./packages/core build",
+    "build:inject-chunk-webpack-plugin": "pnpm -C ./packages/inject-chunk-webpack-plugin build",
+    "build:wxml-loader": "pnpm -C ./packages/wxml-loader build",
+    "preinstall": "npx only-allow pnpm"
   },
   "keywords": [
     "daysnap",

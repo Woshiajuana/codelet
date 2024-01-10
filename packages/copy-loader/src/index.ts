@@ -1,9 +1,14 @@
+import path from 'path'
 import type { LoaderContext } from 'webpack'
 import type { CopyLoaderOptions } from './types'
 import schema from './schema.json'
 
-const s = schema
+export default function loader(this: LoaderContext<CopyLoaderOptions>, content: string) {
+  const { entryPath } = this.getOptions(schema as any)
 
-export default function loader(this: LoaderContext<CopyLoaderOptions>, source: string) {
-  const { entryPath } = this.getOptions(s)
+  const outputPath = this.resourcePath.replace(`${entryPath}${path.sep}`, '')
+
+  this.emitFile(outputPath, content)
+
+  return ''
 }

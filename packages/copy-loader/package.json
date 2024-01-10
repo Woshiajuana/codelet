@@ -2,9 +2,17 @@
   "name": "@bee/copy-loader",
   "version": "0.0.1",
   "description": "webpack loader copy copy-loader",
-  "main": "index.js",
-  "scripts": {},
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "npm run clean && tsc",
+    "clean": "rimraf ./dist",
+    "release": "npm run build && dsc publish --pnpm -t && dsc sync"
+  },
   "publishConfig": {
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "files": [
@@ -24,6 +32,7 @@
     "webpack": ">=5.0.0 <6.0.0"
   },
   "devDependencies": {
+    "rimraf": "^5.0.5",
     "typescript": "^5.3.3",
     "webpack": "^5.89.0"
   }
