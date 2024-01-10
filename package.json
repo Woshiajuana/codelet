@@ -6,6 +6,7 @@
   "packageManager": "pnpm@8.7.1",
   "scripts": {
     "clean": "rimraf --glob **/node_modules",
+    "start": "pnpm -C ./playground start",
     "build": "npm run build:copy-loader",
     "build:cli-service": "pnpm -C ./packages/cli-service build",
     "build:copy-loader": "pnpm -C ./packages/copy-loader build",

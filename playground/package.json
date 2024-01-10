@@ -23,6 +23,7 @@
     "webpack": "^5.89.0"
   },
   "devDependencies": {
-    "@bee/cli-service": "workspace:^"
+    "@bee/cli-service": "workspace:^",
+    "typescript": "^5.3.3"
   }
 }
