@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "properties": {
+    "entryPath": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}
