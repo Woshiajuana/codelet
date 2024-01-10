@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "webpack plugin inject chunk",
   "scripts": {
-    "build": "npm run clean && tsc",
+    "build": "npm run clean && tsc -p ./tsconfig.lib.json",
     "clean": "rimraf ./dist",
     "release": "npm run build && dsc publish --pnpm -t"
   },
