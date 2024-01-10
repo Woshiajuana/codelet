@@ -1,0 +1,19 @@
+{
+  "name": "@bee/cli-service",
+  "version": "0.0.1",
+  "description": "cli-service",
+  "main": "index.js",
+  "bin": "./bin/cli.js",
+  "scripts": {
+  },
+  "keywords": [
+    "daysnap",
+    "bee",
+    "wechat",
+    "miniprogram",
+    "cli-service",
+    "mini"
+  ],
+  "author": "woshiajuana",
+  "license": "MIT"
+}

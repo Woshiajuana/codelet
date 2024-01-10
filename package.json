@@ -1,0 +1,19 @@
+{
+  "name": "@bee/monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "轻量级微信小程序框架",
+  "packageManager": "pnpm@8.7.1",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm"
+  },
+  "keywords": [
+    "daysnap",
+    "bee",
+    "wechat",
+    "miniprogram",
+    "mini"
+  ],
+  "author": "woshiajuana",
+  "license": "MIT"
+}
