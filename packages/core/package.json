@@ -3,8 +3,13 @@
   "version": "0.0.1",
   "description": "mini core",
   "main": "index.js",
-  "scripts": {
+  "scripts": {},
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "daysnap",
     "bee",
@@ -14,5 +19,7 @@
     "mini"
   ],
   "author": "woshiajuana",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+  }
 }

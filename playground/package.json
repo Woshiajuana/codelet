@@ -16,5 +16,12 @@
     "mini"
   ],
   "author": "woshiajuana",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@bee/core": "workspace:^",
+    "webpack": "^5.89.0"
+  },
+  "devDependencies": {
+    "@bee/cli-service": "workspace:^"
+  }
 }

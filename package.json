@@ -5,7 +5,8 @@
   "description": "轻量级微信小程序框架",
   "packageManager": "pnpm@8.7.1",
   "scripts": {
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "clean": "rimraf --glob **/node_modules"
   },
   "keywords": [
     "daysnap",
@@ -15,5 +16,8 @@
     "mini"
   ],
   "author": "woshiajuana",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "rimraf": "^5.0.5"
+  }
 }
