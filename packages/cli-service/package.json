@@ -33,13 +33,13 @@
   "author": "woshiajuana",
   "license": "MIT",
   "dependencies": {
-    "webpack": "^5.89.0"
-  },
-  "devDependencies": {
-    "rimraf": "^5.0.5",
     "@bee/copy-loader": "workspace:^",
     "@bee/inject-chunk-webpack-plugin": "workspace:^",
     "@bee/wxml-loader": "workspace:^",
+    "fast-glob": "^3.3.2",
     "webpack": "^5.89.0"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.5"
   }
 }
