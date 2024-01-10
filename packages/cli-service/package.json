@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "cli-service",
   "main": "index.js",
-  "bin": "./bin/cli.js",
+  "bin": {
+    "bee-cli-service": "./bin/cli.js"
+  },
   "scripts": {},
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -27,6 +29,7 @@
   },
   "devDependencies": {
     "@bee/copy-loader": "workspace:^",
+    "@bee/inject-chunk-webpack-plugin": "workspace:^",
     "@bee/wxml-loader": "workspace:^"
   }
 }
