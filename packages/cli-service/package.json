@@ -2,12 +2,19 @@
   "name": "@bee/cli-service",
   "version": "0.0.1",
   "description": "cli-service",
-  "main": "index.js",
+  "scripts": {
+    "build": "npm run clean && tsc",
+    "clean": "rimraf ./dist",
+    "release": "npm run build && dsc publish --pnpm -t"
+  },
   "bin": {
     "bee-cli-service": "./bin/cli.js"
   },
-  "scripts": {},
+  "main": "src/index.ts",
+  "types": "src/index.ts",
   "publishConfig": {
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
@@ -29,8 +36,10 @@
     "webpack": "^5.89.0"
   },
   "devDependencies": {
+    "rimraf": "^5.0.5",
     "@bee/copy-loader": "workspace:^",
     "@bee/inject-chunk-webpack-plugin": "workspace:^",
-    "@bee/wxml-loader": "workspace:^"
+    "@bee/wxml-loader": "workspace:^",
+    "webpack": "^5.89.0"
   }
 }
