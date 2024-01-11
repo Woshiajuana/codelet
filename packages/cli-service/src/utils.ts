@@ -2,17 +2,19 @@ import path from 'path'
 import fg from 'fast-glob'
 import fs from 'fs'
 import merge from 'webpack-merge'
+import type { Configuration } from 'webpack'
 import { getDefaultConfig } from './config'
 
 export const cmd = process.cwd()
 
 export const resolve = (...args: string[]) => path.resolve(cmd, ...args)
 
-export const parseDir = (entryPath: string, source: string | string[]) => {
-  const filepaths = fg.sync(source)
+export const parseDir = (entryPath: string, source: string[]) => {
+  entryPath = resolve(entryPath)
+  const filepaths = fg.sync(source.map((item) => resolve(entryPath, item)))
   const entry = filepaths.reduce<Record<string, { import: string; runtime: string }>>(
     (res, filepath) => {
-      const relPath = filepath.replace(`${entryPath}${path.sep}`, '')
+      const relPath = path.relative(entryPath, filepath)
       const { dir, name } = path.parse(relPath)
       res[path.join(dir, name)] = {
         import: filepath,
@@ -35,7 +37,7 @@ export function parseArgv(argv: string[]) {
   return { configPath }
 }
 
-export function getConfig(configPath: string) {
+export function getConfig(configPath: string): Configuration {
   let config = getDefaultConfig()
   if (fs.existsSync(configPath)) {
     const options = require(configPath)
@@ -46,7 +48,11 @@ export function getConfig(configPath: string) {
     }
   }
 
-  const { entryPath } = config
+  const { entryPath, source, ...rest } = config
+  if (!rest.entry) {
+    const { entry } = parseDir(entryPath, source)
+    rest.entry = entry
+  }
 
-  return config
+  return rest
 }

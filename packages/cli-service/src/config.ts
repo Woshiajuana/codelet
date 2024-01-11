@@ -9,10 +9,15 @@ export interface Config extends Configuration {
   source?: string[]
 }
 
-export function getDefaultConfig(): Config {
+export function getDefaultConfig(): Configuration & {
+  entryPath: string
+  source: string[]
+} {
   const entryPath = './src'
 
   return {
+    watch: true,
+
     entryPath,
 
     source: ['app.js', 'pages/home/*.js', 'pages/login/*.js'],
@@ -48,7 +53,7 @@ export function getDefaultConfig(): Config {
             },
             {
               test: /\.wxml$/,
-              use: 'wxml-loader',
+              loader: '@bee/wxml-loader',
               options: {
                 entryPath,
               },
@@ -56,7 +61,7 @@ export function getDefaultConfig(): Config {
             {
               test: /\.json$/,
               type: 'javascript/auto',
-              use: 'copy-loader',
+              loader: '@bee/copy-loader',
               options: {
                 entryPath,
               },

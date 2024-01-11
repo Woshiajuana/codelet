@@ -23,6 +23,9 @@
     "webpack": "^5.89.0"
   },
   "devDependencies": {
+    "@bee/copy-loader": "workspace:^",
+    "@bee/inject-chunk-webpack-plugin": "workspace:^",
+    "@bee/wxml-loader": "workspace:^",
     "@bee/cli-service": "workspace:^",
     "typescript": "^5.3.3"
   }
