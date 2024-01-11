@@ -40,24 +40,12 @@ export const DEFAULT_CONFIG: Configuration = {
           },
           {
             test: /\.wxml$/,
-            use: [
-              {
-                loader: 'wxml-loader',
-                options: {
-                  entryPath: '',
-                },
-              },
-            ],
+            use: 'wxml-loader',
           },
           {
             test: /\.json$/,
             type: 'javascript/auto',
-            use: {
-              loader: resolve('build/copy-loader'),
-              options: {
-                entryPath: '',
-              },
-            },
+            use: 'copy-loader',
           },
           {
             test: /\.(png|jpe?g|gif|svg)$/,
@@ -77,8 +65,25 @@ export const DEFAULT_CONFIG: Configuration = {
     }),
     new InjectChunkWebpackPlugin(),
   ],
+
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      minChunks: 2,
+      minSize: 0,
+      cacheGroups: {
+        main: {
+          name: 'bundle',
+          minChunks: 2,
+          chunks: 'all',
+        },
+      },
+    },
+  },
 }
 
-export const getConfig = (configPath: string) => {
-  //
+export const getConfig = (configPath?: string) => {
+  if (!configPath) {
+    return DEFAULT_CONFIG
+  }
 }
