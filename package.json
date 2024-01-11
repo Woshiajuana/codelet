@@ -6,8 +6,8 @@
   "packageManager": "pnpm@8.7.1",
   "scripts": {
     "clean": "rimraf --glob **/node_modules",
-    "start": "npm run build:cli-service && pnpm -C ./playground start",
-    "build": "npm run build:copy-loader",
+    "start": "pnpm -C ./playground start",
+    "build": "npm run build:cli-service && npm run build:copy-loader && npm run build:inject-chunk-webpack-plugin && npm run build:wxml-loader",
     "build:cli-service": "pnpm -C ./packages/cli-service build",
     "build:copy-loader": "pnpm -C ./packages/copy-loader build",
     "build:core": "pnpm -C ./packages/core build",

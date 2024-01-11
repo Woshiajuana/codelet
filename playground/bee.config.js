@@ -1,5 +1,5 @@
-const { defineConfig } = require('@bee/cli-service')
+// const { defineConfig } = require('@bee/cli-service')
 
-module.exports = defineConfig({
+module.exports = {
   mode: 'production',
-})
+}

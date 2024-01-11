@@ -10,8 +10,8 @@
   "bin": {
     "bee-cli-service": "./bin/bee-cli-service.js"
   },
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "publishConfig": {
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -41,7 +41,8 @@
     "mini-css-extract-plugin": "^2.7.7",
     "sass": "^1.69.7",
     "sass-loader": "^13.3.3",
-    "webpack": "^5.89.0"
+    "webpack": "^5.89.0",
+    "webpack-merge": "^5.10.0"
   },
   "devDependencies": {
     "rimraf": "^5.0.5"

@@ -1,3 +1,7 @@
+import { parseArgv, getConfig } from './utils'
+
 export async function bootstrap(argv: string[]) {
-  console.log('argv => ', argv)
+  const { configPath } = parseArgv(argv)
+  const config = getConfig(configPath)
+  console.log('config => ', config)
 }

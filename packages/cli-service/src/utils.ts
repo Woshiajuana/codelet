@@ -1,5 +1,8 @@
 import path from 'path'
 import fg from 'fast-glob'
+import fs from 'fs'
+import merge from 'webpack-merge'
+import { getDefaultConfig } from './config'
 
 export const cmd = process.cwd()
 
@@ -21,4 +24,29 @@ export const parseDir = (entryPath: string, source: string | string[]) => {
   )
 
   return { entry }
+}
+
+export function parseArgv(argv: string[]) {
+  const [, , option, config] = argv
+  if (option === '--config' && !config) {
+    throw '请指定配置文件'
+  }
+  const configPath = resolve(option === '--config' ? config : 'bee.config.js')
+  return { configPath }
+}
+
+export function getConfig(configPath: string) {
+  let config = getDefaultConfig()
+  if (fs.existsSync(configPath)) {
+    const options = require(configPath)
+    if (typeof options === 'function') {
+      config = options(config)
+    } else {
+      config = merge(config, options)
+    }
+  }
+
+  const { entryPath } = config
+
+  return config
 }

@@ -1,89 +1,98 @@
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import InjectChunkWebpackPlugin from '@bee/inject-chunk-webpack-plugin'
 import type { Configuration } from 'webpack'
-// import { defineConfig } from './defineConfig'
 import { resolve } from './utils'
 
-export interface Config {
-  //
+export interface Config extends Configuration {
+  /** 开发路径默认 src */
+  entryPath?: string
+  source?: string[]
 }
 
-export const DEFAULT_CONFIG: Configuration = {
-  mode: 'production',
+export function getDefaultConfig(): Config {
+  const entryPath = './src'
 
-  devtool: false,
+  return {
+    entryPath,
 
-  output: {
-    filename: '[name].js',
-    path: resolve('dist'),
-    publicPath: '/',
-    clean: true,
-  },
+    source: ['app.js', 'pages/home/*.js', 'pages/login/*.js'],
 
-  resolve: {
-    alias: {
-      '@': resolve('src'),
+    mode: 'production',
+
+    devtool: false,
+
+    output: {
+      filename: '[name].js',
+      path: resolve('dist'),
+      publicPath: '/',
+      clean: true,
     },
-  },
 
-  module: {
-    rules: [
-      {
-        oneOf: [
-          {
-            test: /\.(css|wxss)$/,
-            use: [MiniCssExtractPlugin.loader, 'css-loader'],
-          },
-          {
-            test: /\.s(a|c)ss$/,
-            use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
-          },
-          {
-            test: /\.wxml$/,
-            use: 'wxml-loader',
-          },
-          {
-            test: /\.json$/,
-            type: 'javascript/auto',
-            use: 'copy-loader',
-          },
-          {
-            test: /\.(png|jpe?g|gif|svg)$/,
-            type: 'asset/resource',
-            generator: {
-              filename: 'assets/images/[name][ext]',
-            },
-          },
-        ],
+    resolve: {
+      alias: {
+        '@': resolve('src'),
       },
+    },
+
+    module: {
+      rules: [
+        {
+          oneOf: [
+            {
+              test: /\.(css|wxss)$/,
+              use: [MiniCssExtractPlugin.loader, 'css-loader'],
+            },
+            {
+              test: /\.s(a|c)ss$/,
+              use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+            },
+            {
+              test: /\.wxml$/,
+              use: 'wxml-loader',
+              options: {
+                entryPath,
+              },
+            },
+            {
+              test: /\.json$/,
+              type: 'javascript/auto',
+              use: 'copy-loader',
+              options: {
+                entryPath,
+              },
+            },
+            {
+              test: /\.(png|jpe?g|gif|svg)$/,
+              type: 'asset/resource',
+              generator: {
+                filename: 'assets/images/[name][ext]',
+              },
+            },
+          ],
+        },
+      ],
+    },
+
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: '[name].wxss',
+      }),
+      new InjectChunkWebpackPlugin(),
     ],
-  },
 
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: '[name].wxss',
-    }),
-    new InjectChunkWebpackPlugin(),
-  ],
-
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-      minChunks: 2,
-      minSize: 0,
-      cacheGroups: {
-        main: {
-          name: 'bundle',
-          minChunks: 2,
-          chunks: 'all',
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+        minChunks: 2,
+        minSize: 0,
+        cacheGroups: {
+          main: {
+            name: 'bundle',
+            minChunks: 2,
+            chunks: 'all',
+          },
         },
       },
     },
-  },
-}
-
-export const getConfig = (configPath?: string) => {
-  if (!configPath) {
-    return DEFAULT_CONFIG
   }
 }
