@@ -12,11 +12,13 @@ export default function loader(
   map: string,
   meta?: any,
 ) {
-  const { entryPath } = this.getOptions(schema as any)
+  let { entryPath = 'src' } = this.getOptions(schema as any)
   const callback = this.async()
 
   const pattern = /(?<=\bsrc=("|')).*?(?=('|"))/gi
   const result = content.match(pattern) || []
+
+  entryPath = path.resolve(this.rootContext, entryPath)
 
   const filepaths = result
     .filter((src) => src.startsWith('.') || src.startsWith('/') || !filepathCaches.includes(src))
@@ -38,7 +40,7 @@ export default function loader(
     .then(() => filepathCaches.push(...filepaths))
     .catch(callback)
     .finally(() => {
-      const outputPath = this.resourcePath.replace(`${entryPath}${path.sep}`, '')
+      const outputPath = this.utils.contextify(entryPath, this.resourcePath)
       this.emitFile(outputPath, content)
       callback(null, '', map, meta)
     })
