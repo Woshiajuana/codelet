@@ -8,7 +8,7 @@
     "release": "npm run build && dsc publish --pnpm -t"
   },
   "bin": {
-    "bee-cli-service": "./bin/cli.js"
+    "bee-cli-service": "./bin/bee-cli-service.js"
   },
   "main": "src/index.ts",
   "types": "src/index.ts",
@@ -36,7 +36,11 @@
     "@bee/copy-loader": "workspace:^",
     "@bee/inject-chunk-webpack-plugin": "workspace:^",
     "@bee/wxml-loader": "workspace:^",
+    "css-loader": "^6.9.0",
     "fast-glob": "^3.3.2",
+    "mini-css-extract-plugin": "^2.7.7",
+    "sass": "^1.69.7",
+    "sass-loader": "^13.3.3",
     "webpack": "^5.89.0"
   },
   "devDependencies": {

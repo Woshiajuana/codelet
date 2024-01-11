@@ -3,7 +3,7 @@ import { Compilation, Compiler, sources, Chunk } from 'webpack'
 
 const NAME = 'InjectChunkWebpackPlugin'
 
-export class InjectChunkWebpackPlugin {
+export default class InjectChunkWebpackPlugin {
   apply(compiler: Compiler) {
     compiler.hooks.thisCompilation.tap(NAME, (compilation: Compilation) => {
       // asset 处理
