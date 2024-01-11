@@ -1,7 +1,7 @@
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import InjectChunkWebpackPlugin from '@bee/inject-chunk-webpack-plugin'
 import type { Configuration } from 'webpack'
-import { defineConfig } from './defineConfig'
+// import { defineConfig } from './defineConfig'
 import { resolve } from './utils'
 
 export interface Config {
