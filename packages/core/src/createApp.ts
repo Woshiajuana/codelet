@@ -1,3 +1,3 @@
 export function createApp() {
-  // return App()
+  return App({})
 }

@@ -1,5 +1,11 @@
-// const { defineConfig } = require('@bee/cli-service')
+const { defineConfig } = require('@bee/cli-service')
 
-module.exports = {
-  mode: 'production',
-}
+module.exports = defineConfig({
+  source: [
+    // 'app.(js|ts)',
+    'pages/**/*.(js|ts)',
+    // 'pages/home/*.(js|ts)',
+    // 'components/**/*.(js|ts)',
+    // 'subpackage/**/*.(js|ts)',
+  ],
+})

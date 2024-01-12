@@ -22,7 +22,8 @@
     // Anything that uses the type modifier is dropped entirely.
     "verbatimModuleSyntax": true,
 
-    "lib": ["es6", "es7", "DOM"]
+    "lib": ["es6", "es7", "DOM"],
+    "types": ["miniprogram-api-typings"]
   },
   "include": [
     "src/**/*.ts",
