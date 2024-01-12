@@ -50,6 +50,9 @@ export function getConfig(options: { configPath: string; isWatch: boolean }): Co
     if (typeof options === 'function') {
       config = options(config)
     } else {
+      if (options.source) {
+        delete (config as any).source
+      }
       config = merge(config, options)
     }
   }

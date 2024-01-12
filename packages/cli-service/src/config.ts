@@ -79,6 +79,11 @@ export function getDefaultConfig(): Configuration & {
                 filename: 'assets/images/[name][ext]',
               },
             },
+            {
+              test: /\.(ts|js)$/,
+              loader: 'babel-loader',
+              exclude: /node_modules/,
+            },
           ],
         },
       ],

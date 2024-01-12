@@ -6,6 +6,8 @@ import { test } from '@/utils'
 
 Page({
   onLoad() {
-    test()
+    const s = test()
+    const data = Object.assign({ s }, { x: '1' })
+    console.log('data => ', data)
   },
 })

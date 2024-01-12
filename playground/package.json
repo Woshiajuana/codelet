@@ -19,14 +19,14 @@
   "author": "woshiajuana",
   "license": "MIT",
   "dependencies": {
-    "@bee/core": "workspace:^",
-    "webpack": "^5.89.0"
+    "@bee/core": "workspace:^"
   },
   "devDependencies": {
     "@bee/copy-loader": "workspace:^",
     "@bee/inject-chunk-webpack-plugin": "workspace:^",
     "@bee/wxml-loader": "workspace:^",
     "@bee/cli-service": "workspace:^",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "webpack": "^5.89.0"
   }
 }
