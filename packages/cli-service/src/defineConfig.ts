@@ -1,5 +1,5 @@
-import type { Configuration } from 'webpack'
+import type { Config } from './config'
 
-export function defineConfig(config: Configuration | ((config: Configuration) => Configuration)) {
+export function defineConfig(config: Config | ((config: Config) => Config)) {
   return config
 }

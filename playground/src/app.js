@@ -4,4 +4,4 @@ import './project.config.json'
 
 App({})
 
-console.log('1', 'xxx')
+console.log('2', 'xxxxxxxxxxxxxxxxxxxxxx')

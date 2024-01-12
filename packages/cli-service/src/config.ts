@@ -1,3 +1,4 @@
+import WebpackBar from 'webpackbar'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import InjectChunkWebpackPlugin from '@bee/inject-chunk-webpack-plugin'
 import type { Configuration } from 'webpack'
@@ -16,11 +17,9 @@ export function getDefaultConfig(): Configuration & {
   const entryPath = './src'
 
   return {
-    watch: true,
-
     entryPath,
 
-    source: ['app.js', 'pages/home/*.js', 'pages/login/*.js'],
+    source: ['app.(js|ts)', 'pages/**/*.(js|ts)', 'components/**/*.(js|ts)'],
 
     mode: 'production',
 
@@ -59,6 +58,13 @@ export function getDefaultConfig(): Configuration & {
               },
             },
             {
+              test: /\.wxs$/,
+              loader: '@bee/copy-loader',
+              options: {
+                entryPath,
+              },
+            },
+            {
               test: /\.json$/,
               type: 'javascript/auto',
               loader: '@bee/copy-loader',
@@ -83,6 +89,7 @@ export function getDefaultConfig(): Configuration & {
         filename: '[name].wxss',
       }),
       new InjectChunkWebpackPlugin(),
+      new WebpackBar(),
     ],
 
     optimization: {

@@ -28,16 +28,22 @@ export const parseDir = (entryPath: string, source: string[]) => {
   return { entry }
 }
 
-export function parseArgv(argv: string[]) {
-  const [, , option, config] = argv
-  if (option === '--config' && !config) {
-    throw '请指定配置文件'
+export function getOptionValue(argv: string[], option: string) {
+  const index = argv.findIndex((item) => item === option)
+  if (index > -1) {
+    return argv[index + 1]
   }
-  const configPath = resolve(option === '--config' ? config : 'bee.config.js')
-  return { configPath }
 }
 
-export function getConfig(configPath: string): Configuration {
+export function parseArgv(argv: string[]) {
+  const isWatch = argv.includes('--watch')
+  const configRelativePath = getOptionValue(argv, '--config') || 'bee.config.js'
+  const configPath = resolve(configRelativePath)
+  return { configPath, isWatch }
+}
+
+export function getConfig(options: { configPath: string; isWatch: boolean }): Configuration {
+  const { configPath, isWatch } = options
   let config = getDefaultConfig()
   if (fs.existsSync(configPath)) {
     const options = require(configPath)
@@ -52,6 +58,10 @@ export function getConfig(configPath: string): Configuration {
   if (!rest.entry) {
     const { entry } = parseDir(entryPath, source)
     rest.entry = entry
+  }
+
+  if (isWatch) {
+    rest.watch = true
   }
 
   return rest
