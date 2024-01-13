@@ -10,8 +10,6 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "publishConfig": {
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },

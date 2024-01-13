@@ -22,10 +22,11 @@
     "@bee/core": "workspace:^"
   },
   "devDependencies": {
+    "@bee/cli-service": "workspace:^",
     "@bee/copy-loader": "workspace:^",
     "@bee/inject-chunk-webpack-plugin": "workspace:^",
     "@bee/wxml-loader": "workspace:^",
-    "@bee/cli-service": "workspace:^",
+    "miniprogram-api-typings": "^3.12.2",
     "typescript": "^5.3.3",
     "webpack": "^5.89.0"
   }
