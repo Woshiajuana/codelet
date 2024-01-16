@@ -36,6 +36,7 @@ export function getDefaultConfig(): Configuration & {
       alias: {
         '@': resolve('src'),
       },
+      extensions: ['.js', '.ts'],
     },
 
     module: {

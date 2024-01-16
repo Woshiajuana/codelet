@@ -4,7 +4,7 @@
  * @param x 首选值
  * @param max 最大值
  */
-export function clamp(min, val, max) {
+export function clamp(min: number, val: number, max: number) {
   console.log('clampclampclamp')
   // Math.min(Math.max(min, val), max)
   if (val < min) {

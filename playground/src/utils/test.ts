@@ -1,4 +1,4 @@
-export const test = (x) => {
+export const test = (x: any) => {
   console.log('test function start')
   const value = x ? new Date() : x
   console.log('test function value => ', value)

@@ -4,6 +4,6 @@ import './index.scss'
 
 Page({
   onLoad() {
-    console.log('111', [].includes('1'))
+    console.log('111', ['1'].includes('1'))
   },
 })
