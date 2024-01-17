@@ -5,3 +5,5 @@
 </view>
 
 <image src="/assets/images/logo.png"></image>
+
+<button bindtap="handleJump">去登录</button>

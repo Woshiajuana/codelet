@@ -1,13 +1,18 @@
 import './index.json'
 import './index.wxml'
 import './index.scss'
-
+import bee, { createPage } from '@bee/core'
 import { clamp } from '@/utils'
 
-Page({
+createPage({
+  data: {
+    xx: '1',
+  },
   onLoad() {
-    const s1 = clamp(1, 2, 3)
-    const s2 = clamp(1, 2, 3)
-    console.log('111', s2, s1)
+    clamp(1, 2, 3)
+    console.log('login', bee)
+  },
+  handleJump() {
+    //
   },
 })

@@ -1,5 +1,6 @@
 import './index.json'
 import './index.wxml'
 import './index.scss'
+import { createComponent } from '@bee/core'
 
-Component({})
+createComponent()

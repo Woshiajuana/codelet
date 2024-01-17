@@ -15,3 +15,5 @@ export function clamp(min: number, val: number, max: number) {
   }
   return val
 }
+
+console.log('utils => utilsutilsutilsutils')
