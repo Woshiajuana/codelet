@@ -1,5 +1,3 @@
-import 'miniprogram-api-typings'
-
-export interface AppOptions extends WechatMiniprogram.App.Option {
+export interface AppOptions extends WechatMiniprogram.App.Options<WechatMiniprogram.IAnyObject> {
   //
 }

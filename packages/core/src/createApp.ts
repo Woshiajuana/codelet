@@ -1,7 +1,5 @@
 import type { AppOptions } from './types'
 
-export function createApp(options: AppOptions) {
+export function createApp(options: AppOptions = {}) {
   return App(options)
 }
-
-createApp({})
