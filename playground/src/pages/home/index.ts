@@ -11,7 +11,7 @@ createPage({
   handleJump() {
     clamp(1, 2, 3)
     console.log('11')
-    wx.navigateTo({
+    bee.navigateTo({
       url: '/pages/login/index',
     })
   },
