@@ -2,4 +2,4 @@
   <text>登录页面 {{ xx }}</text>
 </view>
 
-<button bindtap="handleJump">去登录</button>
+<button bindtap="handleJump(1)">去登录</button>

@@ -13,6 +13,11 @@ createPage({
     console.log('login', bee)
   },
   handleJump() {
-    //
+    // console.log('x => ', x)
+  },
+  methods: {
+    onLoad() {
+      console.log('login', bee)
+    },
   },
 })
