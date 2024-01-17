@@ -5,4 +5,4 @@ import './project.config.json'
 
 bee.use(apiProxy)
 
-createApp()
+createApp({})
