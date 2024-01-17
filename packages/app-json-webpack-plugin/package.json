@@ -1,0 +1,37 @@
+{
+  "name": "@bee/app-json-webpack-plugin",
+  "version": "0.0.1",
+  "description": "webpack plugin inject chunk",
+  "scripts": {
+    "build": "npm run clean && tsc -p ./tsconfig.lib.json",
+    "clean": "rimraf ./dist",
+    "release": "npm run build && dsc publish --pnpm -t"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "daysnap",
+    "bee",
+    "wechat",
+    "miniprogram",
+    "app-json-webpack-plugin",
+    "mini"
+  ],
+  "author": "woshiajuana",
+  "license": "MIT",
+  "peerDependencies": {
+    "webpack": ">=5.0.0 <6.0.0"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.3",
+    "webpack": "^5.89.0"
+  }
+}
