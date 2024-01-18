@@ -7,7 +7,8 @@
   "scripts": {
     "clean": "rimraf --glob **/node_modules",
     "start": "pnpm -C ./playground start",
-    "build": "npm run build:cli-service && npm run build:copy-loader && npm run build:inject-chunk-webpack-plugin && npm run build:wxml-loader",
+    "build": "npm run build:app-json-webpack-plugin && npm run build:cli-service && npm run build:copy-loader && npm run build:inject-chunk-webpack-plugin && npm run build:wxml-loader",
+    "build:app-json-webpack-plugin": "pnpm -C ./packages/app-json-webpack-plugin build",
     "build:cli-service": "pnpm -C ./packages/cli-service build",
     "build:copy-loader": "pnpm -C ./packages/copy-loader build",
     "build:core": "pnpm -C ./packages/core build",

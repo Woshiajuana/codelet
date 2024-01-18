@@ -34,6 +34,7 @@
     "@babel/core": "^7.23.7",
     "@babel/preset-env": "^7.23.8",
     "@babel/preset-typescript": "^7.23.3",
+    "@bee/app-json-webpack-plugin": "workspace:^",
     "@bee/copy-loader": "workspace:^",
     "@bee/inject-chunk-webpack-plugin": "workspace:^",
     "@bee/wxml-loader": "workspace:^",

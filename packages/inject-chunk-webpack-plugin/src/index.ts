@@ -1,11 +1,11 @@
 import path from 'path'
-import { Compilation, Compiler, sources, Chunk } from 'webpack'
+import { Compiler, sources, Chunk } from 'webpack'
 
 const NAME = 'InjectChunkWebpackPlugin'
 
 export default class InjectChunkWebpackPlugin {
   apply(compiler: Compiler) {
-    compiler.hooks.thisCompilation.tap(NAME, (compilation: Compilation) => {
+    compiler.hooks.thisCompilation.tap(NAME, (compilation) => {
       // asset 处理
       compilation.hooks.processAssets.tap(
         {

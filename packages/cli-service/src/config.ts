@@ -1,6 +1,7 @@
 import WebpackBar from 'webpackbar'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import InjectChunkWebpackPlugin from '@bee/inject-chunk-webpack-plugin'
+import AppJsonWebpackPlugin from '@bee/app-json-webpack-plugin'
 import type { Configuration } from 'webpack'
 import { resolve } from './utils'
 
@@ -95,6 +96,7 @@ export function getDefaultConfig(): Configuration & {
         filename: '[name].wxss',
       }),
       new InjectChunkWebpackPlugin(),
+      new AppJsonWebpackPlugin(),
       new WebpackBar(),
     ],
 
