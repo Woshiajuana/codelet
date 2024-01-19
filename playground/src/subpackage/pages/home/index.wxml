@@ -1,0 +1,9 @@
+<hello-world></hello-world>
+
+<view>
+  <text>首页页面</text>
+</view>
+
+<image src="/assets/images/logo.png"></image>
+
+<button bindtap="handleJump">去登录</button>

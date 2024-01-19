@@ -1,5 +1,5 @@
 import path from 'path'
-import { Compiler, sources, Chunk } from 'webpack'
+import { Compiler, sources, Chunk, Compilation } from 'webpack'
 
 const NAME = 'InjectChunkWebpackPlugin'
 
@@ -10,7 +10,7 @@ export default class InjectChunkWebpackPlugin {
       compilation.hooks.processAssets.tap(
         {
           name: NAME,
-          stage: (compilation as any).PROCESS_ASSETS_STAGE_ADDITIONS,
+          stage: Compilation.PROCESS_ASSETS_STAGE_ADDITIONS,
         },
         () => {
           const { globalObject, chunkLoadingGlobal } = compilation.outputOptions

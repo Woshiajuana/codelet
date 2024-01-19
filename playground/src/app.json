@@ -1,11 +1,11 @@
 {
-    "pages": [
-      "pages/home/index",
-      "pages/login/index"
-    ],
-    "window": {
-        "navigationBarTitleText": "mini-webpack",
-        "navigationBarTextStyle": "black",
-        "navigationBarBackgroundColor": "#ffffff"
-    }
+  "pages": [
+    "pages/home/index",
+    "pages/login/index"
+  ],
+  "window": {
+      "navigationBarTitleText": "mini-webpack",
+      "navigationBarTextStyle": "black",
+      "navigationBarBackgroundColor": "#ffffff"
   }
+}
