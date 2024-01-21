@@ -84,7 +84,10 @@ export function getDefaultConfig(): Configuration & {
             {
               test: /\.(ts|js)$/,
               loader: 'babel-loader',
-              exclude: /node_modules/,
+              options: {
+                cacheDirectory: true, // 开启 babel 缓存
+                cacheCompression: false, // 关闭缓存文件压缩
+              },
             },
           ],
         },

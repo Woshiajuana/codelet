@@ -1,6 +1,7 @@
 import './index.json'
 import './index.wxml'
 import './index.scss'
+import { createWithLoading } from '@daysnap/utils'
 import bee, { createPage } from '@bee/core'
 import { clamp } from '@/utils'
 
@@ -14,5 +15,12 @@ createPage({
     bee.navigateTo({
       url: '/pages/login/index',
     })
+    const xx = createWithLoading(() => {
+      return {
+        close: () => {},
+      }
+    })
+
+    console.log('xxxxx => ', xx)
   },
 })

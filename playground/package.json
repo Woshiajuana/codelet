@@ -18,7 +18,8 @@
   "author": "woshiajuana",
   "license": "MIT",
   "dependencies": {
-    "@bee/core": "workspace:^"
+    "@bee/core": "workspace:^",
+    "@daysnap/utils": "^0.0.81"
   },
   "devDependencies": {
     "@bee/cli-service": "workspace:^",
