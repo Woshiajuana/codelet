@@ -1,23 +1,60 @@
 import './index.json'
 import './index.wxml'
 import './index.scss'
-import bee, { createPage } from '@bee/core'
+import bee, { createComponent, createPage } from '@bee/core'
 import { clamp } from '@/utils'
+import { calculate } from '@/mixins'
 
-createPage({
+Component({
+  data: {
+    xx: 1,
+  },
+  methods: {
+    xxxx() {
+      this.data.xx
+    },
+  },
+})
+
+createComponent({
+  data: {
+    xx: 1,
+  },
+  methods: {
+    xxxx() {
+      this.data.xx
+    },
+  },
+})
+
+Page({
+  ...calculate,
   data: {
     xx: '1',
   },
   onLoad() {
+    const s = this.data.x
+    this.add(1, 2)
     clamp(1, 2, 3)
     console.log('login', bee)
   },
   handleJump() {
     // console.log('x => ', x)
   },
-  methods: {
-    onLoad() {
-      console.log('login', bee)
-    },
+})
+
+createPage({
+  ...calculate,
+  data: {
+    xx: '1',
+  },
+  onLoad() {
+    const s = this.data.x
+    this.add(1, 2)
+    clamp(1, 2, 3)
+    console.log('login', bee)
+  },
+  handleJump() {
+    // console.log('x => ', x)
   },
 })

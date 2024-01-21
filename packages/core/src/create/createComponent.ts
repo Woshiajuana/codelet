@@ -1,5 +1,5 @@
 import type { ComponentOptions } from '../types'
 
-export function createComponent(options: ComponentOptions = {}) {
-  return Component(options)
+export function createComponent<T extends ComponentOptions>(options: T) {
+  return Component(options || {})
 }
