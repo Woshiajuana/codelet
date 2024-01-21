@@ -1,6 +1,12 @@
-import type { PageOptions } from '../types'
+export type PageDataOption = WechatMiniprogram.Page.DataOption
+export type PageCustomOption = WechatMiniprogram.Page.CustomOption
+export type PageOptions<
+  TData extends PageDataOption,
+  TCustom extends PageCustomOption,
+> = WechatMiniprogram.Page.Options<TData, TCustom>
 
-export function createPage<T extends PageOptions>(options?: T) {
-  console.log('创建 page')
-  return Page(options || {})
+export function createPage<TData extends PageDataOption, TCustom extends PageCustomOption>(
+  options?: PageOptions<TData, TCustom>,
+) {
+  return Page(options ?? {})
 }

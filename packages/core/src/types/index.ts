@@ -1,5 +1,2 @@
-export * from './AppOptions'
 export * from './Bee'
-export * from './ComponentOptions'
-export * from './PageOptions'
 export * from './Plugin'

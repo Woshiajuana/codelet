@@ -33,7 +33,7 @@ Page({
     xx: '1',
   },
   onLoad() {
-    const s = this.data.x
+    const s = this.data.xx
     this.add(1, 2)
     clamp(1, 2, 3)
     console.log('login', bee)
@@ -49,7 +49,7 @@ createPage({
     xx: '1',
   },
   onLoad() {
-    const s = this.data.x
+    const s = this.data.xx
     this.add(1, 2)
     clamp(1, 2, 3)
     console.log('login', bee)

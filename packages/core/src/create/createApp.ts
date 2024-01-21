@@ -1,6 +1,5 @@
-import type { AppOptions } from '../types'
+export type AppOptions<T extends Record<string, any>> = WechatMiniprogram.App.Options<T>
 
-export function createApp(options: AppOptions = {}) {
-  console.log('创建 app')
-  return App(options)
+export function createApp<T extends Record<string, any>>(options?: AppOptions<T>) {
+  return App(options ?? {})
 }
