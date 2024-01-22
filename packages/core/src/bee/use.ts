@@ -1,4 +1,4 @@
-import type { Plugin } from '../types'
+import type { Plugin } from '../utils'
 
 export function use<Options extends unknown[]>(plugin: Plugin<Options>, ...options: Options) {
   if (typeof plugin === 'function') {

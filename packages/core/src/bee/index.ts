@@ -1,6 +1,13 @@
-import type { Bee } from '../types'
 import { use } from './use'
 
-export const bee = {
+type GetFunctionKey<T> = {
+  [K in keyof T]: T[K] extends (...args: any) => any ? K : never
+}[keyof T]
+
+const beeApi = {
   use,
-} as Bee
+}
+
+export type Bee = typeof beeApi & Pick<WechatMiniprogram.Wx, GetFunctionKey<WechatMiniprogram.Wx>>
+
+export const bee = beeApi as Bee
