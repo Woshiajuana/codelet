@@ -14,12 +14,16 @@ export type PageInstance<Data extends DataOption, Custom extends CustomOption> =
   data: Data
 } & Custom
 
+export type CommonOptions = {
+  data: Record<string, string>
+}
+
 export type Options<
   Data extends DataOption,
   Custom extends CustomOption,
-  Mixin extends Options<any, any, any>,
+  Mixin extends CommonOptions,
 > = {
   mixins?: Mixin[]
   data: Data
 } & Custom &
-  ThisType<PageInstance<Data & UnwrapMixinsType<Mixin, 'Data'>, Custom>>
+  ThisType<PageInstance<Data & Mixin['data'], Custom>>

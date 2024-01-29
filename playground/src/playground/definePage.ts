@@ -1,9 +1,9 @@
-import type { CustomOption, DataOption, Options } from './types'
+import type { CustomOption, DataOption, Options, CommonOptions } from './types'
 
 export function definePage<
   Data extends DataOption,
   Custom extends CustomOption,
-  Mixin extends Options<any, any, any>,
+  Mixin extends CommonOptions,
 >(options: Options<Data, Custom, Mixin>) {
   return null as any
 }
