@@ -1,11 +1,16 @@
 import { definePage } from './definePage'
+import { hello } from './hello'
+import { print } from './print'
 
 const home = definePage({
-  mixins: [],
+  mixins: [hello, print],
   data: {
     name: 'name',
+    age: 1,
   },
   home() {
-    const s = this.data.name
+    const name = this.data.name
+    const age = this.data.age
+    const printName = this.data.printName
   },
 })
