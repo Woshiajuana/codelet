@@ -6,11 +6,12 @@ import { clamp } from '@/utils'
 import { calculate } from '@/mixins'
 
 createPage({
-  ...calculate,
+  mixins: [calculate],
   data: {
     xx: '1',
   },
   onLoad() {
+    this.data.x
     const s = this.data.xx
     this.add(1, 2)
     clamp(1, 2, 3)
