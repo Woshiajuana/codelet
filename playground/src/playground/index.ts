@@ -1,17 +1,37 @@
-import { definePage } from './definePage'
-import { hello } from './hello'
-import { print } from './print'
+import { defineOptions } from './defineOptions'
 
-const home = definePage({
-  mixins: [hello, print],
+const AaMixin = defineOptions({
   data: {
-    name: 'name',
-    age: 1,
+    aa: 'aa',
   },
-  home() {
-    this.mixins
-    const name = this.data.name
-    const age = this.data.age
-    const printName = this.data.printName
+  aaFn() {
+    console.log('aa')
+  },
+})
+
+const BbMixin = defineOptions({
+  data: {
+    bb: 'bb',
+  },
+  bbFn() {
+    console.log('bb')
+  },
+})
+
+const DataMixin = defineOptions({
+  mixins: [AaMixin, BbMixin],
+  data: {
+    xx: 1,
+  },
+  hello() {
+    this.data.xx
+    this.data.aa
+    const aa = this.aa
+    const bb = this.bb
+    const xx = this.xx
+    const cc = this.cc
+    this.aaFn()
+    this.bbFn()
+    return 'hello world'
   },
 })
