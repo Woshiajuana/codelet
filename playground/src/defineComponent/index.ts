@@ -16,7 +16,7 @@ export const AaMixin = defineComponent({
 export const BbMixin = defineComponent({
   data() {
     return {
-      aa: 1,
+      // aa: 1,
       bb: 'bb',
     }
   },

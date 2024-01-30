@@ -6,9 +6,6 @@ import type {
   ComputedOptions,
   MethodOptions,
 } from './componentOptions'
-import type { ExtractDefaultPropTypes } from './componentProps'
-
-export type PublicProps = Record<string, any>
 
 export type DefineComponent<
   PropsOrPropOptions = {},
@@ -20,9 +17,9 @@ export type DefineComponent<
   Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
   E = {},
   EE extends string = string,
-  PP = PublicProps,
+  PP = {},
   Props = any,
-  Defaults = ExtractDefaultPropTypes<PropsOrPropOptions>,
+  Defaults = {},
   S = {},
 > = { __isFragment: string } & ComponentOptionsBase<
   Props,
@@ -68,21 +65,7 @@ export function defineComponent<
     II,
     S
   >,
-): DefineComponent<
-  Props,
-  RawBindings,
-  D,
-  C,
-  M,
-  Mixin,
-  Extends,
-  E,
-  EE,
-  PublicProps,
-  {},
-  ExtractDefaultPropTypes<Props>,
-  S
->
+): DefineComponent<Props, RawBindings, D, C, M, Mixin, Extends, E, EE, {}, {}, {}, S>
 // implementation, close to no-op
 /*! #__NO_SIDE_EFFECTS__ */
 export function defineComponent(options: unknown) {
