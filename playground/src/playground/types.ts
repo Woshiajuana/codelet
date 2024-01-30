@@ -26,4 +26,4 @@ export type Options<
   mixins?: Mixin[]
   data: Data
 } & Custom &
-  ThisType<PageInstance<Data & Mixin['data'], Custom>>
+  ThisType<PageInstance<Data, Custom>>

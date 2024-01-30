@@ -9,6 +9,7 @@ const home = definePage({
     age: 1,
   },
   home() {
+    this.mixins
     const name = this.data.name
     const age = this.data.age
     const printName = this.data.printName
