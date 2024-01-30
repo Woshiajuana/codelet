@@ -63,7 +63,7 @@ export type CreateComponentPublicInstance<
   PublicMixin = IntersectionMixin<Mixin>,
   PublicD = UnwrapMixinsType<PublicMixin, 'D'> & EnsureNonVoid<D>,
   PublicM extends MethodOptions = UnwrapMixinsType<PublicMixin, 'M'> & EnsureNonVoid<M>,
-> = ComponentPublicInstance<PublicD, PublicM>
+> = UnwrapNestedRefs<PublicD> & PublicM
 
 // public properties exposed on the proxy, which is used as the render context
 // in templates (as `this` in the render option)
