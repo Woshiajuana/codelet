@@ -13,7 +13,7 @@ export type OptionsBase<
   data?: Data
   mixins?: Mixin[]
   methods?: M
-  // [key: string]: any
+  [key: string]: any
 }
 
 export type OptionMixin = OptionsBase<any, any, any>
@@ -63,8 +63,6 @@ export type OptionsInstance<
   PublicD = UnwrapMixinsType<PublicMixin, 'Data'> & EnsureNonVoid<Data>,
   PublicM extends MethodOptions = UnwrapMixinsType<PublicMixin, 'M'> & EnsureNonVoid<M>,
 > = PublicM & PublicD
-// &
-// PublicD
 
 export type Options<
   Data extends DataOptions = {},
