@@ -36,7 +36,7 @@ export interface ComponentOptionsBase<
   I extends ComponentInjectOptions = {},
   II extends string = string,
   S = any,
-> extends LegacyOptions<Props, D, C, M, Mixin, Extends, I, II>,
+> extends LegacyOptions<D, M, Mixin>,
     ComponentCustomOptions {
   name?: string
   template?: string | object // can be a direct DOM node
@@ -107,16 +107,6 @@ export type ExtractComputedReturns<T> = {
 
 export type ObjectWatchOptionItem = any
 
-type WatchOptionItem = string | ObjectWatchOptionItem
-
-type ComponentWatchOptionItem = WatchOptionItem | WatchOptionItem[]
-
-type ComponentWatchOptions = Record<string, ComponentWatchOptionItem>
-
-export type ComponentProvideOptions = ObjectProvideOptions | Function
-
-type ObjectProvideOptions = Record<string | symbol, unknown>
-
 export type ComponentInjectOptions = string[] | ObjectInjectOptions
 
 type ObjectInjectOptions = Record<
@@ -134,16 +124,7 @@ export type InjectToObject<T extends ComponentInjectOptions> = T extends string[
       }
     : never
 
-interface LegacyOptions<
-  Props,
-  D,
-  C extends ComputedOptions,
-  M extends MethodOptions,
-  Mixin extends ComponentOptionsMixin,
-  Extends extends ComponentOptionsMixin,
-  I extends ComponentInjectOptions,
-  II extends string,
-> {
+interface LegacyOptions<D, M extends MethodOptions, Mixin extends ComponentOptionsMixin> {
   // allow any custom options
   [key: string]: any
 
@@ -152,18 +133,10 @@ interface LegacyOptions<
   // since that leads to some sort of circular inference and breaks ThisType
   // for the entire component.
   data?: (this: any, vm: any) => D
-  computed?: C
   methods?: M
-  watch?: ComponentWatchOptions
-  provide?: ComponentProvideOptions
-  inject?: I | II[]
-
-  // assets
-  filters?: Record<string, Function>
 
   // composition
   mixins?: Mixin[]
-  extends?: Extends
 
   // lifecycle
   beforeCreate?(): void
@@ -180,22 +153,6 @@ interface LegacyOptions<
   /** @deprecated use `unmounted` instead */
   destroyed?(): void
   unmounted?(): void
-
-  /**
-   * runtime compile only
-   * @deprecated use `compilerOptions.delimiters` instead.
-   */
-  delimiters?: [string, string]
-
-  /**
-   * #3468
-   *
-   * type-only, used to assist Mixin's type inference,
-   * typescript will try to simplify the inferred `Mixin` type,
-   * with the `__differentiator`, typescript won't be able to combine different mixins,
-   * because the `__differentiator` will be different
-   */
-  __differentiator?: keyof D | keyof C | keyof M
 }
 
 export type OptionTypesKeys = 'P' | 'B' | 'D' | 'C' | 'M' | 'Defaults'

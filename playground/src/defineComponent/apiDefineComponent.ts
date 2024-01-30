@@ -12,10 +12,6 @@ import type {
   ExtractPropTypes,
 } from './componentProps'
 import type { EmitsOptions, EmitsToProps } from './componentEmits'
-import type {
-  ComponentPublicInstanceConstructor,
-  CreateComponentPublicInstance,
-} from './componentPublicInstance'
 import type { SlotsType } from './componentSlots'
 
 export type PublicProps = Record<string, any>
@@ -41,8 +37,21 @@ export type DefineComponent<
   Props = ResolveProps<PropsOrPropOptions, E>,
   Defaults = ExtractDefaultPropTypes<PropsOrPropOptions>,
   S extends SlotsType = {},
-> = ComponentPublicInstanceConstructor<CreateComponentPublicInstance<D, M, Mixin>> &
-  ComponentOptionsBase<Props, RawBindings, D, C, M, Mixin, Extends, E, EE, Defaults, {}, string, S>
+> = { __isFragment: string } & ComponentOptionsBase<
+  Props,
+  RawBindings,
+  D,
+  C,
+  M,
+  Mixin,
+  Extends,
+  E,
+  EE,
+  Defaults,
+  {},
+  string,
+  S
+>
 
 export function defineComponent<
   Props = {},

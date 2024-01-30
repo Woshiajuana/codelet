@@ -56,17 +56,6 @@ export type UnwrapMixinsType<T, Type extends OptionTypesKeys> = T extends Option
 
 type EnsureNonVoid<T> = T extends void ? {} : T
 
-export type ComponentPublicInstanceConstructor<
-  T extends ComponentPublicInstance<D, M> = ComponentPublicInstance<any>,
-  D = any,
-  M extends MethodOptions = MethodOptions,
-> = {
-  __isFragment?: never
-  __isTeleport?: never
-  __isSuspense?: never
-  new (...args: any[]): T
-}
-
 export type CreateComponentPublicInstance<
   D = {},
   M extends MethodOptions = {},
