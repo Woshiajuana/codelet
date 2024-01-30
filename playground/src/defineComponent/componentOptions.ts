@@ -1,4 +1,3 @@
-import type { EmitsOptions, EmitsToProps } from './componentEmits'
 import { type CreateComponentPublicInstance } from './componentPublicInstance'
 
 declare const RefSymbol: unique symbol
@@ -64,12 +63,12 @@ export type ComponentOptionsWithoutProps<
   M extends MethodOptions = {},
   Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
   Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
-  E extends EmitsOptions = EmitsOptions,
+  E = {},
   EE extends string = string,
   I extends ComponentInjectOptions = {},
   II extends string = string,
   S = {},
-  PE = Props & EmitsToProps<E>,
+  PE = Props,
 > = ComponentOptionsBase<PE, RawBindings, D, C, M, Mixin, Extends, E, EE, {}, I, II, S> & {
   props?: undefined
 } & ThisType<CreateComponentPublicInstance<D, M, Mixin>>

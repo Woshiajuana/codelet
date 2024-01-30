@@ -7,7 +7,6 @@ import type {
   MethodOptions,
 } from './componentOptions'
 import type { ExtractDefaultPropTypes } from './componentProps'
-import type { EmitsOptions } from './componentEmits'
 
 export type PublicProps = Record<string, any>
 
@@ -19,7 +18,7 @@ export type DefineComponent<
   M extends MethodOptions = MethodOptions,
   Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
   Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
-  E extends EmitsOptions = {},
+  E = {},
   EE extends string = string,
   PP = PublicProps,
   Props = any,
@@ -49,7 +48,7 @@ export function defineComponent<
   M extends MethodOptions = {},
   Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
   Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
-  E extends EmitsOptions = {},
+  E = {},
   EE extends string = string,
   S = {},
   I extends ComponentInjectOptions = {},
