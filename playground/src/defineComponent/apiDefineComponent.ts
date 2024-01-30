@@ -6,21 +6,19 @@ import type {
   ComputedOptions,
   MethodOptions,
 } from './componentOptions'
-import type { AllowedComponentProps, ComponentCustomProps } from './component'
 import type {
   ComponentPropsOptions,
   ExtractDefaultPropTypes,
   ExtractPropTypes,
 } from './componentProps'
 import type { EmitsOptions, EmitsToProps } from './componentEmits'
-import type { VNodeProps } from './vnode'
 import type {
   ComponentPublicInstanceConstructor,
   CreateComponentPublicInstance,
 } from './componentPublicInstance'
 import type { SlotsType } from './componentSlots'
 
-export type PublicProps = VNodeProps & AllowedComponentProps & ComponentCustomProps
+export type PublicProps = Record<string, any>
 
 type ResolveProps<PropsOrPropOptions, E extends EmitsOptions> = Readonly<
   PropsOrPropOptions extends ComponentPropsOptions

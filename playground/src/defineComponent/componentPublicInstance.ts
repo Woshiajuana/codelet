@@ -1,4 +1,3 @@
-import { type ComponentInternalInstance } from './component'
 export type IfAny<T, Y, N> = 0 extends 1 & T ? Y : N
 export type Prettify<T> = { [K in keyof T]: T[K] } & {}
 
@@ -17,7 +16,6 @@ import {
   type OptionTypesType,
 } from './componentOptions'
 import type { EmitsOptions } from './componentEmits'
-import type { SlotsType } from './componentSlots'
 
 export interface ComponentCustomProperties {}
 
@@ -86,7 +84,7 @@ export type CreateComponentPublicInstance<
   Defaults = {},
   MakeDefaultsOptional extends boolean = false,
   I extends ComponentInjectOptions = {},
-  S extends SlotsType = {},
+  S = any,
   PublicMixin = IntersectionMixin<Mixin> & IntersectionMixin<Extends>,
   PublicD = UnwrapMixinsType<PublicMixin, 'D'> & EnsureNonVoid<D>,
   PublicM extends MethodOptions = UnwrapMixinsType<PublicMixin, 'M'> & EnsureNonVoid<M>,
@@ -153,11 +151,4 @@ export interface Ref<T = any> {
    * autocomplete, so we use a private Symbol instead.
    */
   [RefSymbol]: true
-}
-
-export type PublicPropertiesMap = Record<string, (i: ComponentInternalInstance) => any>
-
-export interface ComponentRenderContext {
-  [key: string]: any
-  _: ComponentInternalInstance
 }
