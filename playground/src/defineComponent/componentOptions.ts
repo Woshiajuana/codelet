@@ -79,21 +79,6 @@ export type ComponentOptionsWithoutProps<
     CreateComponentPublicInstance<PE, RawBindings, D, C, M, Mixin, Extends, E, PE, {}, false, I, S>
   >
 
-export type ComponentOptions<
-  Props = {},
-  RawBindings = any,
-  D = any,
-  C extends ComputedOptions = any,
-  M extends MethodOptions = any,
-  Mixin extends ComponentOptionsMixin = any,
-  Extends extends ComponentOptionsMixin = any,
-  E extends EmitsOptions = any,
-  S = {},
-> = ComponentOptionsBase<Props, RawBindings, D, C, M, Mixin, Extends, E, string, S> &
-  ThisType<
-    CreateComponentPublicInstance<{}, RawBindings, D, C, M, Mixin, Extends, E, Readonly<Props>>
-  >
-
 export type ComponentOptionsMixin = ComponentOptionsBase<
   any,
   any,
@@ -168,10 +153,7 @@ interface LegacyOptions<
   // Limitation: we cannot expose RawBindings on the `this` context for data
   // since that leads to some sort of circular inference and breaks ThisType
   // for the entire component.
-  data?: (
-    this: CreateComponentPublicInstance<Props, {}, {}, {}, MethodOptions, Mixin, Extends>,
-    vm: CreateComponentPublicInstance<Props, {}, {}, {}, MethodOptions, Mixin, Extends>,
-  ) => D
+  data?: (this: any, vm: any) => D
   computed?: C
   methods?: M
   watch?: ComponentWatchOptions
