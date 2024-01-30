@@ -75,9 +75,7 @@ export type ComponentOptionsWithoutProps<
   PE = Props & EmitsToProps<E>,
 > = ComponentOptionsBase<PE, RawBindings, D, C, M, Mixin, Extends, E, EE, {}, I, II, S> & {
   props?: undefined
-} & ThisType<
-    CreateComponentPublicInstance<PE, RawBindings, D, C, M, Mixin, Extends, E, PE, {}, false, I, S>
-  >
+} & ThisType<CreateComponentPublicInstance<D, M, Mixin>>
 
 export type ComponentOptionsMixin = ComponentOptionsBase<
   any,

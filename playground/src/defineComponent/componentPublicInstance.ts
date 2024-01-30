@@ -7,15 +7,12 @@ export type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) ex
   ? I
   : never
 import {
-  type ComponentInjectOptions,
   type ComponentOptionsBase,
   type ComponentOptionsMixin,
-  type ComputedOptions,
   type MethodOptions,
   type OptionTypesKeys,
   type OptionTypesType,
 } from './componentOptions'
-import type { EmitsOptions } from './componentEmits'
 
 export interface ComponentCustomProperties {}
 
@@ -45,7 +42,6 @@ type MixinToOptionTypes<T> = T extends ComponentOptionsBase<
       IntersectionMixin<Extends>
   : never
 
-// ExtractMixin(map type) is used to resolve circularly references
 type ExtractMixin<T> = {
   Mixin: MixinToOptionTypes<T>
 }[T extends ComponentOptionsMixin ? 'Mixin' : never]
@@ -72,23 +68,14 @@ export type ComponentPublicInstanceConstructor<
 }
 
 export type CreateComponentPublicInstance<
-  P = {},
-  B = {},
   D = {},
-  C extends ComputedOptions = {},
   M extends MethodOptions = {},
   Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
-  Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
-  E extends EmitsOptions = {},
-  PublicProps = P,
-  Defaults = {},
-  MakeDefaultsOptional extends boolean = false,
-  I extends ComponentInjectOptions = {},
-  S = any,
-  PublicMixin = IntersectionMixin<Mixin> & IntersectionMixin<Extends>,
+  PublicMixin = IntersectionMixin<Mixin>,
   PublicD = UnwrapMixinsType<PublicMixin, 'D'> & EnsureNonVoid<D>,
   PublicM extends MethodOptions = UnwrapMixinsType<PublicMixin, 'M'> & EnsureNonVoid<M>,
 > = ComponentPublicInstance<PublicD, PublicM>
+
 // public properties exposed on the proxy, which is used as the render context
 // in templates (as `this` in the render option)
 export type ComponentPublicInstance<

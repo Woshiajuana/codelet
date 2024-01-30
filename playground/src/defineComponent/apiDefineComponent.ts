@@ -41,23 +41,7 @@ export type DefineComponent<
   Props = ResolveProps<PropsOrPropOptions, E>,
   Defaults = ExtractDefaultPropTypes<PropsOrPropOptions>,
   S extends SlotsType = {},
-> = ComponentPublicInstanceConstructor<
-  CreateComponentPublicInstance<
-    Props,
-    RawBindings,
-    D,
-    C,
-    M,
-    Mixin,
-    Extends,
-    E,
-    PP & Props,
-    Defaults,
-    true,
-    {},
-    S
-  >
-> &
+> = ComponentPublicInstanceConstructor<CreateComponentPublicInstance<D, M, Mixin>> &
   ComponentOptionsBase<Props, RawBindings, D, C, M, Mixin, Extends, E, EE, Defaults, {}, string, S>
 
 export function defineComponent<
