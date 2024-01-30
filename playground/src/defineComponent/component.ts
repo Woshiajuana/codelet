@@ -107,8 +107,6 @@ export type Component<
   S extends Record<string, any> = any,
 > = ConcreteComponent<Props, RawBindings, D, C, M, E, S> | ComponentPublicInstanceConstructor<Props>
 
-export type { ComponentOptions }
-
 // use `E extends any` to force evaluating type to fix #2362
 export type SetupContext<E = EmitsOptions, S extends SlotsType = {}> = E extends any
   ? {
