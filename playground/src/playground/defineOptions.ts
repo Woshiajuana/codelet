@@ -28,14 +28,14 @@ export type UnwrapMixinsType<T, Type extends OptionTypesKeys> = T extends Option
 
 type EnsureNonVoid<T> = T extends void ? {} : T
 
+type UnwrapData<T> 
+
 export type OptionsInstance<
   Data extends DataOptions = {},
   Mixin extends OptionMixin = OptionMixin,
   M extends MethodOptions = {},
   PublicD = UnwrapMixinsType<Mixin, 'Data'> & EnsureNonVoid<Data>,
-> = {
-  data: Data
-} & M
+> = M & Data
 // &
 // PublicD
 

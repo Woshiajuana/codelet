@@ -5,11 +5,6 @@ import type {
   Data,
   SetupContext,
 } from './component'
-import type {
-  ComponentObjectPropsOptions,
-  ExtractDefaultPropTypes,
-  ExtractPropTypes,
-} from './componentProps'
 import type { EmitsOptions, EmitsToProps } from './componentEmits'
 import {
   type CreateComponentPublicInstance,
@@ -18,23 +13,6 @@ import {
 } from './componentPublicInstance'
 import type { VNodeChild } from './vnode'
 import type { SlotsType } from './componentSlots'
-
-/**
- * Interface for declaring custom options.
- *
- * @example
- * ```ts
- * declare module '@vue/runtime-core' {
- *   interface ComponentCustomOptions {
- *     beforeRouteUpdate?(
- *       to: Route,
- *       from: Route,
- *       next: () => void
- *     ): void
- *   }
- * }
- * ```
- */
 
 declare const RefSymbol: unique symbol
 
@@ -181,75 +159,6 @@ export type ComponentOptionsWithoutProps<
     CreateComponentPublicInstance<PE, RawBindings, D, C, M, Mixin, Extends, E, PE, {}, false, I, S>
   >
 
-export type ComponentOptionsWithArrayProps<
-  PropNames extends string = string,
-  RawBindings = {},
-  D = {},
-  C extends ComputedOptions = {},
-  M extends MethodOptions = {},
-  Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
-  Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
-  E extends EmitsOptions = EmitsOptions,
-  EE extends string = string,
-  I extends ComponentInjectOptions = {},
-  II extends string = string,
-  S extends SlotsType = {},
-  Props = Prettify<Readonly<{ [key in PropNames]?: any } & EmitsToProps<E>>>,
-> = ComponentOptionsBase<Props, RawBindings, D, C, M, Mixin, Extends, E, EE, {}, I, II, S> & {
-  props: PropNames[]
-} & ThisType<
-    CreateComponentPublicInstance<
-      Props,
-      RawBindings,
-      D,
-      C,
-      M,
-      Mixin,
-      Extends,
-      E,
-      Props,
-      {},
-      false,
-      I,
-      S
-    >
-  >
-
-export type ComponentOptionsWithObjectProps<
-  PropsOptions = ComponentObjectPropsOptions,
-  RawBindings = {},
-  D = {},
-  C extends ComputedOptions = {},
-  M extends MethodOptions = {},
-  Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
-  Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
-  E extends EmitsOptions = EmitsOptions,
-  EE extends string = string,
-  I extends ComponentInjectOptions = {},
-  II extends string = string,
-  S extends SlotsType = {},
-  Props = Prettify<Readonly<ExtractPropTypes<PropsOptions> & EmitsToProps<E>>>,
-  Defaults = ExtractDefaultPropTypes<PropsOptions>,
-> = ComponentOptionsBase<Props, RawBindings, D, C, M, Mixin, Extends, E, EE, Defaults, I, II, S> & {
-  props: PropsOptions & ThisType<void>
-} & ThisType<
-    CreateComponentPublicInstance<
-      Props,
-      RawBindings,
-      D,
-      C,
-      M,
-      Mixin,
-      Extends,
-      E,
-      Props,
-      Defaults,
-      false,
-      I,
-      S
-    >
-  >
-
 export type ComponentOptions<
   Props = {},
   RawBindings = any,
@@ -387,27 +296,6 @@ interface LegacyOptions<
    * because the `__differentiator` will be different
    */
   __differentiator?: keyof D | keyof C | keyof M
-}
-
-type MergedHook<T = () => void> = T | T[]
-
-export type MergedComponentOptions = ComponentOptions & MergedComponentOptionsOverride
-
-export type MergedComponentOptionsOverride = {
-  beforeCreate?: MergedHook
-  created?: MergedHook
-  beforeMount?: MergedHook
-  mounted?: MergedHook
-  beforeUpdate?: MergedHook
-  updated?: MergedHook
-  activated?: MergedHook
-  deactivated?: MergedHook
-  /** @deprecated use `beforeUnmount` instead */
-  beforeDestroy?: MergedHook
-  beforeUnmount?: MergedHook
-  /** @deprecated use `unmounted` instead */
-  destroyed?: MergedHook
-  unmounted?: MergedHook
 }
 
 export type OptionTypesKeys = 'P' | 'B' | 'D' | 'C' | 'M' | 'Defaults'

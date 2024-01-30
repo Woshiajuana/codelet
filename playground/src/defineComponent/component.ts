@@ -22,33 +22,6 @@ import {
 export type Data = Record<string, unknown>
 
 /**
- * Public utility type for extracting the instance type of a component.
- * Works with all valid component definition types. This is intended to replace
- * the usage of `InstanceType<typeof Comp>` which only works for
- * constructor-based component definition types.
- *
- * Exmaple:
- * ```ts
- * const MyComp = { ... }
- * declare const instance: ComponentInstance<typeof MyComp>
- * ```
- */
-export type ComponentInstance<T> = T extends { new (): ComponentPublicInstance }
-  ? InstanceType<T>
-  : T extends FunctionalComponent<infer Props, infer Emits>
-    ? ComponentPublicInstance<Props, {}, {}, {}, {}, ShortEmitsToObject<Emits>>
-    : T extends Component<infer Props, infer RawBindings, infer D, infer C, infer M>
-      ? // NOTE we override Props/RawBindings/D to make sure is not `unknown`
-        ComponentPublicInstance<
-          unknown extends Props ? {} : Props,
-          unknown extends RawBindings ? {} : RawBindings,
-          unknown extends D ? {} : D,
-          C,
-          M
-        >
-      : never // not a vue Component
-
-/**
  * For extending allowed non-declared props on components in TSX
  */
 export interface ComponentCustomProps {}
@@ -104,11 +77,6 @@ export interface FunctionalComponent<
   displayName?: string
 }
 
-export interface ClassComponent {
-  new (...args: any[]): ComponentPublicInstance<any, any, any, any, any>
-  __vccOpts: ComponentOptions
-}
-
 /**
  * Concrete component type matches its actual value: it's either an options
  * object, or a function. Use this where the code expects to work with actual
@@ -140,8 +108,6 @@ export type Component<
 > = ConcreteComponent<Props, RawBindings, D, C, M, E, S> | ComponentPublicInstanceConstructor<Props>
 
 export type { ComponentOptions }
-
-type LifecycleHook<TFn = Function> = TFn[] | null
 
 // use `E extends any` to force evaluating type to fix #2362
 export type SetupContext<E = EmitsOptions, S extends SlotsType = {}> = E extends any

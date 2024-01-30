@@ -61,22 +61,7 @@ export type DefineComponent<
     S
   >
 > &
-  ComponentOptionsBase<
-    Props,
-    RawBindings,
-    D,
-    C,
-    M,
-    Mixin,
-    Extends,
-    E,
-    EE,
-    Defaults,
-    {},
-    string,
-    S
-  > &
-  PP
+  ComponentOptionsBase<Props, RawBindings, D, C, M, Mixin, Extends, E, EE, Defaults, {}, string, S>
 
 export function defineComponent<
   Props = {},

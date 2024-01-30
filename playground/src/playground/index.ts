@@ -24,8 +24,8 @@ const DataMixin = defineOptions({
     xx: 1,
   },
   hello() {
-    this.data.xx
-    this.data.aa
+    // this.data.xx
+    // this.data.aa
     const aa = this.aa
     const bb = this.bb
     const xx = this.xx
