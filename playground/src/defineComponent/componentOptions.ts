@@ -1,6 +1,5 @@
 import type { EmitsOptions, EmitsToProps } from './componentEmits'
 import { type CreateComponentPublicInstance } from './componentPublicInstance'
-import type { VNodeChild } from './vnode'
 
 declare const RefSymbol: unique symbol
 
@@ -19,8 +18,6 @@ export type Prettify<T> = { [K in keyof T]: T[K] } & {}
 export type LooseRequired<T> = { [P in keyof (T & Required<T>)]: T[P] }
 
 export interface ComponentCustomOptions {}
-
-export type RenderFunction = () => VNodeChild
 
 export interface ComponentOptionsBase<
   Props,

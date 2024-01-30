@@ -6,22 +6,10 @@ import type {
   ComputedOptions,
   MethodOptions,
 } from './componentOptions'
-import type {
-  ComponentPropsOptions,
-  ExtractDefaultPropTypes,
-  ExtractPropTypes,
-} from './componentProps'
-import type { EmitsOptions, EmitsToProps } from './componentEmits'
-import type { SlotsType } from './componentSlots'
+import type { ExtractDefaultPropTypes } from './componentProps'
+import type { EmitsOptions } from './componentEmits'
 
 export type PublicProps = Record<string, any>
-
-type ResolveProps<PropsOrPropOptions, E extends EmitsOptions> = Readonly<
-  PropsOrPropOptions extends ComponentPropsOptions
-    ? ExtractPropTypes<PropsOrPropOptions>
-    : PropsOrPropOptions
-> &
-  ({} extends E ? {} : EmitsToProps<E>)
 
 export type DefineComponent<
   PropsOrPropOptions = {},
@@ -34,9 +22,9 @@ export type DefineComponent<
   E extends EmitsOptions = {},
   EE extends string = string,
   PP = PublicProps,
-  Props = ResolveProps<PropsOrPropOptions, E>,
+  Props = any,
   Defaults = ExtractDefaultPropTypes<PropsOrPropOptions>,
-  S extends SlotsType = {},
+  S = {},
 > = { __isFragment: string } & ComponentOptionsBase<
   Props,
   RawBindings,
@@ -63,7 +51,7 @@ export function defineComponent<
   Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
   E extends EmitsOptions = {},
   EE extends string = string,
-  S extends SlotsType = {},
+  S = {},
   I extends ComponentInjectOptions = {},
   II extends string = string,
 >(
@@ -92,7 +80,7 @@ export function defineComponent<
   E,
   EE,
   PublicProps,
-  ResolveProps<Props, E>,
+  {},
   ExtractDefaultPropTypes<Props>,
   S
 >
