@@ -1,3 +1,3 @@
-export function createPage() {
-  return Page({})
+export function createPage(options: any) {
+  return Page(options ?? {})
 }

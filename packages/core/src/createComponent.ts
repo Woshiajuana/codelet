@@ -1,3 +1,3 @@
-export function createComponent() {
-  return Component({})
+export function createComponent(options: any) {
+  return Component(options ?? {})
 }
