@@ -12,6 +12,7 @@ const AaMixin = defineOptions({
 })
 
 const BbMixin = defineOptions({
+  mixins: [AaMixin],
   data: {
     bb: 'bb',
   },
@@ -23,10 +24,11 @@ const BbMixin = defineOptions({
 })
 
 const DataMixin = defineOptions({
-  mixins: [AaMixin, BbMixin],
+  mixins: [BbMixin],
   data: {
     xx: 1,
   },
+  onLoad() {},
   methods: {
     hello() {
       // this.data.xx

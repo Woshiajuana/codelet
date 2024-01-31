@@ -14,6 +14,7 @@ export interface OptionsBase<
   data?: Data
   mixins?: Mixin[]
   methods?: Method
+  onLoad?: () => void
   [key: string]: any
 }
 
