@@ -1,32 +1,41 @@
 {
   "compilerOptions": {
+    /* Language and Environment */
+    "target": "ESNext",
+    "lib": ["ESNext"],
+
+    /* Modules */
+    "module": "ESNext",
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     },
-    "outDir": "dist",
-    "sourceMap": false,
-    "target": "es2015",
-    "module": "commonjs",
     "moduleResolution": "node",
-    "esModuleInterop": true,
-    "declaration": true,
-    "allowJs": false,
-    "noUnusedLocals": true,
-    "strictNullChecks": true,
-    "noImplicitAny": true,
-    "removeComments": false,
-    "skipLibCheck": true,
-    "strict": true,
-    "lib": ["es6", "es7", "DOM"],
     "types": ["miniprogram-api-typings"],
 
-    // <https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#verbatimmodulesyntax>
-    // Any imports or exports without a type modifier are left around. This is important for `<script setup>`.
-    // Anything that uses the type modifier is dropped entirely.
-    // "verbatimModuleSyntax": true,
+    /* JavaScript Support */
+    "allowJs": true,
+
+    /* Emit */
+    "declaration": true,
+    "outDir": "dist",
+
+    /* Interop Constraints */
+    "esModuleInterop": true,
+
+    /* Type Checking */
+    "strict": true,
+
+    /* Completeness */
+    "skipLibCheck": true,
+
+     // <https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#verbatimmodulesyntax>
+    "verbatimModuleSyntax": true,
   },
   "include": [
-    "src/**/*.ts", "src/pages/login/index.js", "src/utils/index.js", "src/utils/clamp.js", "src/utils/test.js",
+    "src/**/*.ts", 
+  ],
+  "exclude": [
+    "node_modules",
   ],
 }

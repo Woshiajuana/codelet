@@ -5,7 +5,7 @@ const argv = process.argv
 const options = parseArgv(argv)
 const config = getConfig(options)
 
-const callback = (err?: Error, stats?: Stats) => {
+const callback = (err?: Error | null, stats?: Stats) => {
   if (err) {
     throw err
   }

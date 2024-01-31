@@ -36,7 +36,7 @@ export default class AppJsonWebpackPlugin {
             }
             callback()
           } catch (err) {
-            callback(err)
+            callback(err as any)
           }
         },
       )
