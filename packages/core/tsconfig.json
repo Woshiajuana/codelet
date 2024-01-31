@@ -1,31 +1,37 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "outDir": "dist",
-    "sourceMap": false,
-    "target": "es2015",
+    /* Language and Environment */
+    "target": "ESNext",
+    "lib": ["ESNext"],
+
+    /* Modules */
     "module": "ESNext",
     "moduleResolution": "node",
-    "esModuleInterop": true,
+    "types": ["miniprogram-api-typings"],
+
+    /* JavaScript Support */
+    "allowJs": true,
+
+    /* Emit */
     "declaration": true,
-    "allowJs": false,
-    "noUnusedLocals": true,
-    "strictNullChecks": true,
-    "noImplicitAny": true,
-    "removeComments": false,
+    "outDir": "dist",
+
+    /* Interop Constraints */
+    "esModuleInterop": true,
+
+    /* Type Checking */
+    "strict": true,
+
+    /* Completeness */
     "skipLibCheck": true,
 
-    "resolveJsonModule": true,
-    
      // <https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#verbatimmodulesyntax>
-    // Any imports or exports without a type modifier are left around. This is important for `<script setup>`.
-    // Anything that uses the type modifier is dropped entirely.
     "verbatimModuleSyntax": true,
-
-    "lib": ["es6", "es7", "ESNext", "DOM"],
-    "types": ["miniprogram-api-typings"]
   },
   "include": [
-    "src/**/*.ts",
+    "src/**/*.ts", 
+  ],
+  "exclude": [
+    "node_modules",
   ],
 }

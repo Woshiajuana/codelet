@@ -25,7 +25,7 @@
     "skipLibCheck": true,
 
     // <https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#verbatimmodulesyntax>
-   "verbatimModuleSyntax": true,
+    "verbatimModuleSyntax": true,
   },
   "include": [
     "src/**/*.ts",
