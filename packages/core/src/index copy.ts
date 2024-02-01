@@ -1,11 +1,13 @@
 import { defineOptions } from './defineOptions'
 
 const AaMixin = defineOptions({
+  mixins: [],
   data: {
     aa: 'aa',
   },
   methods: {
     aaFn() {
+      this.data.aa
       console.log('aa')
     },
   },
@@ -28,15 +30,15 @@ const DataMixin = defineOptions({
   data: {
     xx: 1,
   },
-  onLoad() {},
+  // onLoad() {},
   methods: {
     hello() {
       // this.data.xx
       // this.data.aa
-      const aa = this.aa
-      const bb = this.bb
-      const xx = this.xx
-      const cc = this.cc
+      const aa = this.data.aa
+      const bb = this.data.bb
+      const xx = this.data.xx
+      const cc = this.data.cc
       this.aaFn()
       this.bbFn()
       this.hello()

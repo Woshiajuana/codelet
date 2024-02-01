@@ -62,7 +62,7 @@ export type OptionsInstance<
   PublicMixin = IntersectionMixin<Mixin>,
   PublicD = UnwrapMixinsType<PublicMixin, 'Data'> & EnsureNonVoid<Data>,
   PublicM extends MethodOptions = UnwrapMixinsType<PublicMixin, 'Method'> & EnsureNonVoid<Method>,
-> = PublicM & PublicD
+> = PublicM & { data: PublicD }
 
 export type Options<
   Data extends DataOptions = {},
