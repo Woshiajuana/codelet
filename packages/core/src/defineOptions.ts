@@ -4,15 +4,15 @@ export interface MethodOptions {
   [key: string]: Function
 }
 
-export type OptionMixin = OptionsBase<any, any, any>
+export type OptionBehavior = OptionsBase<any, any, any>
 
 export interface OptionsBase<
   Data extends DataOptions,
-  Mixin extends OptionMixin,
+  Behavior extends OptionBehavior,
   Method extends MethodOptions,
 > {
   data?: Data
-  mixins?: Mixin[]
+  behaviors?: Behavior[]
   methods?: Method
   onLoad?: () => void
   [key: string]: any
@@ -25,14 +25,14 @@ export type OptionTypesType<Data = {}, Method extends MethodOptions = {}> = {
   Method: Method
 }
 
-export type UnwrapMixinsType<T, Type extends OptionTypesKeys> = T extends OptionTypesType
+export type UnwrapBehaviorsType<T, Type extends OptionTypesKeys> = T extends OptionTypesType
   ? T[Type]
   : never
 
 type EnsureNonVoid<T> = T extends void ? {} : T
 
-type IsDefaultMixinComponent<T> = T extends OptionMixin
-  ? OptionMixin extends T
+type IsDefaultBehaviorComponent<T> = T extends OptionBehavior
+  ? OptionBehavior extends T
     ? true
     : false
   : false
@@ -43,44 +43,45 @@ export type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) ex
   ? I
   : never
 
-type MixinToOptionTypes<T> = T extends OptionsBase<infer Data, infer Mixin, infer Method>
-  ? OptionTypesType<Data & {}, Method & {}> & IntersectionMixin<Mixin>
+type BehaviorToOptionTypes<T> = T extends OptionsBase<infer Data, infer Behavior, infer Method>
+  ? OptionTypesType<Data & {}, Method & {}> & IntersectionBehavior<Behavior>
   : never
 
-type ExtractMixin<T> = {
-  Mixin: MixinToOptionTypes<T>
-}[T extends OptionMixin ? 'Mixin' : never]
+type ExtractBehavior<T> = {
+  Behavior: BehaviorToOptionTypes<T>
+}[T extends OptionBehavior ? 'Behavior' : never]
 
-export type IntersectionMixin<T> = IsDefaultMixinComponent<T> extends true
+export type IntersectionBehavior<T> = IsDefaultBehaviorComponent<T> extends true
   ? OptionTypesType
-  : UnionToIntersection<ExtractMixin<T>>
+  : UnionToIntersection<ExtractBehavior<T>>
 
 export type OptionsInstance<
   Data extends DataOptions = {},
-  Mixin extends OptionMixin = OptionMixin,
+  Behavior extends OptionBehavior = OptionBehavior,
   Method extends MethodOptions = {},
-  PublicMixin = IntersectionMixin<Mixin>,
-  PublicD = UnwrapMixinsType<PublicMixin, 'Data'> & EnsureNonVoid<Data>,
-  PublicM extends MethodOptions = UnwrapMixinsType<PublicMixin, 'Method'> & EnsureNonVoid<Method>,
-> = PublicM & { data: PublicD }
+  PublicBehavior = IntersectionBehavior<Behavior>,
+  PublicD = UnwrapBehaviorsType<PublicBehavior, 'Data'> & EnsureNonVoid<Data>,
+  PublicM extends MethodOptions = UnwrapBehaviorsType<PublicBehavior, 'Method'> &
+    EnsureNonVoid<Method>,
+> = PublicM & { data: PublicD & { [key: string]: any } }
 
 export type Options<
   Data extends DataOptions = {},
-  Mixin extends OptionMixin = OptionMixin,
+  Behavior extends OptionBehavior = OptionBehavior,
   Method extends MethodOptions = {},
-> = OptionsBase<Data, Mixin, Method> & ThisType<OptionsInstance<Data, Mixin, Method>>
+> = OptionsBase<Data, Behavior, Method> & ThisType<OptionsInstance<Data, Behavior, Method>>
 
 export type DefineOptions<
   Data extends DataOptions = {},
-  Mixin extends OptionMixin = OptionMixin,
+  Behavior extends OptionBehavior = OptionBehavior,
   Method extends MethodOptions = {},
-> = { __isFragment: string } & OptionsBase<Data, Mixin, Method>
+> = { __isFragment: string } & OptionsBase<Data, Behavior, Method>
 
 export function defineOptions<
   Data extends DataOptions = {},
-  Mixin extends OptionMixin = OptionMixin,
+  Behavior extends OptionBehavior = OptionBehavior,
   Method extends MethodOptions = {},
->(options: Options<Data, Mixin, Method>): DefineOptions<Data, Mixin, Method> {
+>(options: Options<Data, Behavior, Method>): DefineOptions<Data, Behavior, Method> {
   console.log('options => ', options)
   return null as any
 }

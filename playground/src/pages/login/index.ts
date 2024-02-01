@@ -10,6 +10,7 @@ const a = createBehavior({
   methods: {
     aFn() {
       console.log(this.data.a)
+      console.log(this.data.xx)
     },
   },
 })
@@ -26,18 +27,22 @@ const b = createBehavior({
 })
 
 const c = createBehavior({
+  behaviors: [a],
   data: {
     c: 'c',
   },
   methods: {
     cFn() {
+      console.log(this.data.a)
       console.log(this.data.c)
+      this.aFn()
+      this.cFn()
     },
   },
 })
 
 createPage({
-  behaviors: [a, b, c],
+  behaviors: [b, c],
   onLoad() {
     const a = this.data.a
     const b = this.data.b
@@ -46,5 +51,7 @@ createPage({
     this.aFn()
     this.bFn()
     this.cFn()
+    this.test()
   },
+  test() {},
 })
