@@ -29,8 +29,8 @@
   "author": "woshiajuana",
   "license": "MIT",
   "dependencies": {
-    "@daysnap/types": "^0.0.4",
-    "@daysnap/utils": "^0.0.81",
+    "@daysnap/types": "^0.0.5",
+    "@daysnap/utils": "^0.0.83",
     "miniprogram-api-typings": "^3.12.2"
   },
   "devDependencies": {

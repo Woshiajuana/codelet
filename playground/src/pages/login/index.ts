@@ -13,8 +13,10 @@ const a = createBehavior({
       value: 1,
     },
   },
+  pageLifetimes: {},
   lifetimes: {
     attached() {
+      console.log('a => ', this.data.ap)
       console.log('a => ', this.data.a)
     },
     detached() {
@@ -65,8 +67,11 @@ const c = createBehavior({
       console.log(this.data.a)
       console.log(this.data.c)
       this.aFn()
+      this.xxxx()
       this.cFn()
     },
+
+    xxxx() {},
   },
 })
 
