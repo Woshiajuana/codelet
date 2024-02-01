@@ -1,4 +1,4 @@
-import type { OptionBehavior, Options } from './defineOptions'
+import type { OptionBehavior, Options } from './options'
 import type { DataOptions, MethodOptions, PageLifetimes } from './types'
 
 export type PageOptions = Partial<PageLifetimes> & {
@@ -9,6 +9,12 @@ export function createPage<
   Data extends DataOptions = {},
   Behavior extends OptionBehavior = OptionBehavior,
   Method extends MethodOptions = {},
->(options: Options<Data, Behavior, Method, {}, PageOptions>) {
+>(options: Omit<Options<Data, Behavior, Method, {}, PageOptions>, 'properties'>) {
   return Page((options as any) ?? {})
 }
+
+createPage({
+  properties: {},
+})
+
+c

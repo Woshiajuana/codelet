@@ -1,4 +1,4 @@
-import type { OptionBehavior, Options } from './defineOptions'
+import type { OptionBehavior, Options } from './options'
 import type {
   ComponentPropertyOption,
   DataOptions,
@@ -16,5 +16,32 @@ export function createComponent<
   Method extends MethodOptions = {},
   Property extends ComponentPropertyOption = {},
 >(options: Options<Data, Behavior, Method, Property, ComponentOptions>) {
-  return Component((options as any) ?? {}) as any
+  return Component((options as any) ?? {})
 }
+
+createComponent({
+  properties: {
+    x: {
+      value: 'x',
+      xxx: '1',
+      observe1r() {},
+    },
+  },
+})
+
+Component({
+  properties: {
+    x: {
+    
+      value: 'x',
+    },
+  },
+})
+
+Behavior({
+  properties: {
+    x: {
+      value: 'x',
+    },
+  },
+})
