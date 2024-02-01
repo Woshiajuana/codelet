@@ -15,3 +15,5 @@ export type ComponentPropertyOption = WechatMiniprogram.Component.PropertyOption
 
 // 组件
 export type ComponentOtherOption = WechatMiniprogram.Component.OtherOption
+
+export type EnsureNonVoid<T> = T extends void ? {} : T
