@@ -5,6 +5,7 @@ import type {
   EnsureNonVoid,
   ComponentPropertyOption,
   PropertyOptionToData,
+  InstanceMethods,
 } from './types'
 
 export type OptionBehavior = OptionsBase<any, any, any, any>
@@ -78,7 +79,10 @@ export type OptionsInstance<
     EnsureNonVoid<Method>,
   PublicProperty extends ComponentPropertyOption = UnwrapBehaviorsType<PublicBehavior, 'Property'> &
     EnsureNonVoid<Property>,
-> = PublicM & { data: PublicD & PropertyOptionToData<PublicProperty> } & Other
+> = PublicM & { data: PublicD & PropertyOptionToData<PublicProperty> } & InstanceMethods<
+    PublicD & PropertyOptionToData<PublicProperty>
+  > &
+  Other
 
 export type Options<
   Data extends DataOptions = {},

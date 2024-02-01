@@ -24,30 +24,3 @@ export function createBehavior<
 ): DefineOptions<Data, Behavior, Method, Property, BehaviorOptions> {
   return Behavior((options as any) ?? {}) as any
 }
-
-createBehavior({
-  properties: {
-    x: {
-      type: String,
-      observer() {},
-    },
-  },
-  methods: {
-    xxx() {
-      this.data.x
-    },
-  },
-})
-
-Behavior({
-  properties: {
-    x: {
-      observer() {},
-    },
-  },
-  methods: {
-    xxx() {
-      this.setData({})
-    },
-  },
-})

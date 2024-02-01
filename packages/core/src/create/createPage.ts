@@ -12,9 +12,3 @@ export function createPage<
 >(options: Omit<Options<Data, Behavior, Method, {}, PageOptions>, 'properties'>) {
   return Page((options as any) ?? {})
 }
-
-createPage({
-  properties: {},
-})
-
-c

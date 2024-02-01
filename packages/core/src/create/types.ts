@@ -21,3 +21,5 @@ export type PropertyOptionToData<P extends ComponentPropertyOption> =
 export type ComponentOtherOption = WechatMiniprogram.Component.OtherOption
 
 export type EnsureNonVoid<T> = T extends void ? {} : T
+
+export type InstanceMethods<D extends DataOptions> = WechatMiniprogram.Component.InstanceMethods<D>

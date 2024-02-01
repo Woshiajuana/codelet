@@ -18,30 +18,3 @@ export function createComponent<
 >(options: Options<Data, Behavior, Method, Property, ComponentOptions>) {
   return Component((options as any) ?? {})
 }
-
-createComponent({
-  properties: {
-    x: {
-      value: 'x',
-      xxx: '1',
-      observe1r() {},
-    },
-  },
-})
-
-Component({
-  properties: {
-    x: {
-    
-      value: 'x',
-    },
-  },
-})
-
-Behavior({
-  properties: {
-    x: {
-      value: 'x',
-    },
-  },
-})
