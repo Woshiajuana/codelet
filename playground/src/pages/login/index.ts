@@ -7,8 +7,23 @@ const a = createBehavior({
   data: {
     a: 'a',
   },
+  properties: {
+    ap: {
+      type: Number,
+      value: 1,
+    },
+  },
+  lifetimes: {
+    attached() {
+      console.log('a => ', this.data.a)
+    },
+    detached() {
+      //
+    },
+  },
   methods: {
     aFn() {
+      console.log(this.data.ap)
       console.log(this.data.a)
       console.log(this.data.xx)
     },
@@ -19,8 +34,15 @@ const b = createBehavior({
   data: {
     b: 'b',
   },
+  properties: {
+    bp: {
+      type: Number,
+      value: 1,
+    },
+  },
   methods: {
     bFn() {
+      console.log(this.data.bp)
       console.log(this.data.b)
     },
   },
@@ -31,8 +53,15 @@ const c = createBehavior({
   data: {
     c: 'c',
   },
+  properties: {
+    cp: {
+      type: Number,
+      value: 1,
+    },
+  },
   methods: {
     cFn() {
+      console.log(this.data.cp)
       console.log(this.data.a)
       console.log(this.data.c)
       this.aFn()

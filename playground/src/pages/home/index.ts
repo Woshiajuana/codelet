@@ -16,6 +16,12 @@ const b = Behavior({
       console.log('b => ', this.data.b)
     },
   },
+  properties: {
+    bp: {
+      type: Number,
+      value: 1,
+    },
+  },
   methods: {
     onLoad(options: any) {
       console.log('b onLoad => ', options)
@@ -27,11 +33,20 @@ const b = Behavior({
 })
 
 const a = Behavior({
+  behaviors: [b],
   data: {
     a: 1,
   },
+  properties: {
+    ap: {
+      type: Number,
+      value: 1,
+    },
+  },
   lifetimes: {
     attached() {
+      console.log('a => ', this.data.bp)
+      console.log('a => ', this.data.ap)
       console.log('a => ', this.data.a)
     },
   },
