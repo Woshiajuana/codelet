@@ -9,6 +9,6 @@ export function createPage<
   Data extends DataOptions = {},
   Behavior extends OptionBehavior = OptionBehavior,
   Method extends MethodOptions = {},
->(options: Omit<Options<Data, Behavior, Method, {}, PageOptions>, 'properties'>) {
+>(options: Options<Data, Behavior, Method> & PageOptions) {
   return Page((options as any) ?? {})
 }

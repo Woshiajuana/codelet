@@ -1,4 +1,4 @@
-import type { Loose } from '@daysnap/types'
+import type { Loose, AnyObject } from '@daysnap/types'
 import type {
   DataOptions,
   MethodOptions,
@@ -72,32 +72,22 @@ export type OptionsInstance<
   Behavior extends OptionBehavior = OptionBehavior,
   Method extends MethodOptions = {},
   Property extends ComponentPropertyOption = {},
-  Other extends Record<string, any> = {},
+  CustomInstanceProperty extends AnyObject = {},
   PublicBehavior = IntersectionBehavior<Behavior>,
-  PublicD = UnwrapBehaviorsType<PublicBehavior, 'Data'> & EnsureNonVoid<Data>,
-  PublicM extends MethodOptions = UnwrapBehaviorsType<PublicBehavior, 'Method'> &
-    EnsureNonVoid<Method>,
   PublicProperty extends ComponentPropertyOption = UnwrapBehaviorsType<PublicBehavior, 'Property'> &
     EnsureNonVoid<Property>,
-> = PublicM & { data: PublicD & PropertyOptionToData<PublicProperty> } & InstanceMethods<
-    PublicD & PropertyOptionToData<PublicProperty>
-  > &
-  Other
+  PublicData extends DataOptions = UnwrapBehaviorsType<PublicBehavior, 'Data'> &
+    EnsureNonVoid<Data> &
+    PropertyOptionToData<PublicProperty>,
+  PublicMethod extends MethodOptions = UnwrapBehaviorsType<PublicBehavior, 'Method'> &
+    EnsureNonVoid<Method>,
+> = PublicMethod & { data: PublicData } & InstanceMethods<PublicData> & CustomInstanceProperty
 
 export type Options<
   Data extends DataOptions = {},
   Behavior extends OptionBehavior = OptionBehavior,
   Method extends MethodOptions = {},
   Property extends ComponentPropertyOption = {},
-  Other extends Record<string, any> = {},
+  CustomInstanceProperty extends AnyObject = {},
 > = OptionsBase<Data, Behavior, Method, Property> &
-  ThisType<OptionsInstance<Data, Behavior, Method, Property>> &
-  Other
-
-export type DefineOptions<
-  Data extends DataOptions = {},
-  Behavior extends OptionBehavior = OptionBehavior,
-  Method extends MethodOptions = {},
-  Property extends ComponentPropertyOption = {},
-  Other extends Record<string, any> = {},
-> = { __isFragment: string } & OptionsBase<Data, Behavior, Method, Property> & Other
+  ThisType<OptionsInstance<Data, Behavior, Method, Property, CustomInstanceProperty>>

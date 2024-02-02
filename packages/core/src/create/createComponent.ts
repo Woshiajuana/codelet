@@ -15,6 +15,6 @@ export function createComponent<
   Behavior extends OptionBehavior = OptionBehavior,
   Method extends MethodOptions = {},
   Property extends ComponentPropertyOption = {},
->(options: Options<Data, Behavior, Method, Property, ComponentOptions>) {
+>(options: Options<Data, Behavior, Method, Property> & ComponentOptions) {
   return Component((options as any) ?? {})
 }
