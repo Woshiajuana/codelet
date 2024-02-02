@@ -12,5 +12,6 @@ createPage({
   onLoad(query) {
     console.log('home onLoad', query)
     console.log('home data', this.data.title)
+    Promise.resolve().toast()
   },
 })
