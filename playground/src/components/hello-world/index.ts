@@ -3,4 +3,13 @@ import './index.wxml'
 import './index.scss'
 import { createComponent } from '@bee/core'
 
-createComponent()
+createComponent({
+  data: {
+    title: 'Hello, World!',
+  },
+  methods: {
+    onTap() {
+      console.log('onTap')
+    },
+  },
+})

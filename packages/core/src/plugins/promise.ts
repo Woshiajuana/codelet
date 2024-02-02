@@ -1,5 +1,6 @@
 import { formatMessage, isFunction } from '@daysnap/utils'
 import { definePlugin } from '../utils'
+import { bee } from '../bee'
 
 type ToastCallback = ((err: unknown, message: string) => boolean | void) | boolean
 
@@ -11,7 +12,29 @@ declare global {
   }
 }
 
-export const promise = definePlugin((bee) => {
+export interface PromiseOptions {
+  /** 格式化错误消息 */
+  formatMessage: (err: unknown) => string
+
+  /** 排除指定错误消息 */
+  excludeMessage: (message: string) => boolean
+
+  /** 默认调用 showToast */
+  showToast: (message: string) => void
+}
+
+// 默认配置
+const defaultOptions: PromiseOptions = {
+  formatMessage,
+  excludeMessage: (message) => !message,
+  showToast: (message) => {
+    bee.showToast({ title: message, icon: 'none' })
+  },
+}
+
+export const promise = definePlugin((_, options?: Partial<PromiseOptions>) => {
+  const { excludeMessage, formatMessage, showToast } = Object.assign(defaultOptions, options)
+
   Promise.prototype.toast = async function (cb) {
     try {
       return await this
@@ -22,9 +45,9 @@ export const promise = definePlugin((bee) => {
         return
       }
 
-      // if (cb !== false && !excludeMessage(message)) {
-      // showToast(message)
-      // }
+      if (cb !== false && !excludeMessage(message)) {
+        showToast?.(message)
+      }
     }
   }
 
@@ -35,4 +58,4 @@ export const promise = definePlugin((bee) => {
       return console.log(err)
     }
   }
-}
+})
