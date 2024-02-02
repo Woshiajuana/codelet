@@ -6,6 +6,7 @@ import type {
   MethodOptions,
   ComponentLifetimes,
   ComponentOtherOption,
+  ComponentInstanceProperties,
 } from './types'
 
 export type BehaviorOptions = Partial<ComponentLifetimes> &
@@ -29,7 +30,8 @@ export function createBehavior<
   Method extends MethodOptions = {},
   Property extends ComponentPropertyOption = {},
 >(
-  options: Options<Data, Behavior, Method, Property> & BehaviorOptions,
+  options?: Options<Data, Behavior, Method, Property, ComponentInstanceProperties> &
+    BehaviorOptions,
 ): CreateBehavior<Data, Behavior, Method, Property, BehaviorOptions> {
   return Behavior((options as any) ?? {}) as any
 }

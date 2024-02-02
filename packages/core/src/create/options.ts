@@ -81,7 +81,8 @@ export type OptionsInstance<
     PropertyOptionToData<PublicProperty>,
   PublicMethod extends MethodOptions = UnwrapBehaviorsType<PublicBehavior, 'Method'> &
     EnsureNonVoid<Method>,
-> = PublicMethod & { data: PublicData } & InstanceMethods<PublicData> & CustomInstanceProperty
+> = PublicMethod & { data: Loose<PublicData> } & InstanceMethods<PublicData> &
+  CustomInstanceProperty
 
 export type Options<
   Data extends DataOptions = {},
