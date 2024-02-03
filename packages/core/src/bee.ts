@@ -1,4 +1,5 @@
 import type { Plugin } from './utils'
+import { apiProxy } from './plugins'
 
 function use<Options extends unknown[]>(this: Bee, plugin: Plugin<Options>, ...options: Options) {
   if (typeof plugin === 'function') {
@@ -20,3 +21,6 @@ const beeApi = {
 export type Bee = typeof beeApi & Pick<WechatMiniprogram.Wx, GetFunctionKey<WechatMiniprogram.Wx>>
 
 export const bee = beeApi as Bee
+
+// 使用 api 代理插件
+bee.use(apiProxy)

@@ -1,7 +1,10 @@
-import { createApp } from '@bee/core'
+import bee, { createApp } from '@bee/core'
+import {} from '@bee/core/plugins'
 import './app.json'
 import './app.scss'
 import './project.config.json'
+
+bee.use()
 
 createApp({
   onError(err) {
