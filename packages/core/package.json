@@ -7,19 +7,11 @@
     "clean": "rimraf ./dist",
     "release": "npm run build && dsc publish --pnpm -t"
   },
-  "main": "src/index.ts",
-  "types": "src/index.ts",
   "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.js"
-    },
-    "./plugins": {
-      "types": "./src/plugins/index.ts",
-      "import": "./src/plugins/index.ts"
-    },
-    "./package.json": "./package.json",
-    "./*": "./src/*"
+    ".": "./src/index.ts",
+    "./plugins": "./src/plugins/index.ts",
+    "./*": "./src/*",
+    "./package.json": "./package.json"
   },
   "publishConfig": {
     "main": "dist/index.js",

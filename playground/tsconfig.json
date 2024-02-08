@@ -10,7 +10,7 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "types": ["miniprogram-api-typings"],
 
     /* JavaScript Support */
