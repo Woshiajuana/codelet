@@ -4,7 +4,7 @@ import './app.json'
 import './app.scss'
 import './project.config.json'
 
-bee.use()
+// bee.use()
 
 createApp({
   onError(err) {
