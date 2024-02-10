@@ -1,5 +1,5 @@
 import bee, { createApp } from '@bee/core'
-import {} from '@bee/core/plugins'
+// import {  } from '@bee/core/plugins/promise.ts'
 import './app.json'
 import './app.scss'
 import './project.config.json'
@@ -17,3 +17,5 @@ createApp({
     console.log('app onPageNotFound => ', res)
   },
 })
+
+Promise.resolve().toast()
