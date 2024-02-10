@@ -7,6 +7,9 @@ import './project.config.json'
 bee.use(promise)
 
 createApp({
+  onLaunch() {
+    Promise.reject().toast('11')
+  },
   onError(err) {
     console.error('app onError => ', err)
   },
@@ -17,5 +20,3 @@ createApp({
     console.log('app onPageNotFound => ', res)
   },
 })
-
-Promise.resolve().toast()

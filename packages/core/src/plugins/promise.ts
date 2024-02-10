@@ -1,8 +1,8 @@
-import { formatMessage, isFunction } from '@daysnap/utils'
+import { formatMessage, isFunction, isString } from '@daysnap/utils'
 import { definePlugin } from '../utils'
 import { bee } from '../bee'
 
-type ToastCallback = ((err: unknown, message: string) => boolean | void) | boolean
+type ToastCallback = ((err: unknown, message: string) => boolean | void) | string
 
 declare global {
   interface Promise<T> {
@@ -45,7 +45,9 @@ export const promise = definePlugin((_, options?: Partial<PromiseOptions>) => {
         return
       }
 
-      if (cb !== false && !excludeMessage(message)) {
+      if (isString(cb)) {
+        showToast?.(cb)
+      } else if (!excludeMessage(message)) {
         showToast?.(message)
       }
     }
