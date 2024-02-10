@@ -17,6 +17,19 @@
   "publishConfig": {
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "./plugins": {
+        "types": "./dist/plugins/index.d.ts",
+        "default": "./dist/plugins/index.js"
+      },
+      "./plugins/*": "./dist/plugins/*",
+      "./*": "./dist/*",
+      "./package.json": "./package.json"
+    },
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },

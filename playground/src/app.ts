@@ -1,10 +1,10 @@
 import bee, { createApp } from '@bee/core'
-// import {  } from '@bee/core/plugins/promise.ts'
+import { promise } from '@bee/core/plugins/promise.ts'
 import './app.json'
 import './app.scss'
 import './project.config.json'
 
-// bee.use()
+bee.use(promise)
 
 createApp({
   onError(err) {

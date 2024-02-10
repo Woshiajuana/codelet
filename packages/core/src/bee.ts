@@ -1,5 +1,5 @@
 import type { Plugin } from './utils'
-import { apiProxy } from './plugins'
+import { apiProxy } from './plugins/api-proxy'
 
 function use<Options extends unknown[]>(this: Bee, plugin: Plugin<Options>, ...options: Options) {
   if (typeof plugin === 'function') {
