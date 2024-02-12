@@ -1,5 +1,5 @@
 import type { Plugin } from './utils'
-import { apiProxy } from './plugins/api-proxy'
+// import { apiProxy } from './plugins/api-proxy'
 
 function use<Options extends unknown[]>(this: Bee, plugin: Plugin<Options>, ...options: Options) {
   if (typeof plugin === 'function') {
@@ -14,13 +14,15 @@ type GetFunctionKey<T> = {
   [K in keyof T]: T[K] extends (...args: any) => any ? K : never
 }[keyof T]
 
-const beeApi = {
+export interface Bee {
+  use: typeof use
+}
+
+export const bee: Bee = {
   use,
 }
 
-export type Bee = typeof beeApi & Pick<WechatMiniprogram.Wx, GetFunctionKey<WechatMiniprogram.Wx>>
+// export type Bee = typeof beeApi & Pick<WechatMiniprogram.Wx, GetFunctionKey<WechatMiniprogram.Wx>>
 
-export const bee = beeApi as Bee
-
-// 使用 api 代理插件
-bee.use(apiProxy)
+// // 使用 api 代理插件
+// bee.use(apiProxy)

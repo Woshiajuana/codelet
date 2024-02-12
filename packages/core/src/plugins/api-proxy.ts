@@ -1,4 +1,13 @@
 import { definePlugin, promisify } from '../utils'
+import '../bee'
+
+type GetFunctionKey<T> = {
+  [K in keyof T]: T[K] extends (...args: any) => any ? K : never
+}[keyof T]
+
+type WX = Pick<WechatMiniprogram.Wx, GetFunctionKey<WechatMiniprogram.Wx>>
+
+export interface Bee extends WX {}
 
 /**
  * 兼容 wx api promise 写法

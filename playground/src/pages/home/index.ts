@@ -2,7 +2,7 @@ import './index.json'
 import './index.wxml'
 import './index.scss'
 
-import { createPage } from '@bee/core'
+import bee, { createPage } from '@bee/core'
 
 createPage({
   behaviors: [],
@@ -13,5 +13,8 @@ createPage({
     console.log('home onLoad', query)
     console.log('home data', this.data.title)
     Promise.resolve().toast()
+  },
+  handleTap() {
+    // bee.
   },
 })
