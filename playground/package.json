@@ -19,7 +19,7 @@
   "license": "MIT",
   "dependencies": {
     "@bee/core": "workspace:^",
-    "@daysnap/utils": "^0.0.83"
+    "@daysnap/utils": "^0.0.84"
   },
   "devDependencies": {
     "@bee/cli-service": "workspace:^",

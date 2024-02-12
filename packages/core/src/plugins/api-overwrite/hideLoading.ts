@@ -1,3 +1,3 @@
-export function hideLoading() {
-  //
-}
+import { promisify } from '../../utils'
+
+export function hideLoadingPlus() {}
