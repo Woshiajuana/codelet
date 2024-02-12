@@ -6,12 +6,10 @@ type GetFunctionKey<T> = {
 
 type WX = Pick<WechatMiniprogram.Wx, GetFunctionKey<WechatMiniprogram.Wx>>
 
-export interface Bee extends WX {}
+declare module '../bee' {
+  interface Bee extends WX {}
+}
 
-/**
- * 兼容 wx api promise 写法
- * 使用 bee 自动引入安装
- *  */
 export const apiProxy = definePlugin((bee) => {
   Object.entries(wx).forEach(([key, fn]) => {
     if (typeof fn !== 'function') {

@@ -4,7 +4,6 @@ import { apiProxy } from '@bee/core/plugins/api-proxy.ts'
 import './app.json'
 import './app.scss'
 import './project.config.json'
-import '@bee/core/plugins/api-proxy.ts'
 
 bee.use(apiProxy)
 bee.use(promise)

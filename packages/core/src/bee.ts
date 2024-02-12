@@ -13,6 +13,6 @@ export interface Bee {
   use: typeof use
 }
 
-export const bee: Bee = {
+export const bee = {
   use,
-}
+} as Bee
