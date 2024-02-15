@@ -6,7 +6,7 @@ export type ShowLoadingPlusOptions = {
   mask?: boolean
 }
 
-export function showLoadingPlus(options: string | ShowLoadingPlusOptions) {
+export function showLoading(options: string | ShowLoadingPlusOptions) {
   if (isString(options)) {
     options = { title: options }
   }
