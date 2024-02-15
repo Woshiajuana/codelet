@@ -1,7 +1,7 @@
 import { definePlugin } from '../utils'
+import { apiOverwrite } from './api-overwrite'
 import { apiProxy } from './api-proxy'
 import { promise } from './promise'
-import {} from './api-overwrite'
 
 export * from './api-overwrite'
 export * from './api-proxy'
@@ -11,6 +11,7 @@ export * from './promise'
 const plugins = {
   apiProxy,
   promise,
+  apiOverwrite,
 }
 
 // 启用全部插件

@@ -12,3 +12,12 @@ export function showLoading(options: string | ShowLoadingPlusOptions) {
   }
   return promisify(wx.showLoading)(options)
 }
+
+type OverwriteType = {
+  showLoading: typeof showLoading
+  showLoading1: typeof showLoading
+}
+
+declare module '../../bee' {
+  interface Bee extends OverwriteType {}
+}
