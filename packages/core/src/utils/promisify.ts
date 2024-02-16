@@ -15,7 +15,7 @@ export type PromisifyRestArgs<T> = T extends [any, ...args: infer P] ? P : never
 
 export function promisify<T extends (...args: any[]) => any>(fn: T) {
   return function <P extends Parameters<T>[0]>(
-    options: P,
+    options?: P,
     ...args: PromisifyRestArgs<Parameters<T>>
   ): PromisifySuccessResult<P, Parameters<T>[0]> {
     const { success, fail, complete } = options as any
