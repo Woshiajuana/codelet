@@ -2,6 +2,7 @@ import bee, { createApp } from '@bee/core'
 import { promise } from '@bee/core/plugins/promise.ts'
 import { apiProxy } from '@bee/core/plugins/api-proxy.ts'
 import { apiOverwrite } from '@bee/core/plugins/api-overwrite/index.ts'
+
 import './app.json'
 import './app.scss'
 import './project.config.json'
@@ -11,7 +12,6 @@ bee.use(apiOverwrite)
 bee.use(promise)
 
 bee.showLoading('11')
-bee.showLoading1('11')
 
 createApp({
   onLaunch() {

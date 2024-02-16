@@ -1,23 +1,15 @@
 import { isString } from '@daysnap/utils'
 import { promisify } from '../../utils'
 
-export type ShowLoadingPlusOptions = {
-  title: string
-  mask?: boolean
-}
-
-export function showLoading(options: string | ShowLoadingPlusOptions) {
+export function showLoading(options: string | Parameters<typeof wx.showLoading>[0]) {
   if (isString(options)) {
-    options = { title: options }
+    options = { title: options, mask: true }
   }
   return promisify(wx.showLoading)(options)
 }
 
-type OverwriteType = {
-  showLoading: typeof showLoading
-  showLoading1: typeof showLoading
-}
-
 declare module '../../bee' {
-  interface Bee extends OverwriteType {}
+  interface Bee {
+    showLoading: typeof showLoading
+  }
 }
