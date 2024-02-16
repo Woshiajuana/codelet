@@ -11,7 +11,16 @@ bee.use(apiProxy)
 bee.use(apiOverwrite)
 bee.use(promise)
 
-bee.showLoading('11')
+bee
+  .showLoading({
+    title: '1',
+    success() {
+      //
+    },
+  })
+  .then(() => {
+    //
+  })
 
 createApp({
   onLaunch() {

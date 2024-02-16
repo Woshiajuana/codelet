@@ -11,9 +11,10 @@ export type PromisifySuccessResult<
       ? void
       : Promise<Parameters<Exclude<T['success'], undefined>>[0]>
 
-export type PromisifyRestArgs<T> = T extends [any, ...args: infer P] ? P : never
+export type PromisifyRestArgs<T> = T extends [any, ...args: infer P] ? P : never[]
 
 export function promisify<T extends (...args: any[]) => any>(fn: T) {
+  // TODO options 可选类型这里有点问题 以后看有没有解决方法
   return function <P extends Parameters<T>[0]>(
     options?: P,
     ...args: PromisifyRestArgs<Parameters<T>>

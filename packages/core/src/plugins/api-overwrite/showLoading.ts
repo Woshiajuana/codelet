@@ -1,25 +1,23 @@
 import { isString } from '@daysnap/utils'
-import { promisify } from '../../utils'
+import { definePlugin, promisify } from '../../utils'
 
-export function showLoading(options: string | Parameters<typeof wx.showLoading>[0] = '') {
+type ShowLoadingOptions = WechatMiniprogram.ShowLoadingOption | string
+
+declare module '../../bee' {
+  interface Bee {
+    showLoading<T extends ShowLoadingOptions = ShowLoadingOptions>(
+      option?: T,
+    ): WechatMiniprogram.PromisifySuccessResult<T, WechatMiniprogram.ShowLoadingOption>
+  }
+}
+
+function showLoading(options: string | Parameters<typeof wx.showLoading>[0] = 'loading') {
   if (isString(options)) {
     options = { title: options, mask: true }
   }
   return promisify(wx.showLoading)(options)
 }
 
-declare module '../../bee' {
-  interface Bee {
-    showLoading: typeof showLoading
-  }
-}
-
-promisify(wx.showLoading)({
-  title: '1',
-  success: () => {
-    //
-  },
-}).then(() => {
-  //
+export const showLoadingPlugin = definePlugin((bee) => {
+  ;(bee as any)['showLoading'] = showLoading
 })
-// .then()

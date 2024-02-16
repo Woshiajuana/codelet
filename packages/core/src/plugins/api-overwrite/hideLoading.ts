@@ -1,8 +1,10 @@
-import { promisify } from '../../utils'
+import { definePlugin, promisify } from '../../utils'
 
-export function hideLoading(options: Parameters<typeof wx.hideLoading>[0]) {
-  return promisify(wx.hideLoading)({}, 1)
+function hideLoading(options?: Parameters<typeof wx.hideLoading>[0]) {
+  options = Object.assign({ noConflict: true }, options)
+  return promisify(wx.hideLoading)(options)
 }
 
-wx.showLoading()
-wx.hideLoading()
+export const hideLoadingPlugin = definePlugin((bee) => {
+  ;(bee as any)['hideLoading'] = hideLoading
+})

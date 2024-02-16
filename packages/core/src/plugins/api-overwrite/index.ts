@@ -1,12 +1,9 @@
 import { definePlugin } from '../../utils'
-import { showLoading } from './showLoading'
-import { hideLoading } from './hideLoading'
+import { hideLoadingPlugin } from './hideLoading'
+import { showLoadingPlugin } from './showLoading'
 
 export const apiOverwrite = definePlugin((bee) => {
-  Object.entries({
-    showLoading,
-    hideLoading,
-  }).forEach(([key, fn]) => {
-    ;(bee as any)[key] = fn
+  ;[hideLoadingPlugin, showLoadingPlugin].forEach((plugin) => {
+    bee.use(plugin)
   })
 })
