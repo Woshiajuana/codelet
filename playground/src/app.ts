@@ -14,9 +14,6 @@ bee.use(promise)
 bee
   .showLoading({
     title: '1',
-    success() {
-      //
-    },
   })
   .then(() => {
     //
