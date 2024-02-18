@@ -1,19 +1,11 @@
-import type { Loose, AnyObject } from '@daysnap/types'
-import type {
-  DataOptions,
-  MethodOptions,
-  EnsureNonVoid,
-  ComponentPropertyOption,
-  PropertyOptionToData,
-  InstanceMethods,
-} from './types'
+import type { MethodOption, ComponentPropertyOption, DataOption } from './types'
 
-export type OptionBehavior = OptionsBase<any, any, any, any>
+export type OptionBehavior = BehaviorOptionsBase<any, any, any, any>
 
-export type OptionsBase<
-  Data extends DataOptions,
+export type BehaviorOptionsBase<
+  Data extends DataOption,
   Behavior extends OptionBehavior,
-  Method extends MethodOptions = {},
+  Method extends MethodOption = {},
   Property extends ComponentPropertyOption = {},
 > = {
   data?: Data
@@ -26,7 +18,7 @@ export type OptionTypesKeys = 'Data' | 'Method' | 'Property'
 
 export type OptionTypesType<
   Data = {},
-  Method extends MethodOptions = {},
+  Method extends MethodOption = {},
   Property extends ComponentPropertyOption = {},
 > = {
   Data: Data
@@ -50,7 +42,7 @@ export type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) ex
   ? I
   : never
 
-export type BehaviorToOptionTypes<T> = T extends OptionsBase<
+export type BehaviorToOptionTypes<T> = T extends BehaviorOptionsBase<
   infer Data,
   infer Behavior,
   infer Method,
@@ -66,29 +58,3 @@ export type ExtractBehavior<T> = {
 export type IntersectionBehavior<T> = IsDefaultBehaviorComponent<T> extends true
   ? OptionTypesType
   : UnionToIntersection<ExtractBehavior<T>>
-
-export type OptionsInstance<
-  Data extends DataOptions = {},
-  Behavior extends OptionBehavior = OptionBehavior,
-  Method extends MethodOptions = {},
-  Property extends ComponentPropertyOption = {},
-  CustomInstanceProperty extends AnyObject = {},
-  PublicBehavior = IntersectionBehavior<Behavior>,
-  PublicProperty extends ComponentPropertyOption = UnwrapBehaviorsType<PublicBehavior, 'Property'> &
-    EnsureNonVoid<Property>,
-  PublicData extends DataOptions = UnwrapBehaviorsType<PublicBehavior, 'Data'> &
-    EnsureNonVoid<Data> &
-    PropertyOptionToData<PublicProperty>,
-  PublicMethod extends MethodOptions = UnwrapBehaviorsType<PublicBehavior, 'Method'> &
-    EnsureNonVoid<Method>,
-> = PublicMethod & { data: Loose<PublicData> } & InstanceMethods<PublicData> &
-  CustomInstanceProperty
-
-export type Options<
-  Data extends DataOptions = {},
-  Behavior extends OptionBehavior = OptionBehavior,
-  Method extends MethodOptions = {},
-  Property extends ComponentPropertyOption = {},
-  CustomInstanceProperty extends AnyObject = {},
-> = OptionsBase<Data, Behavior, Method, Property> &
-  ThisType<OptionsInstance<Data, Behavior, Method, Property, CustomInstanceProperty>>

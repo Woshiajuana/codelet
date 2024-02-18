@@ -7,7 +7,11 @@ createApp({
   },
 })
 
-Behavior({})
+Component({
+  methods: {
+    xx() {},
+  },
+})
 
 // 行为
 const a = createBehavior({
@@ -67,6 +71,8 @@ const c = createBehavior({
     cFn() {
       this.data.d
       this.data.dp
+      this.data.cp
+      this.data.cxxx
       this.dFn()
       console.log('cFn')
       this.setData({ c: '' })

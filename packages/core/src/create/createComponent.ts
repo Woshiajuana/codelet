@@ -1,24 +1,55 @@
-import type { OptionBehavior, Options } from './options'
+import type { Loose } from '@daysnap/types'
+import type {
+  BehaviorOptionsBase,
+  IntersectionBehavior,
+  OptionBehavior,
+  UnwrapBehaviorsType,
+} from './options'
 import type {
   ComponentPropertyOption,
-  DataOptions,
-  MethodOptions,
+  DataOption,
+  MethodOption,
   ComponentLifetimes,
   ComponentOtherOption,
   ComponentInstanceProperties,
+  EnsureNonVoid,
+  PropertyOptionToData,
+  InstanceMethods,
 } from './types'
 
-export type ComponentOptions = Partial<ComponentLifetimes> &
-  Partial<Omit<ComponentOtherOption, 'behaviors'>>
+export type ComponentOtherOptions = Partial<Omit<ComponentOtherOption, 'behaviors'>>
+
+export type ComponentOptionsInstance<
+  Data extends DataOption = {},
+  Behavior extends OptionBehavior = OptionBehavior,
+  Method extends MethodOption = {},
+  Property extends ComponentPropertyOption = {},
+  PublicBehavior = IntersectionBehavior<Behavior>,
+  PublicProperty extends ComponentPropertyOption = UnwrapBehaviorsType<PublicBehavior, 'Property'> &
+    EnsureNonVoid<Property>,
+  PublicData extends DataOption = UnwrapBehaviorsType<PublicBehavior, 'Data'> &
+    EnsureNonVoid<Data> &
+    PropertyOptionToData<PublicProperty>,
+  PublicMethod extends MethodOption = UnwrapBehaviorsType<PublicBehavior, 'Method'> &
+    EnsureNonVoid<Method>,
+> = ComponentInstanceProperties &
+  PublicMethod & { data: Loose<PublicData> } & InstanceMethods<PublicData>
+
+export type ComponentOptions<
+  Data extends DataOption = {},
+  Behavior extends OptionBehavior = OptionBehavior,
+  Method extends MethodOption = {},
+  Property extends ComponentPropertyOption = {},
+> = BehaviorOptionsBase<Data, Behavior, Method, Property> &
+  ComponentOtherOptions &
+  Partial<ComponentLifetimes> &
+  ThisType<ComponentOptionsInstance<Data, Behavior, Method, Property>>
 
 export function createComponent<
-  Data extends DataOptions = {},
+  Data extends DataOption = {},
   Behavior extends OptionBehavior = OptionBehavior,
-  Method extends MethodOptions = {},
+  Method extends MethodOption = {},
   Property extends ComponentPropertyOption = {},
->(
-  options?: Options<Data, Behavior, Method, Property, ComponentInstanceProperties> &
-    ComponentOptions,
-) {
+>(options?: ComponentOptions<Data, Behavior, Method, Property>) {
   return Component((options as any) ?? {})
 }
