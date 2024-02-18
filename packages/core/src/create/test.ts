@@ -140,26 +140,26 @@ createPage({
   },
 })
 
-Page({
-  behaviors: [a, b, c],
-  data: {
-    title: 'Hello, World!',
-  },
-  x: 1,
-  test() {
-    this.onLoad()
-    this.x
-    console.log('test')
-    this.data.a
-    this.data.b
-    this.data.c
-    this.data.d
-    this.data.dp
-    this.data.cp
-    this.data.e
-    this.aFn()
-    this.test()
-    this.dFn()
-    this.setData({ title: 'page Hello, World!' })
-  },
-})
+// Page({
+//   behaviors: [a, b, c],
+//   data: {
+//     title: 'Hello, World!',
+//   },
+//   x: 1,
+//   test() {
+//     this.onLoad()
+//     this.x
+//     console.log('test')
+//     this.data.a
+//     this.data.b
+//     this.data.c
+//     this.data.d
+//     this.data.dp
+//     this.data.cp
+//     this.data.e
+//     this.aFn()
+//     this.test()
+//     this.dFn()
+//     this.setData({ title: 'page Hello, World!' })
+//   },
+// })

@@ -23,8 +23,10 @@ export type ComponentPropertyOption = WechatMiniprogram.Component.PropertyOption
 export type PropertyOptionToData<P extends ComponentPropertyOption> =
   WechatMiniprogram.Component.PropertyOptionToData<P>
 
+// 组件中其他的属性
 export type ComponentInstanceProperties = WechatMiniprogram.Component.InstanceProperties
 
+// 页面中其他的属性
 export type PageInstanceProperties = WechatMiniprogram.Page.InstanceProperties
 
 export type EnsureNonVoid<T> = T extends void ? {} : T
