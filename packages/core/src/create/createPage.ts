@@ -1,4 +1,5 @@
 import type { OptionBehavior, Options } from './options'
+import type { AnyObject } from '@daysnap/types'
 import type { DataOptions, MethodOptions, PageInstanceProperties, PageLifetimes } from './types'
 
 export type PageOptions = Partial<PageLifetimes> & {
@@ -8,7 +9,7 @@ export type PageOptions = Partial<PageLifetimes> & {
 export function createPage<
   Data extends DataOptions = {},
   Behavior extends OptionBehavior = OptionBehavior,
-  Method extends MethodOptions = {},
->(options?: Options<Data, Behavior, Method, {}, PageInstanceProperties> & PageOptions) {
+  Custom extends AnyObject = {},
+>(options?: Options<Data, Behavior, {}, {}, PageInstanceProperties & Custom> & PageOptions) {
   return Page((options as any) ?? {})
 }

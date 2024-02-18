@@ -15,12 +15,12 @@ export type OptionsBase<
   Behavior extends OptionBehavior,
   Method extends MethodOptions = {},
   Property extends ComponentPropertyOption = {},
-> = Loose<{
+> = {
   data?: Data
   behaviors?: Behavior[]
   methods?: Method
   properties?: Property
-}>
+}
 
 export type OptionTypesKeys = 'Data' | 'Method' | 'Property'
 
