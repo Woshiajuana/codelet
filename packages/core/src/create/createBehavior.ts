@@ -1,4 +1,4 @@
-import type { AnyObject, Loose } from '@daysnap/types'
+import type { Loose } from '@daysnap/types'
 import type {
   IntersectionBehavior,
   UnwrapBehaviorsType,
@@ -50,11 +50,9 @@ export type CreateBehavior<
   Behavior extends OptionBehavior = OptionBehavior,
   Method extends MethodOption = {},
   Property extends ComponentPropertyOption = {},
-  Other extends AnyObject = {},
 > = { __isFragment: string } & BehaviorOptionsBase<Data, Behavior, Method, Property> &
   BehaviorOtherOption &
-  Partial<ComponentLifetimes> &
-  Other
+  Partial<ComponentLifetimes>
 
 /**
  * 需要注意 createBehavior 实际返回的是字符串

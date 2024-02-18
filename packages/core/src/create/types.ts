@@ -29,4 +29,5 @@ export type PageInstanceProperties = WechatMiniprogram.Page.InstanceProperties
 
 export type EnsureNonVoid<T> = T extends void ? {} : T
 
+// page 的属性方法
 export type InstanceMethods<D extends DataOption> = WechatMiniprogram.Component.InstanceMethods<D>

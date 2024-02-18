@@ -13,6 +13,12 @@ Component({
   },
 })
 
+Behavior({
+  methods: {
+    xx() {},
+  },
+})
+
 // 行为
 const a = createBehavior({
   data: {
@@ -50,6 +56,7 @@ const d = createBehavior({
   },
   methods: {
     dFn() {
+      this.data.dp
       console.log('dFn')
       return this.data.d
     },
@@ -124,20 +131,24 @@ createPage({
     this.test()
     this.dFn()
     this.onLoad()
+    this.x
     this.setData({ title: 'page Hello, World!' })
   },
+  x: 1,
   onLoad() {
     //
   },
 })
 
 Page({
-  // behaviors: [a, b, c],
+  behaviors: [a, b, c],
   data: {
     title: 'Hello, World!',
   },
+  x: 1,
   test() {
     this.onLoad()
+    this.x
     console.log('test')
     this.data.a
     this.data.b
