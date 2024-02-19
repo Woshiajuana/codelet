@@ -14,17 +14,17 @@ declare global {
 
 export interface PromiseOptions {
   /** 格式化错误消息 */
-  formatMessage: (err: unknown) => string
+  formatMessage?: (err: unknown) => string
 
   /** 排除指定错误消息 */
-  excludeMessage: (message: string) => boolean
+  excludeMessage?: (message: string) => boolean
 
   /** 默认调用 showToast */
-  showToast: (message: string) => void
+  showToast?: (message: string) => void
 }
 
 // 默认配置
-const defaultOptions: PromiseOptions = {
+const defaultOptions: Required<PromiseOptions> = {
   formatMessage,
   excludeMessage: (message) => !message,
   showToast: (message) => {
@@ -32,7 +32,7 @@ const defaultOptions: PromiseOptions = {
   },
 }
 
-export const promise = definePlugin((_, options?: Partial<PromiseOptions>) => {
+export const promise = definePlugin((_, options?: PromiseOptions) => {
   const { excludeMessage, formatMessage, showToast } = Object.assign(defaultOptions, options)
 
   Promise.prototype.toast = async function (cb) {
