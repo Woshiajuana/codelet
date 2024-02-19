@@ -1,3 +1,4 @@
+export * from './behaviors'
 export * from './create'
 export * from './utils'
 

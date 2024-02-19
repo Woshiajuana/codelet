@@ -3,6 +3,9 @@ import { bee } from '../bee'
 
 export const AuthorizeBehavior = createBehavior({
   methods: {
+    /**
+     * 申请授权操作
+     */
     async authorizeRequest(options: { scope: string; message?: string }) {
       const { scope, message } = options
       await bee.authorize({

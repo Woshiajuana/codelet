@@ -2,15 +2,15 @@ import './index.json'
 import './index.wxml'
 import './index.scss'
 
-import { createPage } from '@bee/core'
+import { RouterBehavior, createPage } from '@bee/core'
 
 createPage({
-  behaviors: [],
+  behaviors: [RouterBehavior],
   data: {
     title: 'Hello, World!',
   },
   onLoad(query) {
-    console.log('login onLoad', query)
-    console.log('login data', this.data.title)
+    this.routerParseQuery(query)
+    console.log('login onLoad', this.data.query)
   },
 })
