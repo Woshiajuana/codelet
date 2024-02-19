@@ -11,6 +11,7 @@ createPage({
   },
   onLoad(query) {
     this.routerParseQuery(query)
+    this.options
     console.log('login onLoad', this.data.query)
   },
 })

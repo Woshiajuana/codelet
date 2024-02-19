@@ -1,7 +1,8 @@
 import type { Loose } from '@daysnap/types'
-import { isNumber, isString, parseQueryString } from '@daysnap/utils'
+import { isNumber, isString } from '@daysnap/utils'
 import { createBehavior } from '../create'
 import { bee } from '../bee'
+import { ParseBehavior } from './parse'
 
 type RouteOptions = string | Loose<{ url: string; query?: Record<string, any>; replace?: boolean }>
 
@@ -18,6 +19,7 @@ function parseOptions(options: RouteOptions) {
 }
 
 export const RouterBehavior = createBehavior({
+  behaviors: [ParseBehavior],
   data: {
     // 页面参数
     query: {} as Record<string, any>,
@@ -30,23 +32,11 @@ export const RouterBehavior = createBehavior({
      * 包含了 query 和 scene 参数，优先级 rest > scene > query
      */
     routerParseQuery<T extends Record<string, any>>(options: Record<string, any>) {
-      // eslint-disable-next-line prefer-const
-      let { query = {}, scene, ...rest } = options
-      if (isString(query)) {
-        query = JSON.parse(query)
-      }
-      if (scene) {
-        if (scene.includes('=')) {
-          Object.assign(query, parseQueryString(scene))
-        } else {
-          Object.assign(query, { scene: decodeURIComponent(scene) })
-        }
-      }
-      Object.assign(query, rest)
+      const query = this.parseQuery<T>(options)
 
       this.setData({ query })
 
-      return query as T
+      return query
     },
 
     /**

@@ -1,22 +1,30 @@
 import { definePlugin } from '../utils'
 import { apiOverwrite } from './api-overwrite'
 import { apiProxy } from './api-proxy'
-import { promise } from './promise'
+import { promise, type PromiseOptions } from './promise'
+import { router, type RouterOptions } from './router'
 
 export * from './api-overwrite'
 export * from './api-proxy'
 export * from './promise'
+export * from './router'
 
 // 插件
 const plugins = {
+  apiOverwrite,
   apiProxy,
   promise,
-  apiOverwrite,
+  router,
+}
+
+export type PluginConfig = {
+  promise: PromiseOptions
+  router: RouterOptions
 }
 
 // 启用全部插件
-export default definePlugin((bee) => {
-  Object.values(plugins).forEach((plugin) => {
-    bee.use(plugin)
+export default definePlugin((bee, options?: PluginConfig) => {
+  Object.entries(plugins).forEach(([key, plugin]) => {
+    bee.use(plugin as any, options?.[key as keyof PluginConfig] as any)
   })
 })

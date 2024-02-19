@@ -1,21 +1,14 @@
 import { createBehavior } from '../create'
+import { ParseBehavior } from './parse'
 
 export const TransferBehavior = createBehavior({
+  behaviors: [ParseBehavior],
   methods: {
-    async transfer() {
-      //
-    },
-
     /**
-     * 转化解析参数
+     * 处理点击事件的
      */
-    transferParseEvent(event: WechatMiniprogram.CustomEvent) {
-      const { detail = {}, currentTarget } = event
-      const { dataset } = currentTarget
-      return {
-        ...dataset,
-        ...detail,
-      }
+    async transfer(e: any) {
+      const { item, ...rest } = this.parseEvent(e)
     },
   },
 })
