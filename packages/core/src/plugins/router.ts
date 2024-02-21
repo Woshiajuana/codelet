@@ -1,6 +1,15 @@
 import type { Awaitable } from '@daysnap/types'
-import { isString } from '@daysnap/utils'
-import { definePlugin, parseQuery } from '../utils'
+import { definePlugin, parseLocation, parseQuery } from '../utils'
+
+declare module '../bee' {
+  interface Bee {
+    useRouter: boolean
+    redirectTo(to: RouteLocation): Promise<void>
+    navigateTo(to: RouteLocation): Promise<void>
+    reLaunch(to: RouteLocation): Promise<void>
+    switchTab(to: RouteLocation): Promise<void>
+  }
+}
 
 export type RouteLocation = {
   url: string
@@ -40,8 +49,11 @@ export const router = definePlugin((bee, options?: RouterOptions) => {
 
   // 路由
   Object.assign(bee, {
+    useRouter: true, // 是否使用路由
     redirectTo: overwrite(bee.redirectTo),
     navigateTo: overwrite(bee.navigateTo),
+    reLaunch: overwrite(bee.reLaunch),
+    switchTab: overwrite(bee.switchTab),
   })
 })
 
@@ -50,15 +62,4 @@ function getCurrentRoute() {
   const { route, options } = pages[pages.length - 1]
   const query = parseQuery(options)
   return { url: route, query }
-}
-
-function parseLocation(location: string | RouteLocation) {
-  if (isString(location)) {
-    location = { url: location, query: {} }
-  }
-  const { url, query = {}, ...rest } = location
-  return {
-    url: `${url}?query=${encodeURIComponent(JSON.stringify(query))}`,
-    ...rest,
-  }
 }
