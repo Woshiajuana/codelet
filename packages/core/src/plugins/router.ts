@@ -1,13 +1,14 @@
 import type { Awaitable } from '@daysnap/types'
 import { definePlugin, parseLocation, parseQuery } from '../utils'
+import { isString } from '@daysnap/utils'
 
 declare module '../bee' {
   interface Bee {
     useRouter: boolean
-    redirectTo(to: RouteLocation): Promise<void>
-    navigateTo(to: RouteLocation): Promise<void>
-    reLaunch(to: RouteLocation): Promise<void>
-    switchTab(to: RouteLocation): Promise<void>
+    redirectTo(to: Location): Promise<void>
+    navigateTo(to: Location): Promise<void>
+    reLaunch(to: Location): Promise<void>
+    switchTab(to: Location): Promise<void>
   }
 }
 
@@ -15,6 +16,8 @@ export type RouteLocation = {
   url: string
   query: Record<string, any>
 }
+
+export type Location = string | RouteLocation
 
 export interface RouteNext {
   (): void
@@ -30,7 +33,8 @@ export const router = definePlugin((bee, options?: RouterOptions) => {
   const { beforeEach, afterEach } = options || {}
 
   const overwrite = (fn: (options: any) => any) => {
-    return async function (to: RouteLocation) {
+    return async function (location: Location) {
+      const to = isString(location) ? { url: location, query: {} } : location
       const from = getCurrentRoute()
 
       const next = async () => {
