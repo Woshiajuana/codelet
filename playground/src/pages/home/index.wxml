@@ -6,4 +6,6 @@
 
 <image src="/assets/images/logo.png"></image>
 
+<button bindtap="handleJump('xxxxxx')">去登录</button>
+<button bindtap="handleJump({ x: '1', y })">去登录</button>
 <button bindtap="handleJump">去登录</button>
