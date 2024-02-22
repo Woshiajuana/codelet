@@ -9,6 +9,12 @@ function use<Options extends unknown[]>(this: Bee, plugin: Plugin<Options>, ...o
   return this
 }
 
+// declare global {
+//   interface Bee {
+//     use: typeof use
+//   }
+// }
+
 export interface Bee {
   use: typeof use
 }

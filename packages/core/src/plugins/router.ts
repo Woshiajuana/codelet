@@ -1,14 +1,22 @@
 import type { Awaitable } from '@daysnap/types'
-import { definePlugin, parseLocation, parseQuery } from '../utils'
 import { isString } from '@daysnap/utils'
+import { definePlugin, parseLocation, parseQuery } from '../utils'
 
+// todo 这里的声明合并 这样做不知道是不是最优解
 declare module '../bee' {
   interface Bee {
     useRouter: boolean
-    redirectTo(to: Location): Promise<void>
     navigateTo(to: Location): Promise<void>
+    // navigateTo(...args: any): any
+
+    redirectTo(to: Location): Promise<void>
+    // redirectTo(...args: any): any
+
     reLaunch(to: Location): Promise<void>
+    // reLaunch(...args: any): any
+
     switchTab(to: Location): Promise<void>
+    // switchTab(...args: any): any
   }
 }
 

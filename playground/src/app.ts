@@ -13,7 +13,7 @@ bee.use(apiOverwrite)
 bee.use(promise)
 bee.use(router)
 
-bee.navigateTo('11')
+bee.navigateTo({ url: 1 })
 wx.navigateTo()
 
 bee
