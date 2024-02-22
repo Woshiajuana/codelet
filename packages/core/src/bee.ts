@@ -9,12 +9,9 @@ function use<Options extends unknown[]>(this: Bee, plugin: Plugin<Options>, ...o
   return this
 }
 
-// declare global {
-//   interface Bee {
-//     use: typeof use
-//   }
-// }
-
+// todo 这里的声明合并 这样做不知道是不是最优解
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 export interface Bee {
   use: typeof use
 }

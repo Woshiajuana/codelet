@@ -4,6 +4,14 @@ import { apiProxy } from '@bee/core/plugins/api-proxy.ts'
 import { apiOverwrite } from '@bee/core/plugins/api-overwrite/index.ts'
 import { router } from '@bee/core/plugins/router.ts'
 
+declare global {
+  interface Promise<T> {
+    toast(cb?: any): Promise<T>
+    null(): Promise<T>
+    fix(): Promise<T>
+  }
+}
+
 import './app.json'
 import './app.scss'
 import './project.config.json'
@@ -13,8 +21,8 @@ bee.use(apiOverwrite)
 bee.use(promise)
 bee.use(router)
 
-bee.navigateTo({ url: 1 })
-wx.navigateTo()
+bee.navigateTo('1')
+// wx.navigateTo()
 
 bee
   .showLoading({
