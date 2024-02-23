@@ -469,12 +469,14 @@ function parseFuncStr2(str: string) {
   if (match) {
     const funcName = parseMustacheWithContext(match[1]).result
     const hasArgs = !!match[2]
+    let args = match[3] ? `,${match[3]}` : ''
+    const ret = /(,|^)\s*(\$event)\s*(,|$)/.exec(args)
     if (ret) {
       const subIndex = ret[0].indexOf('$event')
       if (subIndex) {
         const index1 = ret.index + subIndex
         const index2 = index1 + 6
-        args = args.substring(0, index1) + JSON.stringify(eventIdentifier) + args.substring(index2)
+        args = args.substring(0, index1) + stringify(eventIdentifier) + args.substring(index2)
       }
     }
     return {
