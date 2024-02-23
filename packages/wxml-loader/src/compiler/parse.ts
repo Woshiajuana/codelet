@@ -1,3 +1,3 @@
-export function parse() {
+export function parse(html: string) {
   //
 }
