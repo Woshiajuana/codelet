@@ -1,6 +1,6 @@
 import { shouldIgnoreFirstNewline, isUnaryTag } from './utils.js'
 import config from './config.js'
-import JSON5 from 'json5'
+// import JSON5 from 'json5'
 
 // Regular Expressions for parsing tags and attributes
 const attribute = /^\s*([^\s"'<>/=]+)(?:\s*(=)\s*(?:"([^"]*)"+|'([^']*)'+|([^\s"'=<>`]+)))?/
@@ -18,8 +18,6 @@ const tagRE = /\{\{((?:.|\n|\r)+?)\}\}(?!})/
 const tagREG = /\{\{((?:.|\n|\r)+?)\}\}(?!})/g
 
 function parseHtml(html: string, options: any = {}) {
-  console.log('html => ', html)
-
   const stack: any[] = []
 
   let index = 0
@@ -58,6 +56,7 @@ function parseHtml(html: string, options: any = {}) {
 
       // End tag:
       const endTagMatch = html.match(endTag)
+      console.log('endTagMatch => ', endTagMatch)
       if (endTagMatch) {
         const curIndex = index
         advance(endTagMatch[0].length)
@@ -74,37 +73,38 @@ function parseHtml(html: string, options: any = {}) {
         }
         continue
       }
-
-      let text, rest, next
-      if (textEnd >= 0) {
-        rest = html.slice(textEnd)
-        while (
-          !endTag.test(rest) &&
-          !startTagOpen.test(rest) &&
-          !comment.test(rest) &&
-          !conditionalComment.test(rest)
-        ) {
-          // < in plain text, be forgiving and treat it as text
-          next = rest.indexOf('<', 1)
-          if (next < 0) {
-            break
-          }
-          textEnd += next
-          rest = html.slice(textEnd)
-        }
-        text = html.substring(0, textEnd)
-        advance(textEnd)
-      }
-
-      if (textEnd < 0) {
-        text = html
-        html = ''
-      }
-
-      if (text) {
-        options.chars(text)
-      }
     }
+
+    let text, rest, next
+    if (textEnd >= 0) {
+      rest = html.slice(textEnd)
+      while (
+        !endTag.test(rest) &&
+        !startTagOpen.test(rest) &&
+        !comment.test(rest) &&
+        !conditionalComment.test(rest)
+      ) {
+        // < in plain text, be forgiving and treat it as text
+        next = rest.indexOf('<', 1)
+        if (next < 0) {
+          break
+        }
+        textEnd += next
+        rest = html.slice(textEnd)
+      }
+      text = html.substring(0, textEnd)
+      advance(textEnd)
+    }
+
+    if (textEnd < 0) {
+      text = html
+      html = ''
+    }
+
+    if (text) {
+      options.chars(text)
+    }
+
     if (html === last) {
       options.chars(html)
       break
@@ -244,6 +244,8 @@ function createASTElement(tag: any, attrs: any[], parent?: any) {
 }
 
 export function parse(content: string) {
+  console.log('content => ', content)
+
   let currentParent: any
   let root: any
   const stack: any[] = []
@@ -264,6 +266,7 @@ export function parse(content: string) {
   const options = {
     // 开始标签
     start(tag: string, attrs: any, unary: boolean, start: number, end: number) {
+      console.log('tag => ', tag, attrs, unary)
       // check namespace.
       // inherit parent ns if there is one
       const ns = currentParent && currentParent.ns
@@ -344,6 +347,11 @@ export function parse(content: string) {
   }
 
   parseHtml(content, options)
+
+  return {
+    root,
+    meta,
+  }
 }
 
 function addExp(el: any, exp: any, isProps?: any) {
@@ -596,7 +604,8 @@ function processBindEvent(el: any, options: any) {
       const modelFilter = getAndRemoveAttr(el, config[mode].directive.modelFilter).val
       let modelValuePathArr
       try {
-        modelValuePathArr = JSON5.parse(modelValuePath)
+        // modelValuePathArr = JSON5.parse(modelValuePath)
+        modelValuePathArr = JSON.parse(modelValuePath)
       } catch (e) {
         if (modelValuePath === '') {
           modelValuePathArr = []
