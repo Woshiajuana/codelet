@@ -1,20 +1,26 @@
+export interface InterceptorFulfilled {
+  (): any
+}
+
+export interface InterceptorRejected {
+  (): any
+}
+
+export interface InterceptorHandler {
+  fulfilled?: InterceptorFulfilled
+  rejected?: InterceptorRejected
+}
+
 export class InterceptorsManner {
-  constructor() {
-    this.interceptors = []
+  constructor() {}
+  handlers: InterceptorHandler[] = []
+  use(fulfilled?: InterceptorFulfilled, rejected?: InterceptorRejected) {
+    const length = this.handlers.push({ fulfilled, rejected })
+    return length - 1
   }
-  use(interceptor) {
-    this.interceptors.push(interceptor)
-    return this
-  }
-  eject(interceptor) {
-    const index = this.interceptors.indexOf(interceptor)
-    if (index !== -1) {
-      this.interceptors.splice(index, 1)
+  eject(index: number) {
+    if (this.handlers[index]) {
+      this.handlers.splice(index, 1)
     }
-  }
-  forEach(fn) {
-    this.interceptors.forEach((interceptor) => {
-      fn(interceptor)
-    })
   }
 }
