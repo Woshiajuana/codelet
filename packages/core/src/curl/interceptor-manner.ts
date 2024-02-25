@@ -1,9 +1,11 @@
+import type { CurlRequestConfig } from './types'
+
 export interface InterceptorFulfilled {
-  (): any
+  (config: CurlRequestConfig): any
 }
 
 export interface InterceptorRejected {
-  (): any
+  (err: any): any
 }
 
 export interface InterceptorHandler {
@@ -11,7 +13,7 @@ export interface InterceptorHandler {
   rejected?: InterceptorRejected
 }
 
-export class InterceptorsManner {
+export class InterceptorManner {
   constructor() {}
   handlers: InterceptorHandler[] = []
   use(fulfilled?: InterceptorFulfilled, rejected?: InterceptorRejected) {

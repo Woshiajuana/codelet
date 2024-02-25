@@ -1,11 +1,34 @@
-export interface CurlBaseOptions {
+export type Method =
+  | 'get'
+  | 'GET'
+  | 'delete'
+  | 'DELETE'
+  | 'head'
+  | 'HEAD'
+  | 'options'
+  | 'OPTIONS'
+  | 'post'
+  | 'POST'
+  | 'put'
+  | 'PUT'
+  | 'patch'
+  | 'PATCH'
+  | 'purge'
+  | 'PURGE'
+  | 'link'
+  | 'LINK'
+  | 'unlink'
+  | 'UNLINK'
+
+export interface CurlRequestConfig {
+  url?: string
+  baseURI?: string
   fn?: 'request' | 'uploadFile'
-  method?: string
+  data?: any
+  method?: Method | string
   headers?: { [key: string]: string }
   timeout?: number
   dataType?: string
-}
-
-export interface CurlOptions extends CurlBaseOptions {
-  url: string
+  formData?: any
+  responseType?: 'text' | 'arraybuffer'
 }
