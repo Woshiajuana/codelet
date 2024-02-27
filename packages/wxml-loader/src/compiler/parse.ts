@@ -109,7 +109,6 @@ function parseHtml(html: string, options: any = {}) {
       options.chars(html)
       break
     }
-    break
   }
 
   // Clean up any remaining tags
