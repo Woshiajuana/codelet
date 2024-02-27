@@ -5,7 +5,7 @@ const content = `
 <button bindtap="handleJump({ x: '1', y })">去登录</button>
 `
 
-const ast = parse(content)
+const { root: ast } = parse(content)
 
 console.log('ast => ', ast)
 
