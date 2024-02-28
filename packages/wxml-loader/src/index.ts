@@ -15,13 +15,8 @@ export default function loader(
   let { entryPath = 'src' } = this.getOptions(schema as any)
   const callback = this.async()
 
-  const srcPattern = /(?<=\bsrc=("|')).*?(?=('|"))/gi
-  const result = content.match(srcPattern) || []
-
-  const invokePattern = /(?<=\b\\bindtap=("|')).*?(?=('|"))/gi
-  const invokeResult = content.match(invokePattern) || []
-
-  console.log('invokeResult', invokeResult)
+  const pattern = /(?<=\bsrc=("|')).*?(?=('|"))/gi
+  const result = content.match(pattern) || []
 
   entryPath = path.resolve(this.rootContext, entryPath)
 
