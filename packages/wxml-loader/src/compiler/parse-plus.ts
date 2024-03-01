@@ -254,7 +254,7 @@ function parseHtml(html: string, options: any = {}) {
 }
 
 export function parsePlus(content: string) {
-  const root = createASTElement('template', [])
+  const root = createASTElement('temp-node', [])
   let currentParent = root
   const stack: ASTElement[] = [root]
 
