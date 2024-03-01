@@ -24,3 +24,9 @@ export const isNonPhrasingTag = makeMap(
 export const isUnaryTag = makeMap(
   'area,base,br,col,embed,frame,hr,img,input,isindex,keygen,' + 'link,meta,param,source,track,wbr',
 )
+
+export let IS_REGEX_CAPTURING_BROKEN = false
+'x'.replace(/x(.)?/g, function (m, g) {
+  IS_REGEX_CAPTURING_BROKEN = g === ''
+  return m
+})
