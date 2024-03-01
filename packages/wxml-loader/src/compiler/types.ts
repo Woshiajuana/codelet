@@ -29,8 +29,7 @@ export type ASTText = {
   text: string
   static?: boolean
   isComment?: boolean
-  // 2.4 ssr optimization
-  ssrOptimizability?: number
+
   start?: number
   end?: number
 }
@@ -41,8 +40,7 @@ export type ASTExpression = {
   text: string
   tokens: Array<string | Object>
   static?: boolean
-  // 2.4 ssr optimization
-  ssrOptimizability?: number
+
   start?: number
   end?: number
 }
