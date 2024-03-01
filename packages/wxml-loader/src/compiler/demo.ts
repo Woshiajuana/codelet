@@ -1,10 +1,7 @@
 import { parse } from './parse.js'
 import { parsePlus } from './parse-plus.js'
 import { serialize } from './serialize.js'
-const content = `
-<button>登录页面</button>
-<button>111</button>
-`
+const content = `<div>登录页面</div><div>111</div>`
 
 // const { root: ast } = parse(content)
 const ast = parsePlus(content)

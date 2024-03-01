@@ -12,6 +12,11 @@ const doctype = /^<!DOCTYPE [^>]+>/i
 const comment = /^<!--/
 const conditionalComment = /^<!\[/
 
+let IS_REGEX_CAPTURING_BROKEN = false
+'x'.replace(/x(.)?/g, ((m: any, g: any) => {
+  IS_REGEX_CAPTURING_BROKEN = g === ''
+}) as any)
+
 function createASTElement(tag: string, attrs: any[], parent?: any): ASTElement {
   return {
     type: 1,
@@ -62,6 +67,7 @@ function parseHtml(html: string, options: any = {}) {
       // 结束标签
       const endTagMatch = html.match(endTag)
       if (endTagMatch) {
+        console.log('endTagMatch => ', endTagMatch, html)
         const curIndex = index
         advance(endTagMatch[0].length)
         parseEndTag(endTagMatch[1], curIndex, index)
@@ -71,6 +77,7 @@ function parseHtml(html: string, options: any = {}) {
       // 开始标签
       const startTagMatch = parseStartTag()
       if (startTagMatch) {
+        console.log('startTagMatch => ', startTagMatch, html)
         handleStartTag(startTagMatch)
         continue
       }
@@ -114,6 +121,8 @@ function parseHtml(html: string, options: any = {}) {
     }
   }
 
+  parseEndTag()
+
   function advance(n: number) {
     index += n
     html = html.substring(n)
@@ -152,21 +161,43 @@ function parseHtml(html: string, options: any = {}) {
     const attrs = new Array(l)
     for (let i = 0; i < l; i++) {
       const args = match.attrs[i]
-      const value = args[3] || args[4] || args[5] || ''
-      const shouldDecodeNewlines = tagName === 'a' && args[1] === 'href'
+      // hackish work around FF bug https://bugzilla.mozilla.org/show_bug.cgi?id=369778
+      if (IS_REGEX_CAPTURING_BROKEN && args[0].indexOf('""') === -1) {
+        if (args[3] === '') {
+          delete args[3]
+        }
+        if (args[4] === '') {
+          delete args[4]
+        }
+        if (args[5] === '') {
+          delete args[5]
+        }
+      }
+      let value
+      for (const index of [3, 4, 5]) {
+        if (args[index] != null) {
+          value = args[index]
+          break
+        }
+      }
       attrs[i] = {
         name: args[1],
+        // value: decode(value),
         value,
-        shouldDecodeNewlines,
       }
     }
+
     if (!unary) {
+      stack.push({ tag: tagName, lowerCasedTag: tagName.toLowerCase(), attrs: attrs })
       lastTag = tagName
     }
-    options.start(tagName, attrs, unary)
+
+    if (options.start) {
+      options.start(tagName, attrs, unary, match.start, match.end)
+    }
   }
 
-  function parseEndTag(tagName?: string, start?: number, end?: number) {
+  function parseEndTag(tagName?: any, start?: any, end?: any) {
     let pos, lowerCasedTagName
     if (start == null) {
       start = index
@@ -191,11 +222,13 @@ function parseHtml(html: string, options: any = {}) {
       pos = 0
     }
 
+    console.log('parseEndTagparseEndTag', pos, tagName)
+
     if (pos >= 0) {
       // Close all the open elements, up the stack
       for (let i = stack.length - 1; i >= pos; i--) {
-        if (i > pos || !tagName) {
-          console.error('tag <' + stack[i].tag + '> has no matching end tag.')
+        if ((i > pos || !tagName) && options.warn) {
+          options.warn('tag <' + stack[i].tag + '> has no matching end tag.')
         }
         if (options.end) {
           options.end(stack[i].tag, start, end)
@@ -207,14 +240,14 @@ function parseHtml(html: string, options: any = {}) {
       lastTag = pos && stack[pos - 1].tag
     } else if (lowerCasedTagName === 'br') {
       if (options.start) {
-        options.start(tagName!, [], true, start, end)
+        options.start(tagName, [], true, start, end)
       }
     } else if (lowerCasedTagName === 'p') {
       if (options.start) {
-        options.start(tagName!, [], false, start, end)
+        options.start(tagName, [], false, start, end)
       }
       if (options.end) {
-        options.end(tagName!, start, end)
+        options.end(tagName, start, end)
       }
     }
   }
@@ -227,6 +260,7 @@ export function parsePlus(content: string) {
 
   parseHtml(content, {
     start(tag: string, attrs: any[], unary: boolean) {
+      console.log('start => ', tag, attrs, unary)
       const element = createASTElement(tag, attrs, currentParent)
       currentParent.children.push(element)
       if (!unary) {
@@ -234,7 +268,8 @@ export function parsePlus(content: string) {
         stack.push(element)
       }
     },
-    end() {
+    end(tag: string) {
+      console.log('end => ', tag)
       stack.pop()
       currentParent = stack[stack.length - 1]
     },
@@ -244,7 +279,6 @@ export function parsePlus(content: string) {
         type: 3,
         text: text,
         parent: currentParent,
-        isComment: true,
         children: [],
       })
     },
