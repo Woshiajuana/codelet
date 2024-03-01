@@ -1,6 +1,7 @@
 import type { ASTAttr, ASTElement } from './types'
 import { parseHtml } from './html-parser.js'
 import { makeAttrsMap } from './utils.js'
+import { processBindEvent } from './process.js'
 
 export function createASTElement(
   tag: string,
@@ -29,6 +30,8 @@ export function parsePlus(content: string) {
       element.start = start
       element.end = end
       currentParent.children.push(element)
+
+      processBindEvent(element)
 
       if (!unary) {
         currentParent = element
@@ -63,6 +66,7 @@ export function parsePlus(content: string) {
     },
     // 注释节点
     comment(text, start, end) {
+      console.log('comment', text, start, end)
       if (currentParent) {
         currentParent.children.push({
           type: 3,

@@ -13,7 +13,7 @@ const doctype = /^<!DOCTYPE [^>]+>/i
 const comment = /^<!--/
 const conditionalComment = /^<!\[/
 
-const tagRES = /(\{\{(?:.|\n|\r)+?\}\})(?!})/
+// const tagRES = /(\{\{(?:.|\n|\r)+?\}\})(?!})/
 const tagRE = /\{\{((?:.|\n|\r)+?)\}\}(?!})/
 const tagREG = /\{\{((?:.|\n|\r)+?)\}\}(?!})/g
 

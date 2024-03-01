@@ -5,8 +5,8 @@ const content = `
 <input/>
 <xxxx-xx />
 <image></image>
-<div>登录页面</div>
-<div>111</div>
+<div bindtap="handleTap('xxx')">登录页面</div>
+<div bindtap="handleClick">111</div>
 `
 
 // const { root: ast } = parse(content)

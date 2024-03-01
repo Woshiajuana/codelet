@@ -31,6 +31,7 @@
     "webpack": ">=5.0.0 <6.0.0"
   },
   "devDependencies": {
+    "json5": "^2.2.3",
     "rimraf": "^5.0.5",
     "typescript": "^5.3.3",
     "webpack": "^5.89.0"
