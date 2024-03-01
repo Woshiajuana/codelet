@@ -2,9 +2,10 @@ import { parse } from './parse.js'
 import { parsePlus } from './parse-plus.js'
 import { serialize } from './serialize.js'
 const content = `
-<input/>
+<input></input>
+1122
 <xxxx-xx />
-<image></image>
+<image src="xxxxx"></image>
 <div bindtap="handleTap('xxx')">登录页面</div>
 <div bindtap="handleClick">111</div>
 `

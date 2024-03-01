@@ -1,5 +1,5 @@
 import type { ASTAttr } from './types'
-import { shouldIgnoreFirstNewline } from './utils.js'
+import { isUnaryTag, shouldIgnoreFirstNewline } from './utils.js'
 
 // Regular Expressions for parsing tags and attributes
 const attribute = /^\s*([^\s"'<>/=]+)(?:\s*(=)\s*(?:"([^"]*)"+|'([^']*)'+|([^\s"'=<>`]+)))?/
@@ -139,6 +139,9 @@ export function parseHtml(html: string, options: HTMLParserOptions) {
     }
   }
 
+  // Clean up any remaining tags
+  parseEndTag()
+
   function advance(n: number) {
     index += n
     html = html.substring(n)
@@ -173,7 +176,7 @@ export function parseHtml(html: string, options: HTMLParserOptions) {
     const tagName = match.tagName
     const unarySlash = match.unarySlash
 
-    const unary = !!unarySlash
+    const unary = isUnaryTag(tagName) || !!unarySlash
 
     const l = match.attrs.length
     const attrs: ASTAttr[] = new Array(l)
