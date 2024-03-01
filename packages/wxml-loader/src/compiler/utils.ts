@@ -30,3 +30,14 @@ export let IS_REGEX_CAPTURING_BROKEN = false
   IS_REGEX_CAPTURING_BROKEN = g === ''
   return m
 })
+
+export function makeAttrsMap(attrs: Array<Record<string, any>>): Record<string, any> {
+  const map: Record<string, any> = {}
+  for (let i = 0, l = attrs.length; i < l; i++) {
+    if (map[attrs[i].name]) {
+      console.warn('duplicate attribute: ' + attrs[i].name, attrs[i])
+    }
+    map[attrs[i].name] = attrs[i].value
+  }
+  return map
+}
