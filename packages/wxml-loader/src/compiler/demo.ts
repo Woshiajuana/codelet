@@ -6,7 +6,7 @@ const content = `
 <xxxx-xx />
 <image src="xxxxx"></image>
 <div bindtap="handleTap('xxx')">登录页面</div>
-<div bindtap="handleClick">111</div>
+<div bindtap="handleClick(xxx)">111</div>
 `
 const ast = parse(content)
 

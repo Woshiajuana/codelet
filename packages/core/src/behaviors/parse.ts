@@ -1,22 +1,12 @@
-import type { Loose } from '@daysnap/types'
-import { parseQuery } from '../utils'
+import { parseQuery, parseEvent } from '../utils'
 import { createBehavior } from '../create'
-
-type ParseEvent = Loose<WechatMiniprogram.CustomEvent | WechatMiniprogram.BaseEvent>
 
 export const ParseBehavior = createBehavior({
   methods: {
     /**
      * 转化点击事件解析参数
      */
-    parseEvent(event: ParseEvent) {
-      const { detail = {}, currentTarget } = event
-      const { dataset } = currentTarget
-      return {
-        ...dataset,
-        ...detail,
-      }
-    },
+    parseEvent,
 
     /**
      * 打开当前页面路径中的参数

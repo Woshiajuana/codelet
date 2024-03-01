@@ -66,7 +66,6 @@ export function parse(content: string) {
     },
     // 注释节点
     comment(text, start, end) {
-      console.log('comment', text, start, end)
       if (currentParent) {
         currentParent.children.push({
           type: 3,
