@@ -9,5 +9,5 @@
 <button bindtap="handleTap(title, '__bee_event__')">去登录'event'</button>
 <button bindtap="handleTap(title)">去登录'title'</button>
 <button bindtap="handleTap('xxxxxx')">去登录'xxxxxx'</button>
-<button bindtap="handleTap({ x: '1', y })">去登录{ x: '1', y }</button>
+<button bindtap="handleTap({ x: '1', y: 2 })">去登录{ x: '1', y: 2 }</button>
 <button bindtap="handleTap">去登录</button>
