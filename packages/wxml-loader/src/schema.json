@@ -2,8 +2,12 @@
   "type": "object",
   "properties": {
     "entryPath": {
-      "description": "入口文件路径",
+      "description": "入口文件路径，默认 src ",
       "type": "string"
+    },
+    "useCompiler": {
+      "description": "是否开启抽象语法树编译，默认 true 开启",
+      "type": "boolean"
     }
   },
   "additionalProperties": false

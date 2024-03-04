@@ -9,15 +9,19 @@ export interface Config extends Configuration {
   /** 开发路径默认 src */
   entryPath?: string
   source?: string[]
+  useCompiler?: boolean
 }
 
 export function getDefaultConfig(): Configuration & {
   entryPath: string
   source: string[]
+  useCompiler: boolean
 } {
   const entryPath = './src'
 
   return {
+    useCompiler: true,
+
     entryPath,
 
     source: ['app.(js|ts)', 'pages/**/*.(js|ts)', 'components/**/*.(js|ts)'],

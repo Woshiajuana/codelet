@@ -13,7 +13,8 @@ export default function loader(
   map: string,
   meta?: any,
 ) {
-  let { entryPath = 'src' } = this.getOptions(schema as any)
+  // eslint-disable-next-line prefer-const
+  let { entryPath = 'src', useCompiler = true } = this.getOptions(schema as any)
   const callback = this.async()
 
   const pattern = /(?<=\bsrc=("|')).*?(?=('|"))/gi
@@ -42,8 +43,12 @@ export default function loader(
     .catch(callback)
     .finally(() => {
       const outputPath = this.utils.contextify(entryPath, this.resourcePath)
-      const ast = compiler.parse(content)
-      this.emitFile(outputPath, compiler.serialize(ast))
+      if (useCompiler) {
+        const ast = compiler.parse(content)
+        this.emitFile(outputPath, compiler.serialize(ast))
+      } else {
+        this.emitFile(outputPath, content)
+      }
       callback(null, '', map, meta)
     })
 
