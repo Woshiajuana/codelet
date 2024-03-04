@@ -1,5 +1,5 @@
 import config from './config.js'
-// import JSON5 from 'json5'
+import JSON5 from 'json5'
 
 const mode = 'wx'
 const eventIdentifier = '__bee_event__'
@@ -109,8 +109,8 @@ export function processBindEvent(el: any) {
       const modelFilter = getAndRemoveAttr(el, config[mode].directive.modelFilter).val
       let modelValuePathArr
       try {
-        // modelValuePathArr = JSON5.parse(modelValuePath)
-        modelValuePathArr = JSON.parse(modelValuePath)
+        modelValuePathArr = JSON5.parse(modelValuePath)
+        // modelValuePathArr = JSON.parse(modelValuePath)
       } catch (e) {
         if (modelValuePath === '') {
           modelValuePathArr = []
