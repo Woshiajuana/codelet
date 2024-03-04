@@ -2,6 +2,7 @@ import path from 'path'
 import fs from 'node:fs/promises'
 import type { LoaderContext } from 'webpack'
 import type { WxmlLoaderOptions } from './types'
+import compiler from './compiler'
 import schema from './schema.json'
 
 const filepathCaches: string[] = []
@@ -41,7 +42,8 @@ export default function loader(
     .catch(callback)
     .finally(() => {
       const outputPath = this.utils.contextify(entryPath, this.resourcePath)
-      this.emitFile(outputPath, content)
+      const ast = compiler.parse(content)
+      this.emitFile(outputPath, compiler.serialize(ast))
       callback(null, '', map, meta)
     })
 
