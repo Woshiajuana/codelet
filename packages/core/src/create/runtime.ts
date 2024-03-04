@@ -8,7 +8,7 @@ function dash2hump(value: string) {
 }
 
 // 运行时 拓展的一些辅助函数
-export const runtimeBehavior = createBehavior({
+export const RuntimeBehavior = createBehavior({
   methods: {
     __invoke($event: ParseEvent) {
       const { type } = $event
@@ -23,7 +23,7 @@ export const runtimeBehavior = createBehavior({
           const params =
             item.length > 1
               ? item.slice(1).map((item: any) => {
-                  if (item === '__mpx_event__') {
+                  if (item === '__bee_event__') {
                     return $event
                   } else {
                     return item
@@ -33,7 +33,7 @@ export const runtimeBehavior = createBehavior({
           if (typeof (this as any)[callbackName] === 'function') {
             returnedValue = (this as any)[callbackName].apply(this, params)
           } else {
-            console.error(`Instance property [${callbackName}] is not function, please check.`)
+            console.error(`实例属性[${callbackName}]不起作用，请检查。`)
           }
         }
       })

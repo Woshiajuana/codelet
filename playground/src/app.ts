@@ -13,17 +13,6 @@ bee.use(apiOverwrite)
 bee.use(promise)
 bee.use(router)
 
-bee.navigateTo('1')
-// wx.navigateTo()
-
-bee
-  .showLoading({
-    title: '1',
-  })
-  .then(() => {
-    //
-  })
-
 createApp({
   onLaunch() {
     Promise.reject().toast('11')

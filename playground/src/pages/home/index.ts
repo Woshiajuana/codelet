@@ -14,7 +14,7 @@ createPage({
     console.log('home data', this.data.title)
     Promise.resolve().toast()
   },
-  handleTap() {
-    // bee.
+  handleTap(...event: any) {
+    console.log('event => ', event)
   },
 })

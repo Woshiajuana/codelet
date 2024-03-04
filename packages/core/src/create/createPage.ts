@@ -9,6 +9,8 @@ import type {
   PageLifetimes,
   PropertyOptionToData,
 } from './types'
+import { mergeBehavior } from '../utils/mergeBehavior'
+import { RuntimeBehavior } from './runtime'
 
 export type PageOtherOptions = {
   options?: WechatMiniprogram.Component.ComponentOptions
@@ -47,5 +49,5 @@ export function createPage<
   Behavior extends OptionBehavior = OptionBehavior,
   Custom extends AnyObject = {},
 >(options?: PageOptions<Data, Behavior, Custom>) {
-  return Page((options as any) ?? {})
+  return Page(mergeBehavior(options, [RuntimeBehavior]))
 }

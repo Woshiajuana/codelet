@@ -1,4 +1,5 @@
 export * from './definePlugin'
+export * from './mergeBehavior'
 export * from './parseEvent'
 export * from './parseLocation'
 export * from './parseQuery'
