@@ -14,9 +14,7 @@ bee.use(promise)
 bee.use(router)
 
 createApp({
-  onLaunch() {
-    Promise.reject().toast('11')
-  },
+  onLaunch() {},
   onError(err) {
     console.error('app onError => ', err)
   },
