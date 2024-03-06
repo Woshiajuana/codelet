@@ -1,7 +1,7 @@
 import WebpackBar from 'webpackbar'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import InjectChunkWebpackPlugin from '@bee/inject-chunk-webpack-plugin'
-import AppJsonWebpackPlugin from '@bee/app-json-webpack-plugin'
+import InjectChunkWebpackPlugin from '@codelet/inject-chunk-webpack-plugin'
+import AppJsonWebpackPlugin from '@codelet/app-json-webpack-plugin'
 import type { Configuration } from 'webpack'
 import { resolve } from './utils'
 
@@ -54,14 +54,14 @@ export function getDefaultConfig(): Configuration & {
             },
             {
               test: /\.wxml$/,
-              loader: '@bee/wxml-loader',
+              loader: '@codelet/wxml-loader',
               options: {
                 entryPath,
               },
             },
             {
               test: /\.wxs$/,
-              loader: '@bee/copy-loader',
+              loader: '@codelet/copy-loader',
               options: {
                 entryPath,
               },
@@ -69,7 +69,7 @@ export function getDefaultConfig(): Configuration & {
             {
               test: /\.json$/,
               type: 'javascript/auto',
-              loader: '@bee/copy-loader',
+              loader: '@codelet/copy-loader',
               options: {
                 entryPath,
               },

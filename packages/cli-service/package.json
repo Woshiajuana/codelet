@@ -1,14 +1,14 @@
 {
-  "name": "@bee/cli-service",
+  "name": "@codelet/cli-service",
   "version": "0.0.1",
   "description": "cli-service",
   "scripts": {
     "build": "npm run clean && tsc -p ./tsconfig.lib.json",
     "clean": "rimraf ./dist",
-    "release": "npm run build && dsc publish --pnpm -t"
+    "release": "npm run build && dsc publish --pnpm"
   },
   "bin": {
-    "bee-cli-service": "./bin/bee-cli-service.js"
+    "codelet-cli-service": "./bin/codelet-cli-service.js"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -22,7 +22,7 @@
   ],
   "keywords": [
     "daysnap",
-    "bee",
+    "codelet",
     "wechat",
     "miniprogram",
     "cli-service",
@@ -34,10 +34,10 @@
     "@babel/core": "^7.23.7",
     "@babel/preset-env": "^7.23.8",
     "@babel/preset-typescript": "^7.23.3",
-    "@bee/app-json-webpack-plugin": "workspace:^",
-    "@bee/copy-loader": "workspace:^",
-    "@bee/inject-chunk-webpack-plugin": "workspace:^",
-    "@bee/wxml-loader": "workspace:^",
+    "@codelet/app-json-webpack-plugin": "workspace:^",
+    "@codelet/copy-loader": "workspace:^",
+    "@codelet/inject-chunk-webpack-plugin": "workspace:^",
+    "@codelet/wxml-loader": "workspace:^",
     "babel-loader": "^9.1.3",
     "css-loader": "^6.9.0",
     "fast-glob": "^3.3.2",

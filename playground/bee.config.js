@@ -1,4 +1,4 @@
-const { defineConfig } = require('@bee/cli-service')
+const { defineConfig } = require('@codelet/cli-service')
 
 module.exports = defineConfig({
   source: [

@@ -37,7 +37,7 @@ export function getOptionValue(argv: string[], option: string) {
 
 export function parseArgv(argv: string[]) {
   const isWatch = argv.includes('--watch')
-  const configRelativePath = getOptionValue(argv, '--config') || 'bee.config.js'
+  const configRelativePath = getOptionValue(argv, '--config') || 'codelet.config.js'
   const configPath = resolve(configRelativePath)
   return { configPath, isWatch }
 }

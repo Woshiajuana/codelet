@@ -5,6 +5,6 @@ function hideLoading(options?: Parameters<typeof wx.hideLoading>[0]) {
   return promisify(wx.hideLoading)(options)
 }
 
-export const hideLoadingPlugin = definePlugin((bee) => {
-  ;(bee as any)['hideLoading'] = hideLoading
+export const hideLoadingPlugin = definePlugin((col) => {
+  ;(col as any)['hideLoading'] = hideLoading
 })

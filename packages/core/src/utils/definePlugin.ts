@@ -1,8 +1,8 @@
-import type { Bee } from '../bee'
+import type { Codelet } from '../codelet'
 
 type PluginInstallFunction<Options> = Options extends unknown[]
-  ? (bee: Bee, ...options: Options) => any
-  : (bee: Bee, options: Options) => any
+  ? (col: Codelet, ...options: Options) => any
+  : (col: Codelet, options: Options) => any
 
 export type Plugin<Options = any[]> =
   | (PluginInstallFunction<Options> & {

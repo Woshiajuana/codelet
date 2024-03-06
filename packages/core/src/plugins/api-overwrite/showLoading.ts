@@ -3,7 +3,7 @@ import { definePlugin, promisify } from '../../utils'
 
 type ShowLoadingOptions = WechatMiniprogram.ShowLoadingOption | string
 
-declare module '../../bee' {
+declare module '../../col' {
   interface Bee {
     showLoading<T extends ShowLoadingOptions = ShowLoadingOptions>(
       option?: T,
@@ -18,6 +18,6 @@ function showLoading(options: string | Parameters<typeof wx.showLoading>[0] = 'l
   return promisify(wx.showLoading)(options)
 }
 
-export const showLoadingPlugin = definePlugin((bee) => {
-  ;(bee as any)['showLoading'] = showLoading
+export const showLoadingPlugin = definePlugin((col) => {
+  ;(col as any)['showLoading'] = showLoading
 })

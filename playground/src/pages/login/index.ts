@@ -2,7 +2,7 @@ import './index.json'
 import './index.wxml'
 import './index.scss'
 
-import { RouterBehavior, createPage } from '@bee/core'
+import { RouterBehavior, createPage } from '@codelet/core'
 
 createPage({
   behaviors: [RouterBehavior],

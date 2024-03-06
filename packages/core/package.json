@@ -1,11 +1,11 @@
 {
-  "name": "@bee/core",
+  "name": "@codelet/core",
   "version": "0.0.1",
   "description": "mini core",
   "scripts": {
     "build": "npm run clean && tsc",
     "clean": "rimraf ./dist",
-    "release": "npm run build && dsc publish --pnpm -t"
+    "release": "npm run build && dsc publish --pnpm"
   },
   "exports": {
     ".": "./src/index.ts",
@@ -38,7 +38,7 @@
   ],
   "keywords": [
     "daysnap",
-    "bee",
+    "codelet",
     "wechat",
     "miniprogram",
     "core",

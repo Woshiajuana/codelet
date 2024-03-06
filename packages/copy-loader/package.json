@@ -1,11 +1,11 @@
 {
-  "name": "@bee/copy-loader",
+  "name": "@codelet/copy-loader",
   "version": "0.0.1",
   "description": "webpack loader copy copy-loader",
   "scripts": {
     "build": "npm run clean && tsc -p ./tsconfig.lib.json",
     "clean": "rimraf ./dist",
-    "release": "npm run build && dsc publish --pnpm -t"
+    "release": "npm run build && dsc publish --pnpm"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -18,7 +18,7 @@
   ],
   "keywords": [
     "daysnap",
-    "bee",
+    "codelet",
     "wechat",
     "miniprogram",
     "copy-loader",

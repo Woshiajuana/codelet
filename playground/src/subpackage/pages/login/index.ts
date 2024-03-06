@@ -1,7 +1,7 @@
 import './index.json'
 import './index.wxml'
 import './index.scss'
-import bee, { createPage } from '@bee/core'
+import bee, { createPage } from '@codelet/core'
 
 createPage({
   onLoad() {

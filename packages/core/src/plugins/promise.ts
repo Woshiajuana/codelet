@@ -1,6 +1,6 @@
 import { formatMessage, isFunction, isString } from '@daysnap/utils'
 import { definePlugin } from '../utils'
-import { bee } from '../bee'
+import { col } from '../col'
 
 type ToastCallback = ((err: unknown, message: string) => boolean | void) | string
 
@@ -28,7 +28,7 @@ const defaultOptions: Required<PromiseOptions> = {
   formatMessage,
   excludeMessage: (message) => !message,
   showToast: (message) => {
-    bee.showToast({ title: message, icon: 'none' })
+    col.showToast({ title: message, icon: 'none' })
   },
 }
 

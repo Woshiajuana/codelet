@@ -1,8 +1,8 @@
-import bee, { createApp } from '@bee/core'
-import { promise } from '@bee/core/plugins/promise.ts'
-import { apiProxy } from '@bee/core/plugins/api-proxy.ts'
-import { apiOverwrite } from '@bee/core/plugins/api-overwrite/index.ts'
-import { router } from '@bee/core/plugins/router.ts'
+import bee, { createApp } from '@codelet/core'
+import { promise } from '@codelet/core/plugins/promise.ts'
+import { apiProxy } from '@codelet/core/plugins/api-proxy.ts'
+import { apiOverwrite } from '@codelet/core/plugins/api-overwrite/index.ts'
+import { router } from '@codelet/core/plugins/router.ts'
 
 import './app.json'
 import './app.scss'

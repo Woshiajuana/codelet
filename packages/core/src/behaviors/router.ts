@@ -2,13 +2,13 @@ import type { Loose } from '@daysnap/types'
 import { isNumber } from '@daysnap/utils'
 import { parseLocation } from '../utils'
 import { createBehavior } from '../create'
-import { bee } from '../bee'
+import { col } from '../col'
 import { ParseBehavior } from './parse'
 
 type RouteOptions = string | Loose<{ url: string; query?: Record<string, any>; replace?: boolean }>
 
 function parseOptions(options: RouteOptions): any {
-  if (bee.useRouter) {
+  if (col.useRouter) {
     return options
   }
   return parseLocation(options)
@@ -43,7 +43,7 @@ export const RouterBehavior = createBehavior({
      */
     routerPush(options: RouteOptions) {
       const { replace, ...rest } = parseOptions(options)
-      replace ? bee.redirectTo(rest) : bee.navigateTo(rest)
+      replace ? col.redirectTo(rest) : col.navigateTo(rest)
     },
 
     /**
@@ -54,7 +54,7 @@ export const RouterBehavior = createBehavior({
      */
     routerRoot(options: RouteOptions) {
       const { replace, ...rest } = parseOptions(options)
-      replace ? bee.reLaunch(rest) : bee.switchTab(rest)
+      replace ? col.reLaunch(rest) : col.switchTab(rest)
     },
 
     /**
@@ -64,7 +64,7 @@ export const RouterBehavior = createBehavior({
       if (!isNumber(delta) || delta < 1) {
         delta = 1
       }
-      bee.navigateBack({ delta })
+      col.navigateBack({ delta })
     },
   },
 })

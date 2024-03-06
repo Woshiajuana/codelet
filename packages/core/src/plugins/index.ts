@@ -23,8 +23,8 @@ export type PluginConfig = {
 }
 
 // 启用全部插件
-export default definePlugin((bee, options?: PluginConfig) => {
+export default definePlugin((col, options?: PluginConfig) => {
   Object.entries(plugins).forEach(([key, plugin]) => {
-    bee.use(plugin as any, options?.[key as keyof PluginConfig] as any)
+    col.use(plugin as any, options?.[key as keyof PluginConfig] as any)
   })
 })

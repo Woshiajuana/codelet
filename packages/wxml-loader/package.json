@@ -1,12 +1,12 @@
 {
-  "name": "@bee/wxml-loader",
+  "name": "@codelet/wxml-loader",
   "version": "0.0.1",
   "description": "webpack loader",
   "scripts": {
     "build": "npm run clean && tsc -p ./tsconfig.lib.json",
     "demo": "npm run clean && tsc -p ./tsconfig.json -w",
     "clean": "rimraf ./dist",
-    "release": "npm run build && dsc publish --pnpm -t"
+    "release": "npm run build && dsc publish --pnpm"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,7 +19,7 @@
   ],
   "keywords": [
     "daysnap",
-    "bee",
+    "codelet",
     "wechat",
     "miniprogram",
     "wxml-loader",

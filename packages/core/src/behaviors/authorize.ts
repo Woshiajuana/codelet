@@ -1,5 +1,5 @@
 import { createBehavior } from '../create'
-import { bee } from '../bee'
+import { col } from '../col'
 
 export const AuthorizeBehavior = createBehavior({
   methods: {
@@ -8,19 +8,19 @@ export const AuthorizeBehavior = createBehavior({
      */
     async authorizeRequest(options: { scope: string; message?: string }) {
       const { scope, message } = options
-      await bee.authorize({
+      await col.authorize({
         scope,
       })
       if (!message) {
         throw new Error('进行此操作，需要授权')
       }
 
-      await bee.showModal({
+      await col.showModal({
         title: '授权提示',
         content: message,
       })
 
-      const { authSetting } = await bee.openSetting()
+      const { authSetting } = await col.openSetting()
       if (!(authSetting as any)[scope]) {
         throw new Error('进行此操作，需要授权')
       }

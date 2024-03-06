@@ -2,8 +2,8 @@ import { definePlugin } from '../../utils'
 import { hideLoadingPlugin } from './hideLoading'
 import { showLoadingPlugin } from './showLoading'
 
-export const apiOverwrite = definePlugin((bee) => {
+export const apiOverwrite = definePlugin((col) => {
   ;[hideLoadingPlugin, showLoadingPlugin].forEach((plugin) => {
-    bee.use(plugin)
+    col.use(plugin)
   })
 })

@@ -6,15 +6,15 @@ type GetFunctionKey<T> = {
 
 type WX = Pick<WechatMiniprogram.Wx, GetFunctionKey<WechatMiniprogram.Wx>>
 
-declare module '../bee' {
+declare module '../col' {
   interface Bee extends WX {}
 }
 
-export const apiProxy = definePlugin((bee) => {
+export const apiProxy = definePlugin((col) => {
   Object.entries(wx).forEach(([key, fn]) => {
     if (typeof fn !== 'function') {
       return
     }
-    ;(bee as any)[key] = promisify(fn).bind(wx)
+    ;(col as any)[key] = promisify(fn).bind(wx)
   })
 })

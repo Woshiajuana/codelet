@@ -2,7 +2,7 @@ import type { Awaitable } from '@daysnap/types'
 import { isString } from '@daysnap/utils'
 import { definePlugin, parseLocation, parseQuery } from '../utils'
 
-declare module '../bee' {
+declare module '../col' {
   interface Bee {
     useRouter: boolean
     navigateTo(to: Location): Promise<void>
@@ -29,7 +29,7 @@ export interface RouterOptions {
 }
 
 // 重写路由
-export const router = definePlugin((bee, options?: RouterOptions) => {
+export const router = definePlugin((col, options?: RouterOptions) => {
   const { beforeEach, afterEach } = options || {}
 
   const overwrite = (fn: (options: any) => any) => {
@@ -52,12 +52,12 @@ export const router = definePlugin((bee, options?: RouterOptions) => {
   }
 
   // 路由
-  Object.assign(bee, {
+  Object.assign(col, {
     useRouter: true, // 是否使用路由
-    redirectTo: overwrite(bee.redirectTo),
-    navigateTo: overwrite(bee.navigateTo),
-    reLaunch: overwrite(bee.reLaunch),
-    switchTab: overwrite(bee.switchTab),
+    redirectTo: overwrite(col.redirectTo),
+    navigateTo: overwrite(col.navigateTo),
+    reLaunch: overwrite(col.reLaunch),
+    switchTab: overwrite(col.switchTab),
   })
 })
 

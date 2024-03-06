@@ -3,6 +3,6 @@ export * from './create'
 export * from './utils'
 export * from './curl'
 
-import { bee } from './bee'
+import { col } from './codelet'
 
-export default bee
+export default col
