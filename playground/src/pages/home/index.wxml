@@ -1,13 +1,5 @@
-<hello-world></hello-world>
-<!--  -->
-<view>
-  <text>首页页面</text>
+<view class="cell">
+  <view class="cell-label">
+    <text>列表</text>
+  </view>
 </view>
-
-<image src="/assets/images/logo.png"></image>
-
-<button bindtap="handleTap(title, '__bee_event__')">去登录'event'</button>
-<button bindtap="handleTap(title)">去登录'title'</button>
-<button bindtap="handleTap('xxxxxx')">去登录'xxxxxx'</button>
-<button bindtap="handleTap({ x: '1', y: 2 })">去登录{ x: '1', y: 2 }</button>
-<button bindtap="handleTap">去登录</button>
