@@ -1,5 +1,5 @@
 import { createBehavior } from '../create'
-import { col } from '../col'
+import { col } from '../codelet'
 
 export const AuthorizeBehavior = createBehavior({
   methods: {

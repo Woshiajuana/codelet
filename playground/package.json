@@ -5,11 +5,11 @@
   "description": "演练场",
   "main": "index.js",
   "scripts": {
-    "start": "bee-cli-service --watch --config bee.config.js"
+    "start": "codelet-cli-service --watch --config codelet.config.js"
   },
   "keywords": [
     "daysnap",
-    "bee",
+    "codelet",
     "wechat",
     "miniprogram",
     "playground",

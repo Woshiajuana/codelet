@@ -2,7 +2,7 @@ import './index.json'
 import './index.wxml'
 import './index.scss'
 
-import bee, { PagingBehavior, createPage } from '@codelet/core'
+import col, { PagingBehavior, createPage } from '@codelet/core'
 import { sleep } from '@daysnap/utils'
 
 createPage({

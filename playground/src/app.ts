@@ -1,4 +1,4 @@
-import bee, { createApp } from '@codelet/core'
+import col, { createApp } from '@codelet/core'
 import { promise } from '@codelet/core/plugins/promise.ts'
 import { apiProxy } from '@codelet/core/plugins/api-proxy.ts'
 import { apiOverwrite } from '@codelet/core/plugins/api-overwrite/index.ts'
@@ -8,10 +8,10 @@ import './app.json'
 import './app.scss'
 import './project.config.json'
 
-bee.use(apiProxy)
-bee.use(apiOverwrite)
-bee.use(promise)
-bee.use(router)
+col.use(apiProxy)
+col.use(apiOverwrite)
+col.use(promise)
+col.use(router)
 
 createApp({
   onLaunch() {},

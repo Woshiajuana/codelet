@@ -6,8 +6,8 @@ type GetFunctionKey<T> = {
 
 type WX = Pick<WechatMiniprogram.Wx, GetFunctionKey<WechatMiniprogram.Wx>>
 
-declare module '../col' {
-  interface Bee extends WX {}
+declare module '../codelet' {
+  interface Codelet extends WX {}
 }
 
 export const apiProxy = definePlugin((col) => {

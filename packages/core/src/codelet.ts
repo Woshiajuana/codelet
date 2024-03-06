@@ -1,6 +1,10 @@
 import type { Plugin } from './utils'
 
-function use<Options extends unknown[]>(this: Codelet, plugin: Plugin<Options>, ...options: Options) {
+function use<Options extends unknown[]>(
+  this: Codelet,
+  plugin: Plugin<Options>,
+  ...options: Options
+) {
   if (typeof plugin === 'function') {
     plugin(this, ...options)
   } else if (plugin.install) {

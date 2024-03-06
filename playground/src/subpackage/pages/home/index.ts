@@ -1,11 +1,11 @@
 import './index.json'
 import './index.wxml'
 import './index.scss'
-import bee, { createPage } from '@codelet/core'
+import col, { createPage } from '@codelet/core'
 
 createPage({
   onLoad() {
-    console.log('subpackage home', bee)
+    console.log('subpackage home', col)
   },
   handleJump() {},
 })

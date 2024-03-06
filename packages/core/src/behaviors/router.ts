@@ -2,7 +2,7 @@ import type { Loose } from '@daysnap/types'
 import { isNumber } from '@daysnap/utils'
 import { parseLocation } from '../utils'
 import { createBehavior } from '../create'
-import { col } from '../col'
+import { col } from '../codelet'
 import { ParseBehavior } from './parse'
 
 type RouteOptions = string | Loose<{ url: string; query?: Record<string, any>; replace?: boolean }>

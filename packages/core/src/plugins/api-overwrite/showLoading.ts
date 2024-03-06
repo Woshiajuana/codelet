@@ -3,8 +3,8 @@ import { definePlugin, promisify } from '../../utils'
 
 type ShowLoadingOptions = WechatMiniprogram.ShowLoadingOption | string
 
-declare module '../../col' {
-  interface Bee {
+declare module '../../codelet' {
+  interface Codelet {
     showLoading<T extends ShowLoadingOptions = ShowLoadingOptions>(
       option?: T,
     ): WechatMiniprogram.PromisifySuccessResult<T, WechatMiniprogram.ShowLoadingOption>

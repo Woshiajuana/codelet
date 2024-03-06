@@ -2,8 +2,8 @@ import type { Awaitable } from '@daysnap/types'
 import { isString } from '@daysnap/utils'
 import { definePlugin, parseLocation, parseQuery } from '../utils'
 
-declare module '../col' {
-  interface Bee {
+declare module '../codelet' {
+  interface Codelet {
     useRouter: boolean
     navigateTo(to: Location): Promise<void>
     redirectTo(to: Location): Promise<void>
