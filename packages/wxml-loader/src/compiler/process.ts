@@ -2,7 +2,7 @@ import config from './config.js'
 import JSON5 from 'json5'
 
 const mode = 'wx'
-const eventIdentifier = '__bee_event__'
+const eventIdentifier = '__codelet_event__'
 const tagRE = /\{\{((?:.|\n|\r)+?)\}\}(?!})/
 const tagREG = /\{\{((?:.|\n|\r)+?)\}\}(?!})/g
 
