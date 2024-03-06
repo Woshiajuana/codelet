@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "首页",
+  "usingComponents": {
+    "hello-world": "/components/hello-world/index"
+  }
+}
