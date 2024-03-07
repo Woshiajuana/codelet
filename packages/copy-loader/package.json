@@ -1,6 +1,6 @@
 {
   "name": "@codelet/copy-loader",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "webpack loader copy copy-loader",
   "scripts": {
     "build": "npm run clean && tsc -p ./tsconfig.lib.json",

@@ -1,6 +1,6 @@
 {
   "name": "@codelet/inject-chunk-webpack-plugin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "webpack plugin inject chunk",
   "scripts": {
     "build": "npm run clean && tsc -p ./tsconfig.lib.json",
