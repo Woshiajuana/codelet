@@ -14,7 +14,7 @@
     "build:core": "pnpm -C ./packages/core build",
     "build:inject-chunk-webpack-plugin": "pnpm -C ./packages/inject-chunk-webpack-plugin build",
     "build:wxml-loader": "pnpm -C ./packages/wxml-loader build",
-    "release": "npm run release:app-json-webpack-plugin && npm run release:cli-service && npm run release:copy-loader && npm run release:inject-chunk-webpack-plugin && npm run release:wxml-loader",
+    "release": "npm run release:app-json-webpack-plugin && npm run release:copy-loader && npm run release:inject-chunk-webpack-plugin && npm run release:wxml-loader && npm run release:cli-service && npm run release:core",
     "release:app-json-webpack-plugin": "pnpm -C ./packages/app-json-webpack-plugin release",
     "release:cli-service": "pnpm -C ./packages/cli-service release",
     "release:copy-loader": "pnpm -C ./packages/copy-loader release",
