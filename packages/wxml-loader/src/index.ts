@@ -42,7 +42,11 @@ export default function loader(
     .then(() => filepathCaches.push(...filepaths))
     .catch(callback)
     .finally(() => {
-      const outputPath = this.utils.contextify(entryPath, this.resourcePath)
+      // 解析出后缀名
+      const outputPath = this.utils
+        .contextify(entryPath, this.resourcePath)
+        .replace('.html', '.wxml')
+
       if (useCompiler) {
         const ast = compiler.parse(content)
         this.emitFile(outputPath, compiler.serialize(ast))

@@ -2,6 +2,7 @@ import WebpackBar from 'webpackbar'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import InjectChunkWebpackPlugin from '@codelet/inject-chunk-webpack-plugin'
 import AppJsonWebpackPlugin from '@codelet/app-json-webpack-plugin'
+import TerserWebpackPlugin from 'terser-webpack-plugin'
 import type { Configuration } from 'webpack'
 import { resolve } from './utils'
 
@@ -53,7 +54,7 @@ export function getDefaultConfig(): Configuration & {
               use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
             },
             {
-              test: /\.wxml$/,
+              test: /\.(wxml|html)$/,
               loader: '@codelet/wxml-loader',
               options: {
                 entryPath,
@@ -104,6 +105,12 @@ export function getDefaultConfig(): Configuration & {
     ],
 
     optimization: {
+      minimize: true,
+      minimizer: [
+        new TerserWebpackPlugin({
+          extractComments: false, // 不生成 license 文件
+        }),
+      ],
       splitChunks: {
         chunks: 'all',
         minChunks: 2,
