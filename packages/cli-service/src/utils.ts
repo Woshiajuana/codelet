@@ -43,58 +43,43 @@ export function parseArgv(argv: string[]) {
   return { configPath, isWatch, pageIndex }
 }
 
-function omit<T extends object, K extends keyof T>(obj: T, fields: K[] = []): Omit<T, K> {
-  const clone = { ...obj }
-
-  fields.forEach((key) => {
-    delete clone[key]
-  })
-
-  return clone
-}
-
 export function getConfig(options: {
   configPath: string
   isWatch: boolean
   pageIndex: string
 }): Configuration {
-  const { configPath, isWatch, pageIndex } = options
+  const { configPath, isWatch } = options
 
-  let config: Config
+  let config: Required<Config>
   if (fs.existsSync(configPath)) {
     const cfg = require(configPath)
     if (typeof cfg === 'function') {
       config = getDefaultConfig(options)
-      if (pageIndex) {
-        config.pageIndex = pageIndex
-      }
       config = cfg(config)
     } else {
-      if (pageIndex) {
-        cfg.pageIndex = pageIndex
+      if (options.pageIndex) {
+        cfg.pageIndex = options.pageIndex
       }
       config = getDefaultConfig(cfg)
-      // 为了解决 webpack-merge 合并报错的问题
-      const key: any = ['source', 'pageIndex', 'entryPath']
       config = {
         ...config,
         ...cfg,
-        ...merge(omit(config, key), omit(cfg, key)),
+        ...merge(config.webpack ?? {}, cfg.webpack ?? {}),
       }
     }
   } else {
     config = getDefaultConfig(options)
   }
 
-  const { entryPath, source, ...rest } = omit(config, ['pageIndex'])
-  if (!rest.entry && entryPath && source) {
+  const { entryPath, source, webpack } = config
+  if (!webpack.entry) {
     const { entry } = parseDir(entryPath, source)
-    rest.entry = entry
+    webpack.entry = entry
   }
 
   if (isWatch) {
-    rest.watch = true
+    webpack.watch = true
   }
 
-  return rest
+  return webpack
 }

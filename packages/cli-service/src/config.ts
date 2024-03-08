@@ -6,20 +6,20 @@ import TerserWebpackPlugin from 'terser-webpack-plugin'
 import type { Configuration } from 'webpack'
 import { resolve } from './utils'
 
-export interface CodeletCliServiceConfig {
+export interface Config {
   /** 开发路径默认 src */
   entryPath?: string
   /** 入口文件 */
   source?: string[]
   /** 第一页 */
   pageIndex?: string
+  /** webpack 配置 */
+  webpack?: Configuration
 }
 
-export type Config = Configuration & CodeletCliServiceConfig
-
 export function getDefaultConfig(
-  options?: CodeletCliServiceConfig,
-): Configuration & Required<CodeletCliServiceConfig> {
+  options?: Pick<Config, 'entryPath' | 'source' | 'pageIndex'>,
+): Required<Config> {
   const { entryPath, source, pageIndex } = Object.assign(
     {
       pageIndex: '',
@@ -36,105 +36,107 @@ export function getDefaultConfig(
 
     source,
 
-    mode: 'production',
+    webpack: {
+      mode: 'production',
 
-    devtool: false,
+      devtool: false,
 
-    output: {
-      filename: '[name].js',
-      path: resolve('dist'),
-      publicPath: '/',
-      clean: true,
-    },
-
-    resolve: {
-      alias: {
-        '@': resolve('src'),
+      output: {
+        filename: '[name].js',
+        path: resolve('dist'),
+        publicPath: '/',
+        clean: true,
       },
-      extensions: ['.js', '.ts'],
-    },
 
-    module: {
-      rules: [
-        {
-          oneOf: [
-            {
-              test: /\.(css|wxss)$/,
-              use: [MiniCssExtractPlugin.loader, 'css-loader'],
-            },
-            {
-              test: /\.s(a|c)ss$/,
-              use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
-            },
-            {
-              test: /\.(wxml|html)$/,
-              loader: '@codelet/wxml-loader',
-              options: {
-                entryPath,
-              },
-            },
-            {
-              test: /\.wxs$/,
-              loader: '@codelet/copy-loader',
-              options: {
-                entryPath,
-              },
-            },
-            {
-              test: /\.json$/,
-              type: 'javascript/auto',
-              loader: '@codelet/copy-loader',
-              options: {
-                entryPath,
-              },
-            },
-            {
-              test: /\.(png|jpe?g|gif|svg)$/,
-              type: 'asset/resource',
-              generator: {
-                filename: 'assets/images/[name][ext]',
-              },
-            },
-            {
-              test: /\.(ts|js)$/,
-              loader: 'babel-loader',
-              options: {
-                cacheDirectory: true, // 开启 babel 缓存
-                cacheCompression: false, // 关闭缓存文件压缩
-              },
-            },
-          ],
+      resolve: {
+        alias: {
+          '@': resolve('src'),
         },
-      ],
-    },
+        extensions: ['.js', '.ts'],
+      },
 
-    plugins: [
-      new MiniCssExtractPlugin({
-        filename: '[name].wxss',
-      }),
-      new InjectChunkWebpackPlugin(),
-      new AppJsonWebpackPlugin({
-        pageIndex,
-      }),
-      new WebpackBar(),
-    ],
+      module: {
+        rules: [
+          {
+            oneOf: [
+              {
+                test: /\.(css|wxss)$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+              },
+              {
+                test: /\.s(a|c)ss$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+              },
+              {
+                test: /\.(wxml|html)$/,
+                loader: '@codelet/wxml-loader',
+                options: {
+                  entryPath,
+                },
+              },
+              {
+                test: /\.wxs$/,
+                loader: '@codelet/copy-loader',
+                options: {
+                  entryPath,
+                },
+              },
+              {
+                test: /\.json$/,
+                type: 'javascript/auto',
+                loader: '@codelet/copy-loader',
+                options: {
+                  entryPath,
+                },
+              },
+              {
+                test: /\.(png|jpe?g|gif|svg)$/,
+                type: 'asset/resource',
+                generator: {
+                  filename: 'assets/images/[name][ext]',
+                },
+              },
+              {
+                test: /\.(ts|js)$/,
+                loader: 'babel-loader',
+                options: {
+                  cacheDirectory: true, // 开启 babel 缓存
+                  cacheCompression: false, // 关闭缓存文件压缩
+                },
+              },
+            ],
+          },
+        ],
+      },
 
-    optimization: {
-      minimize: true,
-      minimizer: [
-        new TerserWebpackPlugin({
-          extractComments: false, // 不生成 license 文件
+      plugins: [
+        new MiniCssExtractPlugin({
+          filename: '[name].wxss',
         }),
+        new InjectChunkWebpackPlugin(),
+        new AppJsonWebpackPlugin({
+          pageIndex,
+        }),
+        new WebpackBar(),
       ],
-      splitChunks: {
-        chunks: 'all',
-        minChunks: 2,
-        minSize: 0,
-        cacheGroups: {
-          main: {
-            name: 'bundle',
-            minChunks: 2,
-            chunks: 'all',
+
+      optimization: {
+        minimize: true,
+        minimizer: [
+          new TerserWebpackPlugin({
+            extractComments: false, // 不生成 license 文件
+          }),
+        ],
+        splitChunks: {
+          chunks: 'all',
+          minChunks: 2,
+          minSize: 0,
+          cacheGroups: {
+            main: {
+              name: 'bundle',
+              minChunks: 2,
+              chunks: 'all',
+            },
           },
         },
       },
