@@ -5,6 +5,7 @@ const NAME = 'AppJsonWebpackPlugin'
 
 export interface AppJsonWebpackPluginOptions {
   filterPages?: (entryKeys: string[]) => Promise<Record<string, any>>
+  pageIndex?: string
 }
 
 export default class AppJsonWebpackPlugin {
@@ -59,7 +60,7 @@ export default class AppJsonWebpackPlugin {
       })
       .map((item) => item.split(path.sep).join('/'))
 
-    const pages: string[] = []
+    let pages: string[] = []
     const subpackages: { root: string; name: string; pages: string[] }[] = []
     source.forEach((item) => {
       if (item.startsWith('pages/')) {
@@ -74,6 +75,12 @@ export default class AppJsonWebpackPlugin {
         subpackage.pages.push(rest.join('/'))
       }
     })
+
+    // 将 pageIndex 移动到第一位
+    if (this.options.pageIndex) {
+      pages = pages.filter((item) => item !== this.options.pageIndex)
+      pages.unshift(this.options.pageIndex)
+    }
 
     return { pages, subpackages }
   }

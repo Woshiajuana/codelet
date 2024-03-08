@@ -6,22 +6,35 @@ import TerserWebpackPlugin from 'terser-webpack-plugin'
 import type { Configuration } from 'webpack'
 import { resolve } from './utils'
 
-export interface Config extends Configuration {
+export interface CodeletCliServiceConfig {
   /** 开发路径默认 src */
   entryPath?: string
+  /** 入口文件 */
   source?: string[]
+  /** 第一页 */
+  pageIndex?: string
 }
 
-export function getDefaultConfig(): Configuration & {
-  entryPath: string
-  source: string[]
-} {
-  const entryPath = './src'
+export type Config = Configuration & CodeletCliServiceConfig
+
+export function getDefaultConfig(
+  options?: CodeletCliServiceConfig,
+): Configuration & Required<CodeletCliServiceConfig> {
+  const { entryPath, source, pageIndex } = Object.assign(
+    {
+      pageIndex: '',
+      entryPath: './src',
+      source: ['app.(js|ts)', 'pages/**/*.(js|ts)', 'components/**/*.(js|ts)'],
+    },
+    options,
+  )
 
   return {
+    pageIndex,
+
     entryPath,
 
-    source: ['app.(js|ts)', 'pages/**/*.(js|ts)', 'components/**/*.(js|ts)'],
+    source,
 
     mode: 'production',
 
@@ -100,7 +113,9 @@ export function getDefaultConfig(): Configuration & {
         filename: '[name].wxss',
       }),
       new InjectChunkWebpackPlugin(),
-      new AppJsonWebpackPlugin(),
+      new AppJsonWebpackPlugin({
+        pageIndex,
+      }),
       new WebpackBar(),
     ],
 

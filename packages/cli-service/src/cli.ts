@@ -3,6 +3,7 @@ import { parseArgv, getConfig } from './utils'
 
 const argv = process.argv
 const options = parseArgv(argv)
+
 const config = getConfig(options)
 
 const callback = (err?: Error | null, stats?: Stats) => {

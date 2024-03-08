@@ -1,8 +1,5 @@
 {
-  "pages": [
-    "pages/home/index",
-    "pages/login/index"
-  ],
+  "pages": [],
   "window": {
       "navigationBarTitleText": "mini-webpack",
       "navigationBarTextStyle": "black",
