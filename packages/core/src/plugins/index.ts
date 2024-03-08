@@ -18,8 +18,8 @@ const plugins = {
 }
 
 export type PluginConfig = {
-  promise: PromiseOptions
-  router: RouterOptions
+  promise?: PromiseOptions
+  router?: RouterOptions
 }
 
 // 启用全部插件
