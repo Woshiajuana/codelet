@@ -1,11 +1,12 @@
 {
   "name": "@codelet/wxml-loader",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "webpack loader",
   "scripts": {
     "build": "npm run clean && tsc -p ./tsconfig.lib.json",
     "demo": "npm run clean && tsc -p ./tsconfig.json -w",
     "clean": "rimraf ./dist",
+    "sync": "dsc sync",
     "release": "npm run build && dsc publish --pnpm"
   },
   "main": "dist/index.js",

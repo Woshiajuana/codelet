@@ -1,10 +1,11 @@
 {
   "name": "@codelet/core",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "mini core",
   "scripts": {
     "build": "npm run clean && tsc",
     "clean": "rimraf ./dist",
+    "sync": "dsc sync",
     "release": "npm run build && dsc publish --pnpm"
   },
   "exports": {
@@ -47,12 +48,11 @@
   "author": "woshiajuana",
   "license": "MIT",
   "dependencies": {
-    "@daysnap/types": "^0.0.5",
     "@daysnap/utils": "^0.0.85",
     "miniprogram-api-typings": "^3.12.2"
   },
   "devDependencies": {
-    "rimraf": "^5.0.5",
-    "webpack": "^5.89.0"
+    "@daysnap/types": "^0.0.5",
+    "rimraf": "^5.0.5"
   }
 }

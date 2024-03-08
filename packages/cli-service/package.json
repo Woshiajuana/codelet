@@ -1,10 +1,11 @@
 {
   "name": "@codelet/cli-service",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "cli-service",
   "scripts": {
     "build": "npm run clean && tsc -p ./tsconfig.lib.json",
     "clean": "rimraf ./dist",
+    "sync": "dsc sync",
     "release": "npm run build && dsc publish --pnpm"
   },
   "bin": {
@@ -44,6 +45,7 @@
     "mini-css-extract-plugin": "^2.7.7",
     "sass": "^1.69.7",
     "sass-loader": "^13.3.3",
+    "terser-webpack-plugin": "^5.3.10",
     "webpack": "^5.89.0",
     "webpack-merge": "^5.10.0",
     "webpackbar": "^6.0.0"

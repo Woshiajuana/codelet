@@ -21,6 +21,13 @@
     "release:core": "pnpm -C ./packages/core release",
     "release:inject-chunk-webpack-plugin": "pnpm -C ./packages/inject-chunk-webpack-plugin release",
     "release:wxml-loader": "pnpm -C ./packages/wxml-loader release",
+    "sync": "npm run sync:app-json-webpack-plugin && npm run sync:copy-loader && npm run sync:inject-chunk-webpack-plugin && npm run sync:wxml-loader && npm run sync:cli-service && npm run sync:core",
+    "sync:app-json-webpack-plugin": "pnpm -C ./packages/app-json-webpack-plugin sync",
+    "sync:cli-service": "pnpm -C ./packages/cli-service sync",
+    "sync:copy-loader": "pnpm -C ./packages/copy-loader sync",
+    "sync:core": "pnpm -C ./packages/core sync",
+    "sync:inject-chunk-webpack-plugin": "pnpm -C ./packages/inject-chunk-webpack-plugin sync",
+    "sync:wxml-loader": "pnpm -C ./packages/wxml-loader sync",
     "preinstall": "npx only-allow pnpm"
   },
   "keywords": [
