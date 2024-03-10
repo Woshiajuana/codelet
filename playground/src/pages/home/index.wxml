@@ -3,3 +3,5 @@
     <text>列表</text>
   </view>
 </view>
+
+<image src="{{ src }}"></image> <text>111{{ src }}</text>

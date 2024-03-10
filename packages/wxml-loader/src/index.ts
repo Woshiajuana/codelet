@@ -23,7 +23,7 @@ export default function loader(
   entryPath = path.resolve(this.rootContext, entryPath)
 
   const filepaths = result
-    .filter((src) => src.startsWith('.') || src.startsWith('/') || !filepathCaches.includes(src))
+    .filter((src) => (src.startsWith('.') || src.startsWith('/')) && !filepathCaches.includes(src))
     .map((src) => {
       if (src.startsWith('.')) {
         return path.join(this.context, src)
@@ -32,6 +32,7 @@ export default function loader(
       }
     })
 
+  let error: any = null
   Promise.all(
     filepaths.map(async (filepath) => {
       const content = await fs.readFile(filepath)
@@ -40,7 +41,7 @@ export default function loader(
     }),
   )
     .then(() => filepathCaches.push(...filepaths))
-    .catch(callback)
+    .catch((err) => (error = err))
     .finally(() => {
       // 解析出后缀名
       const outputPath = this.utils
@@ -53,7 +54,7 @@ export default function loader(
       } else {
         this.emitFile(outputPath, content)
       }
-      callback(null, '', map, meta)
+      callback(error, '', map, meta)
     })
 
   return
