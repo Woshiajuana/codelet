@@ -1,12 +1,11 @@
 import { parse } from './parse.js'
 import { serialize } from './serialize.js'
 const content = `
-<input></input>
-1122
-<xxxx-xx />
-<image src="xxxxx"></image>
-<div bindtap="handleTap('xxx')">登录页面</div>
-<div bindtap="handleClick(xxx)">111</div>
+<view class="menu-item">
+  <view class="iconfont {{ item.icon }}"></view>
+  <text>{{ item.name }}</text>
+</view>
+<input class="xxx {{ item.icon }}" data="{{ xx }}" />
 `
 const ast = parse(content)
 

@@ -1,4 +1,5 @@
-<view>
+<view class="wrap">
+  <text>登录页面 {{ xx }}</text>
   <text>登录页面 {{ xx }}</text>
 </view>
 
