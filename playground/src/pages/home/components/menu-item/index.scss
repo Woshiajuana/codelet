@@ -1,0 +1,24 @@
+@import '@/assets/scss/define';
+
+.menu-item {
+  @extend %df;
+  @extend %fdc;
+  @extend %aic;
+  @extend %jcc;
+  @extend %c3;
+  @extend %ats;
+  @extend %bsb;
+  font-size: j(16);
+  width: j(163.5);
+  aspect-ratio: 1;
+  border-radius: j(24);
+  background-color: #fff;
+}
+.menu-icon {
+  @extend %br50;
+  @extend %df;
+  @extend %aic;
+  @extend %jcc;
+  margin-bottom: j(16);
+  font-size: j(36);
+}

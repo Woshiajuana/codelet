@@ -1,0 +1,11 @@
+<view class="user-section">
+  <image class="user-avatar"></image>
+  <view class="user-info" data-url="/pages/login/index" bindtap="transfer">
+    <view class="user-name">
+      <text>登录/注册</text>
+    </view>
+    <view class="user-prompt">
+      <text>点击登录 享更多精彩服务</text>
+    </view>
+  </view>
+</view>

@@ -1,3 +1,33 @@
-page{
+@import '@/assets/scss/define';
+@import '@/assets/scss/iconfont';
+
+page {
+  @extend %bsb;
+  background-color: $color-background;
   min-height: 100%;
+}
+
+.c-button {
+  @extend %df;
+  @extend %aic;
+  @extend %jcc;
+  @extend %cfff;
+  @extend %cp;
+  @extend %ma;
+  @extend %ats;
+  margin-top: auto;
+  font-size: j(16);
+  background-color: $color-primary;
+  height: j(55);
+  width: j(315);
+  border-radius: j(28);
+  &.disabled,
+  &:disabled,
+  &[disabled] {
+    color: #fff !important;
+    background-color: #ddd !important;
+  }
+  &:after {
+    @extend %dn;
+  }
 }

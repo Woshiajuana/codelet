@@ -26,6 +26,7 @@
     "@codelet/copy-loader": "workspace:^",
     "@codelet/inject-chunk-webpack-plugin": "workspace:^",
     "@codelet/wxml-loader": "workspace:^",
+    "@types/webpack-env": "^1.18.4",
     "miniprogram-api-typings": "^3.12.2",
     "typescript": "^5.3.3",
     "webpack": "^5.89.0"

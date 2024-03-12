@@ -1,0 +1,4 @@
+<view class="menu-item">
+  <view class="menu-icon iconfont {{ item.icon }}"></view>
+  <text>{{ item.name }}</text>
+</view>

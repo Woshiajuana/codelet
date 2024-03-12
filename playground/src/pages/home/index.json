@@ -1,6 +1,6 @@
 {
-  "navigationBarTitleText": "首页",
+  "navigationBarTitleText": "照片达人",
   "usingComponents": {
-    "hello-world": "/components/hello-world/index"
+    "menu-section": "./components/menu-section/index"
   }
 }

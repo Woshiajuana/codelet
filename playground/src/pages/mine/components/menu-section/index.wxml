@@ -1,0 +1,7 @@
+<pro-cell
+  wx:for="{{ arrMenus }}"
+  wx:key="index"
+  is-arrow="{{ item.isArrow }}"
+  label="{{ item.label }}"
+  icon="{{ item.icon }}"
+></pro-cell>

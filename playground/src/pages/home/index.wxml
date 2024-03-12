@@ -1,7 +1,3 @@
-<view class="cell">
-  <view class="cell-label">
-    <text>列表</text>
-  </view>
-</view>
+<menu-section></menu-section>
 
-<image src="{{ src }}"></image> <text>111{{ src }}</text>
+<pro-end-divider></pro-end-divider>

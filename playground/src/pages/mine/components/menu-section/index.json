@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "pro-cell": "/components/pro-cell/index"
+  }
+}

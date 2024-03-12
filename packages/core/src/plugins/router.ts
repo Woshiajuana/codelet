@@ -14,7 +14,7 @@ declare module '../codelet' {
 
 export type RouteLocation = {
   url: string
-  query: Record<string, any>
+  query?: Record<string, any>
 }
 
 export type Location = string | RouteLocation

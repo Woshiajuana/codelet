@@ -1,8 +1,33 @@
 {
   "pages": [],
   "window": {
-      "navigationBarTitleText": "mini-webpack",
-      "navigationBarTextStyle": "black",
-      "navigationBarBackgroundColor": "#ffffff"
+    "navigationBarTitleText": "照片达人",
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#ffffff"
+  },
+  "lazyCodeLoading": "requiredComponents",
+  "usingComponents": {
+    "pro-end-divider": "/components/pro-end-divider/index"
+  },
+  "tabBar": {
+    "color": "#9EA6B9",
+    "selectedColor": "#07c160",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页",
+        "iconPath": "assets/images/tb-home-o.png",
+        "selectedIconPath": "assets/images/tb-home.png"
+      },
+      {
+        "pagePath": "pages/mine/index",
+        "text": "我的",
+        "iconPath": "assets/images/tb-mine-o.png",
+        "selectedIconPath": "assets/images/tb-mine.png"
+      }
+    ]
   }
 }

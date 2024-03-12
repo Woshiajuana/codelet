@@ -1,0 +1,23 @@
+@import '@daysnap/define-sass';
+
+$color-primary: #07c160;
+$color-success: #67c23a;
+$color-danger: #fc3939;
+$color-warning: #f78a5a;
+
+$color-background: #f3f8f9;
+
+@function j($px, $r: 2) {
+  @if ($px == 1) {
+    @return $px * 1rpx;
+  }
+  @return $px * $r * 1rpx;
+}
+
+%ats {
+  transition: all 0.3s;
+  &:active {
+    transform: scale(0.96);
+    opacity: 0.8;
+  }
+}

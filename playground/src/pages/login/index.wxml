@@ -1,6 +1,12 @@
-<view class="wrap">
-  <text>登录页面 {{ xx }}</text>
-  <text>登录页面 {{ xx }}</text>
+<image class="logo" src="/assets/images/logo.png"></image>
+
+<view class="title">
+  <text>欢迎使用</text>
+  <text class="strong">照片达人</text>
 </view>
 
-<button bindtap="handleJump(1)">去登录</button>
+<view class="sub-title">
+  <text>登录后 享更多精彩服务</text>
+</view>
+
+<button class="c-button">快捷登录</button>
