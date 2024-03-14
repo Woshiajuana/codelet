@@ -17,6 +17,7 @@ import type {
   InstanceMethods,
 } from './types'
 import { mergeOptions } from '../utils'
+import { RuntimeBehavior } from './runtime'
 
 export type ComponentOtherOptions = Partial<Omit<ComponentOtherOption, 'behaviors'>>
 
@@ -55,6 +56,8 @@ export function createComponent<
   return Component(
     mergeOptions(
       {
+        // 注入runtime行为
+        behaviors: [RuntimeBehavior],
         options: {
           // 启用多slot支持
           multipleSlots: true,

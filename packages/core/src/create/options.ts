@@ -42,19 +42,16 @@ export type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) ex
   ? I
   : never
 
-export type BehaviorToOptionTypes<T> = T extends BehaviorOptionsBase<
-  infer Data,
-  infer Behavior,
-  infer Method,
-  infer Property
->
-  ? OptionTypesType<Data & {}, Method & {}, Property & {}> & IntersectionBehavior<Behavior>
-  : never
+export type BehaviorToOptionTypes<T> =
+  T extends BehaviorOptionsBase<infer Data, infer Behavior, infer Method, infer Property>
+    ? OptionTypesType<Data & {}, Method & {}, Property & {}> & IntersectionBehavior<Behavior>
+    : never
 
 export type ExtractBehavior<T> = {
   Behavior: BehaviorToOptionTypes<T>
 }[T extends OptionBehavior ? 'Behavior' : never]
 
-export type IntersectionBehavior<T> = IsDefaultBehaviorComponent<T> extends true
-  ? OptionTypesType
-  : UnionToIntersection<ExtractBehavior<T>>
+export type IntersectionBehavior<T> =
+  IsDefaultBehaviorComponent<T> extends true
+    ? OptionTypesType
+    : UnionToIntersection<ExtractBehavior<T>>

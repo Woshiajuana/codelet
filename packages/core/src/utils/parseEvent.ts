@@ -4,7 +4,7 @@ export type ParseEvent = Loose<WechatMiniprogram.CustomEvent | WechatMiniprogram
 
 export function parseEvent(event: ParseEvent) {
   const { detail = {}, currentTarget, ...rest } = event
-  const { dataset } = currentTarget
+  const { dataset = {} } = currentTarget || {}
   return {
     ...rest,
     ...dataset,

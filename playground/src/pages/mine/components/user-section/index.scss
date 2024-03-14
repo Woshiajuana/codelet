@@ -3,6 +3,7 @@
 .user-section {
   @extend %df;
   @extend %aic;
+  @extend %ats;
   padding: j(16) j(24);
 }
 .user-avatar {

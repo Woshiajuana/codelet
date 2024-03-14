@@ -65,5 +65,5 @@ function getCurrentRoute() {
   const pages = getCurrentPages()
   const { route, options } = pages[pages.length - 1]
   const query = parseQuery(options)
-  return { url: route, query }
+  return { url: `/${route}`, query }
 }

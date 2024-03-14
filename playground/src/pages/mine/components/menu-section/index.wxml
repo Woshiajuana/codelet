@@ -4,4 +4,5 @@
   is-arrow="{{ item.isArrow }}"
   label="{{ item.label }}"
   icon="{{ item.icon }}"
+  bindtap="transfer(item)"
 ></pro-cell>

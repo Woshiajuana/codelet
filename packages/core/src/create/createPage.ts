@@ -52,6 +52,7 @@ export function createPage<
   return Page(
     mergeOptions(
       {
+        // 注入runtime行为
         behaviors: [RuntimeBehavior],
       },
       options,

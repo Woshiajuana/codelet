@@ -20,24 +20,19 @@ export default definePlugin((col) => {
         console.log('beforeEach => ', to, from)
         const { url } = to
         const userinfo = userinfoStorage.getItem()
-        console.log('userinfo => ', userinfo)
         if (userinfo) {
           // 已登录
           if (UN_NEED_LOGIN_PAGES.includes(url)) {
             // 已登录，如果是登录页，则不处理
-            console.log('1')
           } else {
-            console.log('2')
             next()
           }
         } else {
           // 未登录
           if (NEED_LOGIN_PAGES.includes(url)) {
             // 未登录，如果是需要登录的页面，则跳转去登录
-            console.log('3')
             col.navigateTo('/pages/login/index')
           } else {
-            console.log('4')
             next()
           }
         }
