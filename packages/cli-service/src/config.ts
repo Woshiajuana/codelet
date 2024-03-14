@@ -46,9 +46,6 @@ export function getDefaultConfig(
     new WebpackBar(),
   ]
   if (isDev) {
-    console.log(
-      'xxxxxxxxxxxxxxxxxxxx===============================HMRWebpackPluginHMRWebpackPluginHMRWebpackPlugin',
-    )
     plugins.push(new HMRWebpackPlugin())
   }
 
@@ -69,9 +66,6 @@ export function getDefaultConfig(
   }
   // 生产环境
   if (!isDev) {
-    console.log(
-      'xxxxxxxxxxxxxxxxxxxx===============================minimizeminimizeminimizeminimize',
-    )
     optimization.minimize = true
     optimization.minimizer = [
       new TerserWebpackPlugin({
