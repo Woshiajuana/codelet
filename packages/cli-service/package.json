@@ -37,6 +37,7 @@
     "@babel/preset-typescript": "^7.23.3",
     "@codelet/app-json-webpack-plugin": "workspace:^",
     "@codelet/copy-loader": "workspace:^",
+    "@codelet/hmr-webpack-plugin": "workspace:^",
     "@codelet/inject-chunk-webpack-plugin": "workspace:^",
     "@codelet/wxml-loader": "workspace:^",
     "babel-loader": "^9.1.3",

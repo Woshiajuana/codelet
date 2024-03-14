@@ -5,7 +5,8 @@
   "description": "演练场",
   "main": "index.js",
   "scripts": {
-    "start": "codelet-cli-service --watch --config codelet.config.js"
+    "dev": "codelet-cli-service dev --watch --config codelet.config.js",
+    "build": "codelet-cli-service build --watch --config codelet.config.js"
   },
   "keywords": [
     "daysnap",

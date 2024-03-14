@@ -1,0 +1,38 @@
+{
+  "name": "@codelet/hmr-webpack-plugin",
+  "version": "0.0.5",
+  "description": "webpack hrm webpack miniprogram",
+  "scripts": {
+    "build": "npm run clean && tsc -p ./tsconfig.lib.json",
+    "clean": "rimraf ./dist",
+    "sync": "dsc sync",
+    "release": "npm run build && dsc publish --pnpm"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "daysnap",
+    "codelet",
+    "wechat",
+    "miniprogram",
+    "hmr-webpack-plugin",
+    "mini"
+  ],
+  "author": "woshiajuana",
+  "license": "MIT",
+  "peerDependencies": {
+    "webpack": ">=5.0.0 <6.0.0"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.3",
+    "webpack": "^5.89.0"
+  }
+}

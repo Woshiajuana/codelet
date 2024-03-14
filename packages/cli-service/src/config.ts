@@ -1,9 +1,9 @@
 import WebpackBar from 'webpackbar'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import HMRWebpackPlugin from '@codelet/hmr-webpack-plugin'
 import InjectChunkWebpackPlugin from '@codelet/inject-chunk-webpack-plugin'
 import AppJsonWebpackPlugin from '@codelet/app-json-webpack-plugin'
 import TerserWebpackPlugin from 'terser-webpack-plugin'
-import CodeletHMRPlugin from './CodeletHMRPlugin'
 import type { Configuration } from 'webpack'
 import { resolve } from './utils'
 
@@ -19,16 +19,67 @@ export interface Config {
 }
 
 export function getDefaultConfig(
-  options?: Pick<Config, 'entryPath' | 'source' | 'pageIndex'>,
+  options?: Pick<Config, 'entryPath' | 'source' | 'pageIndex'> & { isDev?: boolean },
 ): Required<Config> {
-  const { entryPath, source, pageIndex } = Object.assign(
+  const { entryPath, source, pageIndex, isDev } = Object.assign(
     {
+      isDev: false,
       pageIndex: '',
       entryPath: './src',
       source: ['app.(js|ts)', 'pages/**/*.(js|ts)', 'components/**/*.(js|ts)'],
     },
     options,
   )
+
+  // 模式
+  const mode = isDev ? 'development' : 'production'
+
+  // 插件
+  const plugins = [
+    new MiniCssExtractPlugin({
+      filename: '[name].wxss',
+    }),
+    new InjectChunkWebpackPlugin(),
+    new AppJsonWebpackPlugin({
+      pageIndex,
+    }),
+    new WebpackBar(),
+  ]
+  if (isDev) {
+    console.log(
+      'xxxxxxxxxxxxxxxxxxxx===============================HMRWebpackPluginHMRWebpackPluginHMRWebpackPlugin',
+    )
+    plugins.push(new HMRWebpackPlugin())
+  }
+
+  // 优化
+  const optimization: Configuration['optimization'] = {
+    splitChunks: {
+      chunks: 'all',
+      minChunks: 2,
+      minSize: 0,
+      cacheGroups: {
+        main: {
+          name: 'bundle',
+          minChunks: 2,
+          chunks: 'all',
+        },
+      },
+    },
+  }
+  // 生产环境
+  if (!isDev) {
+    console.log(
+      'xxxxxxxxxxxxxxxxxxxx===============================minimizeminimizeminimizeminimize',
+    )
+    optimization.minimize = true
+    optimization.minimizer = [
+      new TerserWebpackPlugin({
+        // 不生成 license 文件
+        extractComments: false,
+      }),
+    ]
+  }
 
   return {
     pageIndex,
@@ -38,8 +89,7 @@ export function getDefaultConfig(
     source,
 
     webpack: {
-      // mode: 'production',
-      mode: 'development',
+      mode,
 
       devtool: false,
 
@@ -111,39 +161,9 @@ export function getDefaultConfig(
         ],
       },
 
-      plugins: [
-        new CodeletHMRPlugin(),
-        new MiniCssExtractPlugin({
-          filename: '[name].wxss',
-        }),
-        new InjectChunkWebpackPlugin(),
-        new AppJsonWebpackPlugin({
-          pageIndex,
-        }),
-        new WebpackBar(),
-      ],
+      plugins,
 
-      optimization: {
-        // minimize: false,
-        // minimizer: [
-        //   // new TerserWebpackPlugin({
-        //   //   // 不生成 license 文件
-        //   //   extractComments: false,
-        //   // }),
-        // ],
-        splitChunks: {
-          chunks: 'all',
-          minChunks: 2,
-          minSize: 0,
-          cacheGroups: {
-            main: {
-              name: 'bundle',
-              minChunks: 2,
-              chunks: 'all',
-            },
-          },
-        },
-      },
+      optimization,
     },
   }
 }

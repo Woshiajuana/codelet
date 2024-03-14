@@ -1,16 +1,16 @@
 import type { Compiler } from 'webpack'
 
-export default class CodeletHMRPlugin {
+const NAME = 'HMRWebpackPlugin'
+
+export default class HMRWebpackPlugin {
   apply(compiler: Compiler) {
-    compiler.hooks.thisCompilation.tap('TaroMiniHMRPlugin', (compilation) => {
-      compilation.hooks.beforeChunkAssets.tap('TaroMiniHMRPlugin', () => {
+    compiler.hooks.thisCompilation.tap(NAME, (compilation) => {
+      compilation.hooks.beforeChunkAssets.tap(NAME, () => {
         compilation.chunks.forEach((chunk) => {
-          console.log('runtimeModules 11111 => ', chunk.name, chunk.hasRuntime())
           if (chunk.hasRuntime() && chunk.name === 'bundle') {
             const runtimeModules = compilation.chunkGraph.getChunkRuntimeModulesInOrder(chunk)
             for (const module of runtimeModules) {
               if (module.name === 'jsonp chunk loading') {
-                console.log('runtimeModules 22222 => ', module)
                 const runtimeSource: any = compilation.codeGenerationResults.getSource(
                   module,
                   chunk.runtime,

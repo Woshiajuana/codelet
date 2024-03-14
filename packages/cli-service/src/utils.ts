@@ -37,15 +37,17 @@ export function getOptionValue(argv: string[], option: string) {
 
 export function parseArgv(argv: string[]) {
   const isWatch = argv.includes('--watch')
+  const isDev = argv.includes('dev')
   const pageIndex = getOptionValue(argv, '--pageIndex') || ''
   const configRelativePath = getOptionValue(argv, '--config') || 'codelet.config.js'
   const configPath = resolve(configRelativePath)
-  return { configPath, isWatch, pageIndex }
+  return { configPath, isWatch, pageIndex, isDev }
 }
 
 export function getConfig(options: {
   configPath: string
   isWatch: boolean
+  isDev: boolean
   pageIndex: string
 }): Configuration {
   const { configPath, isWatch } = options
@@ -59,6 +61,9 @@ export function getConfig(options: {
     } else {
       if (options.pageIndex) {
         cfg.pageIndex = options.pageIndex
+      }
+      if (options.isDev) {
+        cfg.isDev = options.isDev
       }
       config = getDefaultConfig(cfg)
       config = {
