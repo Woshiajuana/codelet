@@ -2,6 +2,14 @@ import './index.json'
 import './index.wxml'
 import './index.scss'
 
-import { createPage } from '@codelet/core'
+import { RouterBehavior, createPage } from '@codelet/core'
 
-createPage()
+createPage({
+  behaviors: [RouterBehavior],
+  onLoad(query) {
+    this.routerParseQuery(query)
+  },
+  handleMessage(event: any) {
+    //
+  },
+})

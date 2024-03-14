@@ -17,19 +17,21 @@ export const TransferBehavior = createBehavior({
         return
       }
 
+      const params = query || item || rest
+
       // 跳转页面
       if (url) {
-        col.navigateTo({ url, query })
+        col.navigateTo({ url, query: params })
       }
 
       // 触发自定义事件
       if (event) {
-        this.triggerEvent(event, query || item)
+        this.triggerEvent(event, params)
       }
 
       // 执行自定义方法
       if (fn) {
-        ;(this as any)[fn](query || item)
+        ;(this as any)[fn](params)
       }
     },
   },

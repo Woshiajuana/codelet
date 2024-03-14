@@ -32,6 +32,8 @@ export const RouterBehavior = createBehavior({
 
       this.setData({ query })
 
+      console.log('query => ', query)
+
       return query
     },
 

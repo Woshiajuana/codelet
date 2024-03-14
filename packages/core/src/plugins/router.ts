@@ -34,7 +34,7 @@ export const router = definePlugin((col, options?: RouterOptions) => {
 
   const overwrite = (fn: (options: any) => any) => {
     return async function (location: Location) {
-      const to = isString(location) ? { url: location, query: {} } : location
+      const to = isString(location) ? { url: location } : location
       const from = getCurrentRoute()
 
       const next = async () => {

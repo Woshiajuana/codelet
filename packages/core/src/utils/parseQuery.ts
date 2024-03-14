@@ -10,7 +10,7 @@ export function parseQuery<T extends Record<string, any>>(options: Record<string
   // eslint-disable-next-line prefer-const
   let { query = {}, scene, ...rest } = options
   if (isString(query)) {
-    query = JSON.parse(query)
+    query = JSON.parse(decodeURIComponent(query))
   }
   if (scene) {
     if (scene.includes('=')) {
