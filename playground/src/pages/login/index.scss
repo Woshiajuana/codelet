@@ -5,15 +5,14 @@ page {
   @extend %fdc;
   @extend %jcc;
   @extend %bsb;
+  @extend %aic;
   background-color: #fff;
-  // background-color: #ddd;
-  padding: j(60) 0;
+  padding: j(48) 0 j(64);
 }
 .logo {
   border-radius: j(16);
   width: j(100);
   height: j(100);
-  margin-left: j(32);
 }
 .title {
   @extend %c3;

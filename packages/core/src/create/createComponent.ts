@@ -16,6 +16,7 @@ import type {
   PropertyOptionToData,
   InstanceMethods,
 } from './types'
+import { mergeOptions } from '../utils'
 
 export type ComponentOtherOptions = Partial<Omit<ComponentOtherOption, 'behaviors'>>
 
@@ -51,5 +52,17 @@ export function createComponent<
   Method extends MethodOption = {},
   Property extends ComponentPropertyOption = {},
 >(options?: ComponentOptions<Data, Behavior, Method, Property>) {
-  return Component((options as any) ?? {})
+  return Component(
+    mergeOptions(
+      {
+        options: {
+          // 启用多slot支持
+          multipleSlots: true,
+          // 组件样式隔离
+          addGlobalClass: true,
+        },
+      },
+      options,
+    ),
+  )
 }

@@ -5,10 +5,6 @@ import './index.scss'
 import { createComponent } from '@codelet/core'
 
 createComponent({
-  options: {
-    multipleSlots: true,
-    addGlobalClass: true,
-  },
   data: {
     arrMenus: [
       { icon: 'icon-id-photo', name: '证件照' },

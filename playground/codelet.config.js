@@ -1,7 +1,7 @@
 const { defineConfig } = require('@codelet/cli-service')
 
 module.exports = defineConfig({
-  pageIndex: 'pages/login/index',
+  pageIndex: 'pages/home/index',
   source: [
     'app.(js|ts)',
     'pages/**/*.(js|ts)',

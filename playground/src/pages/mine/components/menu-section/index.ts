@@ -2,13 +2,10 @@ import './index.json'
 import './index.wxml'
 import './index.scss'
 
-import { createComponent } from '@codelet/core'
+import { TransferBehavior, createComponent } from '@codelet/core'
 
 createComponent({
-  options: {
-    multipleSlots: true,
-    addGlobalClass: true,
-  },
+  behaviors: [TransferBehavior],
   data: {
     arrMenus: [
       {

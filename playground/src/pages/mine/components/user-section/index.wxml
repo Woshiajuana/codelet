@@ -1,6 +1,6 @@
-<view class="user-section">
+<view class="user-section" data-url="/pages/login/index" bindtap="transfer">
   <image class="user-avatar"></image>
-  <view class="user-info" data-url="/pages/login/index" bindtap="transfer">
+  <view class="user-info">
     <view class="user-name">
       <text>登录/注册</text>
     </view>

@@ -6,8 +6,8 @@
   "packageManager": "pnpm@8.7.1",
   "scripts": {
     "clean": "rimraf --glob **/node_modules",
-    "dev": "npm run build:packages && pnpm -C ./playground dev",
-    "build": "npm run build:packages && pnpm -C ./playground build",
+    "dev": "pnpm -C ./playground dev",
+    "build": "pnpm -C ./playground build",
     "build:packages": "npm run build:app-json-webpack-plugin && npm run build:copy-loader && npm run build:hmr-webpack-plugin && npm run build:inject-chunk-webpack-plugin && npm run build:wxml-loader && npm run build:cli-service",
     "build:app-json-webpack-plugin": "pnpm -C ./packages/app-json-webpack-plugin build",
     "build:cli-service": "pnpm -C ./packages/cli-service build",

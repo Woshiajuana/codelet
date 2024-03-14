@@ -9,6 +9,6 @@ createPage({
     console.log('query22212 122222221> ', query)
   },
   handleTap(e: any) {
-    console.log('handleTap1 =>', e)
+    console.log('handleTap12 122211=>', e)
   },
 })

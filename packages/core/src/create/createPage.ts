@@ -9,7 +9,7 @@ import type {
   PageLifetimes,
   PropertyOptionToData,
 } from './types'
-import { mergeBehavior } from '../utils/mergeBehavior'
+import { mergeOptions } from '../utils'
 import { RuntimeBehavior } from './runtime'
 
 export type PageOtherOptions = {
@@ -49,5 +49,12 @@ export function createPage<
   Behavior extends OptionBehavior = OptionBehavior,
   Custom extends AnyObject = {},
 >(options?: PageOptions<Data, Behavior, Custom>) {
-  return Page(mergeBehavior(options, [RuntimeBehavior]))
+  return Page(
+    mergeOptions(
+      {
+        behaviors: [RuntimeBehavior],
+      },
+      options,
+    ),
+  )
 }

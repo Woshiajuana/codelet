@@ -1,5 +1,6 @@
+export * from './createStorage'
 export * from './definePlugin'
-export * from './mergeBehavior'
+export * from './mergeOptions'
 export * from './parseEvent'
 export * from './parseLocation'
 export * from './parseQuery'
