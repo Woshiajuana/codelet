@@ -2,11 +2,11 @@
 
 <view class="title">
   <text>欢迎使用</text>
-  <text class="strong">照片达人</text>
+  <text class="strong">照片达人1</text>
 </view>
 
 <view class="sub-title">
   <text>登录后 享更多精彩服务</text>
 </view>
 
-<button class="c-button">快捷登录</button>
+<button class="c-button" bindtap="handleTap(1)">快捷登录</button>

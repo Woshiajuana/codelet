@@ -3,6 +3,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import InjectChunkWebpackPlugin from '@codelet/inject-chunk-webpack-plugin'
 import AppJsonWebpackPlugin from '@codelet/app-json-webpack-plugin'
 import TerserWebpackPlugin from 'terser-webpack-plugin'
+import CodeletHMRPlugin from './CodeletHMRPlugin'
 import type { Configuration } from 'webpack'
 import { resolve } from './utils'
 
@@ -37,7 +38,8 @@ export function getDefaultConfig(
     source,
 
     webpack: {
-      mode: 'production',
+      // mode: 'production',
+      mode: 'development',
 
       devtool: false,
 
@@ -110,6 +112,7 @@ export function getDefaultConfig(
       },
 
       plugins: [
+        new CodeletHMRPlugin(),
         new MiniCssExtractPlugin({
           filename: '[name].wxss',
         }),
@@ -121,12 +124,13 @@ export function getDefaultConfig(
       ],
 
       optimization: {
-        minimize: true,
-        minimizer: [
-          new TerserWebpackPlugin({
-            extractComments: false, // 不生成 license 文件
-          }),
-        ],
+        // minimize: false,
+        // minimizer: [
+        //   // new TerserWebpackPlugin({
+        //   //   // 不生成 license 文件
+        //   //   extractComments: false,
+        //   // }),
+        // ],
         splitChunks: {
           chunks: 'all',
           minChunks: 2,
