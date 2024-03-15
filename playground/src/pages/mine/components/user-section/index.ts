@@ -6,4 +6,10 @@ import { TransferBehavior, createComponent } from '@codelet/core'
 
 createComponent({
   behaviors: [TransferBehavior],
+  properties: {
+    userinfo: {
+      type: Object,
+      value: null as any,
+    },
+  },
 })

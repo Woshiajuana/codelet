@@ -3,5 +3,11 @@ import './index.wxml'
 import './index.scss'
 
 import { createPage } from '@codelet/core'
+import { UserinfoBehavior } from '@/behaviors'
 
-createPage()
+createPage({
+  behaviors: [UserinfoBehavior],
+  onShow() {
+    this.userinfoGet()
+  },
+})
