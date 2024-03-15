@@ -14,5 +14,13 @@ export const UserinfoBehavior = createBehavior({
       const userinfo = userinfoStorage.getItem()
       this.setData({ userinfo })
     },
+
+    /**
+     * 用户退出
+     */
+    userinfoLogout() {
+      userinfoStorage.removeItem()
+      this.setData({ userinfo: null })
+    },
   },
 })

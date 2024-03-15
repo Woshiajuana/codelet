@@ -19,8 +19,7 @@ export function promisify<T extends (...args: any[]) => any>(fn: T) {
     options?: P,
     ...args: PromisifyRestArgs<Parameters<T>>
   ): PromisifySuccessResult<P, Parameters<T>[0]> {
-    const { success, fail, complete } = options as any
-
+    const { success, fail, complete } = (options || {}) as any
     if (success || fail || complete) {
       return fn(options, ...args)
     }

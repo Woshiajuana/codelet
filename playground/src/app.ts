@@ -9,7 +9,7 @@ import './project.private.config.json'
 )
 
 createApp({
-  onLaunch(options) {},
+  onLaunch() {},
   onError(err) {
     console.error('app onError => ', err)
   },

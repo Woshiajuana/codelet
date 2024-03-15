@@ -18,9 +18,9 @@ page {
   margin-top: auto;
   font-size: j(16);
   background-color: $color-primary;
-  height: j(55);
+  height: j(50);
   width: j(315);
-  border-radius: j(28);
+  border-radius: j(25);
   &.disabled,
   &:disabled,
   &[disabled] {
@@ -29,5 +29,8 @@ page {
   }
   &:after {
     @extend %dn;
+  }
+  &.is-mt {
+    margin-top: j(48);
   }
 }

@@ -1,14 +1,16 @@
+import { col } from '../codelet'
+
 function setItem<T = any>(key: string, val: T) {
-  wx.setStorageSync<T>(key, val)
+  col.setStorageSync<T>(key, val)
   return val
 }
 
 function getItem<T = any>(key: string, defaultVal: Partial<T> | null = null) {
-  return wx.getStorageSync<T>(key) || defaultVal
+  return col.getStorageSync<T>(key) || defaultVal
 }
 
 function removeItem(key: string) {
-  wx.removeStorageSync(key)
+  col.removeStorageSync(key)
 }
 
 function updateItem<T = any>(key: string, val: Partial<T>) {

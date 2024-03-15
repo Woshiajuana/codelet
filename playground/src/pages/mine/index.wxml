@@ -1,3 +1,5 @@
 <user-section userinfo="{{ userinfo }}"></user-section>
 
 <menu-section></menu-section>
+
+<button wx:if="{{ userinfo }}" class="c-button is-mt" bindtap="handleLogout">退出账号</button>

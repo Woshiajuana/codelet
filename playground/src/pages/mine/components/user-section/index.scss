@@ -22,14 +22,15 @@
 }
 .user-info {
   @extend %df1;
-  @extend %c3;
 }
 .user-name {
+  @extend %c3;
   line-height: j(25);
   font-size: j(18);
 }
 .user-prompt {
-  margin-top: j(3);
+  @extend %c9;
+  margin-top: j(6);
   font-size: j(13);
   line-height: j(18);
 }
