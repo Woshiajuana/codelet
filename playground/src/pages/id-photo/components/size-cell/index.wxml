@@ -1,0 +1,12 @@
+<view class="size-cell">
+  <view class="size-cell-content">
+    <view class="size-cell-title">
+      <text class="size-tag">热门</text>
+      <text>一寸照片</text>
+    </view>
+    <view class="size-cell-desc">
+      <text>25 X 35mm | 25 X 35mm</text>
+    </view>
+  </view>
+  <view class="iconfont icon-arrow"></view>
+</view>

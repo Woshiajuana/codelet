@@ -1,3 +1,9 @@
 <view class="menu-section">
-  <menu-item wx:for="{{ arrMenus }}" wx:key="index" class="menu-item" item="{{ item }}"></menu-item>
+  <menu-item
+    wx:for="{{ arrMenus }}"
+    wx:key="index"
+    class="menu-item"
+    item="{{ item }}"
+    bindtap="transfer(item)"
+  ></menu-item>
 </view>

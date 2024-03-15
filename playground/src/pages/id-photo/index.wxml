@@ -1,1 +1,1 @@
-<view></view>
+<size-cell wx:for="{{ 10 }}" wx:key="index"></size-cell>

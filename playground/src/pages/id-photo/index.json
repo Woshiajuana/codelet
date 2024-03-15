@@ -1,4 +1,6 @@
 {
-  "navigationBarTitleText": "",
-  "usingComponents": {}
+  "navigationBarTitleText": "证件照",
+  "usingComponents": {
+    "size-cell": "./components/size-cell/index"
+  }
 }
