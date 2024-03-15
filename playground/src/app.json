@@ -7,8 +7,7 @@
   },
   "lazyCodeLoading": "requiredComponents",
   "usingComponents": {
-    "pro-end": "/components/pro-end/index",
-    "pro-loading": "/components/pro-loading/index"
+    "pro-end": "/components/pro-end/index"
   },
   "tabBar": {
     "color": "#9EA6B9",

@@ -4,4 +4,11 @@ import './index.scss'
 
 import { createComponent } from '@codelet/core'
 
-createComponent()
+createComponent({
+  properties: {
+    loading: {
+      type: Boolean,
+      value: false,
+    },
+  },
+})
