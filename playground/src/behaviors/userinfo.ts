@@ -1,15 +1,18 @@
+import type { Userinfo } from '@/types'
+import { userinfoStorage } from '@/utils'
 import { createBehavior } from '@codelet/core'
 
 export const UserinfoBehavior = createBehavior({
   data: {
-    userinfo: null,
+    userinfo: '' as Partial<Userinfo> | null,
   },
   methods: {
     /**
      * 获取用户信息
      */
-    async getUserInfo() {
-      //
+    userinfoGet() {
+      const userinfo = userinfoStorage.getItem()
+      this.setData({ userinfo })
     },
   },
 })

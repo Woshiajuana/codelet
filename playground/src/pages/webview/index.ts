@@ -3,12 +3,14 @@ import './index.wxml'
 import './index.scss'
 
 import { formatPathParams } from '@daysnap/utils'
-import col, { RouterBehavior, createPage } from '@codelet/core'
+import col, { ParseBehavior, RouterBehavior, createPage } from '@codelet/core'
+import { UserinfoBehavior } from '@/behaviors'
 
 createPage({
-  behaviors: [RouterBehavior],
+  behaviors: [RouterBehavior, UserinfoBehavior, ParseBehavior],
   onLoad(query) {
     this.routerParseQuery(query)
+    this.userinfoGet()
     this.initData()
   },
   initData() {
@@ -20,6 +22,6 @@ createPage({
     this.setData({ url })
   },
   handleMessage(event: any) {
-    //
+    const { data } = this.parseEvent(event)
   },
 })
