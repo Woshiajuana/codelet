@@ -1,6 +1,6 @@
 import type { Awaitable } from '@daysnap/types'
 import { isString } from '@daysnap/utils'
-import { definePlugin, parseLocation, parseQuery } from '../utils'
+import { definePlugin, getPageByPosition, parseLocation, parseQuery } from '../utils'
 
 declare module '../codelet' {
   interface Codelet {
@@ -62,8 +62,7 @@ export const router = definePlugin((col, options?: RouterOptions) => {
 })
 
 function getCurrentRoute() {
-  const pages = getCurrentPages()
-  const { route, options } = pages[pages.length - 1]
+  const { route, options } = getPageByPosition()
   const query = parseQuery(options)
   return { url: `/${route}`, query }
 }

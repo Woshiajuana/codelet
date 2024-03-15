@@ -1,8 +1,6 @@
-import type { Loose } from '@daysnap/types'
+import type { Event } from '../create/types'
 
-export type ParseEvent = Loose<WechatMiniprogram.CustomEvent | WechatMiniprogram.BaseEvent>
-
-export function parseEvent(event: ParseEvent) {
+export function parseEvent(event: Event) {
   const { detail = {}, currentTarget, ...rest } = event
   const { dataset = {} } = currentTarget || {}
   return {

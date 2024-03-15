@@ -1,3 +1,5 @@
+import type { Loose } from '@daysnap/types'
+
 // 内部数据 用于渲染
 export type DataOption = WechatMiniprogram.Component.DataOption
 
@@ -33,3 +35,12 @@ export type EnsureNonVoid<T> = T extends void ? {} : T
 
 // page 的属性方法
 export type InstanceMethods<D extends DataOption> = WechatMiniprogram.Component.InstanceMethods<D>
+
+// 组件事件类型
+export type CustomEvent = WechatMiniprogram.CustomEvent
+
+// 基础事件类型
+export type BaseEvent = WechatMiniprogram.BaseEvent
+
+// 事件类型
+export type Event = Loose<WechatMiniprogram.CustomEvent | WechatMiniprogram.BaseEvent>
