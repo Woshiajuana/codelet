@@ -4,7 +4,7 @@ import { createBehavior } from '@codelet/core'
 
 export const UserinfoBehavior = createBehavior({
   data: {
-    userinfo: '' as Partial<Userinfo> | null,
+    userinfo: null as Partial<Userinfo> | null,
   },
   methods: {
     /**

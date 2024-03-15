@@ -1,15 +1,14 @@
 import { col } from '../codelet'
 import { createBehavior } from '../create'
-import { ParseBehavior } from './parse'
+import { parseEvent } from '../utils'
 
 export const TransferBehavior = createBehavior({
-  behaviors: [ParseBehavior],
   methods: {
     /**
      * 处理点击事件的
      */
     async transfer(e: any) {
-      const { item, ...rest } = this.parseEvent(e)
+      const { item, ...rest } = parseEvent(e)
       const { url, disabled, query, event, fn } = Object.assign({}, rest, item)
 
       // 如果是禁用状态，则不处理

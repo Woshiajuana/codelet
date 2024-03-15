@@ -1,9 +1,8 @@
 import type { Loose } from '@daysnap/types'
 import { isNumber } from '@daysnap/utils'
-import { parseLocation } from '../utils'
+import { parseLocation, parseQuery } from '../utils'
 import { createBehavior } from '../create'
 import { col } from '../codelet'
-import { ParseBehavior } from './parse'
 
 type RouteOptions = string | Loose<{ url: string; query?: Record<string, any>; replace?: boolean }>
 
@@ -15,7 +14,6 @@ function parseOptions(options: RouteOptions): any {
 }
 
 export const RouterBehavior = createBehavior({
-  behaviors: [ParseBehavior],
   data: {
     // 页面参数
     query: {} as Record<string, any>,
@@ -28,7 +26,7 @@ export const RouterBehavior = createBehavior({
      * 包含了 query 和 scene 参数，优先级 rest > scene > query
      */
     routerParseQuery<T extends Record<string, any>>(options: Record<string, any>) {
-      const query = this.parseQuery<T>(options)
+      const query = parseQuery<T>(options)
 
       this.setData({ query })
 
