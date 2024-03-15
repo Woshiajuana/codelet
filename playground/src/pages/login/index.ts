@@ -2,13 +2,12 @@ import './index.json'
 import './index.wxml'
 import './index.scss'
 
-import { createPage } from '@codelet/core'
+import col, { createPage } from '@codelet/core'
+import { userinfoStorage } from '@/utils'
 
 createPage({
-  onLoad(query) {
-    console.log('query22212 122222221> ', query)
-  },
-  handleTap(e: any) {
-    console.log('handleTap12 122211=>', e)
+  handleSubmit() {
+    userinfoStorage.setItem({ token: '123', nickname: '我是阿倦啊' })
+    col.navigateBack()
   },
 })

@@ -9,10 +9,15 @@
 .user-avatar {
   @extend %br50;
   @extend %bsb;
+  @extend %df;
+  @extend %aic;
+  @extend %jcc;
+  @extend %cc;
+  box-shadow: 0 0 0 2px #fff;
   margin-right: j(15);
-  border: 2px solid #fff;
-  width: j(64);
-  height: j(64);
+  width: j(60);
+  height: j(60);
+  font-size: j(28);
   background-color: #f2f2f2;
 }
 .user-info {
