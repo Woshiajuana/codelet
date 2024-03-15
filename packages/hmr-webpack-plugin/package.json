@@ -1,6 +1,6 @@
 {
   "name": "@codelet/hmr-webpack-plugin",
-  "version": "0.0.5",
+  "version": "0.0.1",
   "description": "webpack hrm webpack miniprogram",
   "scripts": {
     "build": "npm run clean && tsc -p ./tsconfig.lib.json",

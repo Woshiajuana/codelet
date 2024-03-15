@@ -1,5 +1,6 @@
-import { createBehavior } from '../create'
-import { parseEvent, type ParseEvent } from '../utils'
+import { createBehavior } from './createBehavior'
+import { type Event } from './types'
+import { parseEvent } from '../utils'
 
 function dash2hump(value: string) {
   return value.replace(/-([a-z])/g, function (_, p1) {
@@ -10,7 +11,7 @@ function dash2hump(value: string) {
 // 运行时 拓展的一些辅助函数
 export const RuntimeBehavior = createBehavior({
   methods: {
-    __invoke($event: ParseEvent) {
+    __invoke($event: Event) {
       const { type } = $event
       const { eventconfigs: eventConfigs } = parseEvent($event)
       const fallbackType = dash2hump(type)
