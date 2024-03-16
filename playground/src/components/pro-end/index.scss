@@ -6,9 +6,20 @@
   @extend %jcc;
   padding: j(16) 0;
 }
-.pro-end-img {
-  @extend %db;
-  width: j(410 * 0.25);
-  height: j(160 * 0.25);
-  opacity: 0.4;
+
+.pro-end-divider {
+  @extend %df;
+  @extend %aic;
+  @extend %jcc;
+  color: #aaa;
+  font-size: j(13);
+  padding: j(32) j(48);
+  &::before,
+  &::after {
+    margin: 0 j(16);
+    content: '';
+    flex: 1;
+    height: 1px;
+    background-color: #e5e5e5;
+  }
 }

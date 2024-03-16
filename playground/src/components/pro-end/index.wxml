@@ -1,4 +1,6 @@
 <view class="pro-end-wrap">
   <pro-loading wx:if="{{ loading }}"></pro-loading>
-  <image wx:else class="pro-end-img" src="/assets/images/img-pro-end.png"></image>
+  <view wx:else class="pro-end-divider">
+    <text>没有更多了</text>
+  </view>
 </view>
