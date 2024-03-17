@@ -1,3 +1,8 @@
-<size-cell wx:for="{{ 10 }}" wx:key="index"></size-cell>
+<size-cell
+  wx:for="{{ 10 }}"
+  wx:key="index"
+  bindtap="transfer"
+  data-url="/pages/id-photo/take/index"
+></size-cell>
 
 <pro-end loading></pro-end>
