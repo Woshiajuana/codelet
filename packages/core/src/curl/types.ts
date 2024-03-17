@@ -1,24 +1,16 @@
 export type Method =
-  | 'get'
   | 'GET'
-  | 'delete'
   | 'DELETE'
-  | 'head'
   | 'HEAD'
-  | 'options'
   | 'OPTIONS'
-  | 'post'
   | 'POST'
-  | 'put'
   | 'PUT'
-  | 'patch'
   | 'PATCH'
-  | 'purge'
   | 'PURGE'
-  | 'link'
   | 'LINK'
-  | 'unlink'
   | 'UNLINK'
+  | 'TRACE'
+  | 'CONNECT'
 
 export interface CurlRequestConfig {
   url?: string
@@ -26,9 +18,19 @@ export interface CurlRequestConfig {
   fn?: 'request' | 'uploadFile'
   data?: any
   method?: Method | string
-  headers?: { [key: string]: string }
+  header?: { [key: string]: string }
   timeout?: number
   dataType?: string
   formData?: any
   responseType?: 'text' | 'arraybuffer'
+}
+
+export interface CurlResponse<T = any> {
+  data: T
+  statusCode: number
+  header?: { [key: string]: string }
+  exception: any
+  profile: any
+  cookies: string[]
+  config: CurlRequestConfig
 }

@@ -1,22 +1,20 @@
-import type { CurlRequestConfig } from './types'
-
-export interface InterceptorFulfilled {
-  (config: CurlRequestConfig): any
+export interface InterceptorFulfilled<T> {
+  (config: T): T | Promise<T>
 }
 
 export interface InterceptorRejected {
   (err: any): any
 }
 
-export interface InterceptorHandler {
-  fulfilled?: InterceptorFulfilled
+export interface InterceptorHandler<T> {
+  fulfilled?: InterceptorFulfilled<T>
   rejected?: InterceptorRejected
 }
 
-export class InterceptorManner {
+export class InterceptorManner<T> {
   constructor() {}
-  handlers: InterceptorHandler[] = []
-  use(fulfilled?: InterceptorFulfilled, rejected?: InterceptorRejected) {
+  handlers: InterceptorHandler<T>[] = []
+  use(fulfilled?: InterceptorFulfilled<T>, rejected?: InterceptorRejected) {
     const length = this.handlers.push({ fulfilled, rejected })
     return length - 1
   }
