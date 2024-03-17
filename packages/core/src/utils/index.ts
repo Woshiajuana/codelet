@@ -1,4 +1,5 @@
 export * from './createStorage'
+export * from './defineData'
 export * from './definePlugin'
 export * from './getPageByPosition'
 export * from './mergeOptions'
