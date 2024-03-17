@@ -4,7 +4,7 @@ import { InterceptorManner } from './interceptor-manner'
 export const DEFAULT_OPTIONS = {
   baseURL: '',
   fn: 'request',
-  method: 'POST',
+  method: 'GET',
   timeout: 60 * 1000,
   dataType: 'json',
 }
@@ -27,9 +27,9 @@ export class Curl {
 
   async request(cfg: CurlRequestConfig = {}) {
     const config = Object.assign({}, this.defaults, cfg) as Required<CurlRequestConfig>
-    const { baseURI = '', url = '', fn, data = {} } = config
-    if (url?.startsWith('http')) {
-      config.url = baseURI + url
+    const { baseURL = '', url = '', fn, data = {} } = config
+    if (!url.startsWith('http')) {
+      config.url = baseURL + url
     }
     if (fn === 'uploadFile') {
       config.formData = data

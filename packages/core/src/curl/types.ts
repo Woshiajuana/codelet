@@ -14,7 +14,7 @@ export type Method =
 
 export interface CurlRequestConfig {
   url?: string
-  baseURI?: string
+  baseURL?: string
   fn?: 'request' | 'uploadFile'
   data?: any
   method?: Method | string

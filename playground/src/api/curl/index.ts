@@ -4,7 +4,7 @@ import { log } from './log'
 export const baseURL = 'https://gyzj.gongyujjh.org.cn/rare-disease-platform/'
 
 const instance = new Curl({
-  baseURI: baseURL,
+  baseURL,
   header: {},
   timeout: 10000,
 })
