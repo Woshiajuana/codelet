@@ -7,12 +7,12 @@
   @extend %bsb;
   @extend %c3;
   width: j(343);
-  padding: j(14);
+  padding: j(14) j(16);
   background-color: #fff;
-  margin-top: j(10);
   border-radius: j(12);
   font-size: j(16);
   min-height: j(24 + 14 + 14);
+  margin-bottom: j(10);
   .icon-arrow {
     @extend %cc;
     margin-left: j(6);

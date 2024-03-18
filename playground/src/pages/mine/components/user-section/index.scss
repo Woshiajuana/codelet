@@ -5,6 +5,7 @@
   @extend %aic;
   @extend %ats;
   padding: j(16) j(24);
+  margin-bottom: j(10);
 }
 .user-avatar {
   @extend %br50;

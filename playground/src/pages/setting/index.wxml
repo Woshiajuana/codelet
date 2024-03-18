@@ -1,3 +1,5 @@
+<view class="c-bar"></view>
+
 <pro-cell
   wx:for="{{ menus }}"
   wx:key="index"
@@ -6,3 +8,5 @@
   icon="{{ item.icon }}"
   bindtap="transfer(item)"
 ></pro-cell>
+
+<button class="c-button is-mt" bindtap="handleLogout">退出账号</button>

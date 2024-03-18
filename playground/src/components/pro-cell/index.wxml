@@ -1,4 +1,4 @@
-<view class="pro-cell {{ isArrow ? 'is-arrow' : '' }}">
+<view class="pro-cell {{ arrow ? 'is-arrow' : '' }}">
   <view wx:if="{{ icon }}" class="pro-cell-icon iconfont {{ icon }}"></view>
   <view class="pro-cell-label">
     <text>{{ label }}</text>
@@ -6,5 +6,5 @@
   <view class="pro-cell-value">
     <text>{{ value }}</text>
   </view>
-  <view wx:if="{{ isArrow }}" class="iconfont icon-arrow"></view>
+  <view wx:if="{{ arrow }}" class="iconfont icon-arrow"></view>
 </view>

@@ -18,7 +18,7 @@ createComponent({
       type: String,
       value: '',
     },
-    isArrow: {
+    arrow: {
       type: Boolean,
       value: false,
     },
