@@ -1,3 +1,5 @@
 <user-section userinfo="{{ userinfo }}"></user-section>
 
 <menu-section></menu-section>
+
+<share-button></share-button>

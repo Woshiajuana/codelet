@@ -25,3 +25,11 @@
   @extend %df1;
   font-size: j(14);
 }
+.search-btn {
+  @extend %dan;
+  color: $color-primary;
+  padding: 0;
+  font-size: j(14);
+  padding: 0 j(12);
+  background-color: transparent;
+}

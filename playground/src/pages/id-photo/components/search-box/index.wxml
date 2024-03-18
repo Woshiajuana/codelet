@@ -6,7 +6,18 @@
       type="text"
       placeholder-class="c-placeholder"
       placeholder="搜索关键词"
+      value="{{ keyword }}"
+      confirm-type="search"
+      data-prop="keyword"
+      bindinput="modelTransfer"
     />
-    <view class="iconfont icon-cross"></view>
+    <view
+      wx:if="{{ keyword }}"
+      class="iconfont icon-cross"
+      data-value=""
+      data-prop="keyword"
+      bindtap="modelTransfer"
+    ></view>
+    <button class="search-btn" bindtap="handleSearch">搜索</button>
   </view>
 </view>
