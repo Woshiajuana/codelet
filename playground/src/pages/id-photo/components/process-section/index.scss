@@ -1,1 +1,44 @@
 @import '@/assets/scss/define';
+
+.process-section {
+  padding: j(12) j(16);
+  background-color: #fff;
+}
+.process-content {
+  @extend %df;
+  @extend %aic;
+  @extend %jcs;
+  padding: j(12) j(16);
+  background-color: $color-background;
+  border-radius: j(8);
+}
+.process-title {
+  @extend %df;
+  @extend %fdc;
+  @extend %fdc;
+  @extend %fwb;
+  @extend %c3;
+  line-height: 1.3;
+  font-size: j(14);
+}
+.process-bar {
+  @extend %df1;
+  margin: 0 j(12);
+  border-bottom: 2px #ddd dotted;
+}
+.process-cell {
+  @extend %df;
+  @extend %fdc;
+  @extend %aic;
+  @extend %c6;
+  font-size: j(10);
+  .iconfont {
+    @extend %df;
+    @extend %aic;
+    @extend %jcc;
+    width: j(20);
+    height: j(20);
+    font-size: j(20);
+    margin-bottom: j(2);
+  }
+}

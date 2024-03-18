@@ -1,1 +1,23 @@
-<view></view>
+<view class="process-section">
+  <view class="process-content">
+    <view class="process-title">
+      <text>制作</text>
+      <text>步骤</text>
+    </view>
+    <view class="process-bar"></view>
+    <view class="process-cell">
+      <view class="iconfont icon-crop"></view>
+      <text>选规格</text>
+    </view>
+    <view class="process-bar"></view>
+    <view class="process-cell">
+      <view class="iconfont icon-id-photo"></view>
+      <text>拍照/上传</text>
+    </view>
+    <view class="process-bar"></view>
+    <view class="process-cell">
+      <view class="iconfont icon-download"></view>
+      <text>下载</text>
+    </view>
+  </view>
+</view>

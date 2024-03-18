@@ -1,1 +1,27 @@
 @import '@/assets/scss/define';
+
+.search-box {
+  padding: j(12) j(16);
+  background-color: #fff;
+}
+.search-content {
+  @extend %df;
+  @extend %aic;
+  @extend %bsb;
+  @extend %c3;
+  border-radius: j(6);
+  padding-left: j(12);
+  background-color: $color-background;
+  height: j(44);
+  .icon-search {
+    margin-right: j(6);
+  }
+  .icon-cross {
+    @extend %cc;
+    padding: 0 j(12);
+  }
+}
+.search-input {
+  @extend %df1;
+  font-size: j(14);
+}

@@ -38,3 +38,7 @@ page {
 .c-bar {
   height: j(10);
 }
+
+.c-placeholder {
+  @extend %cc;
+}

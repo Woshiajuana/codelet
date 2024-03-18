@@ -1,1 +1,12 @@
-<view></view>
+<view class="search-box">
+  <view class="search-content">
+    <view class="iconfont icon-search"></view>
+    <input
+      class="search-input"
+      type="text"
+      placeholder-class="c-placeholder"
+      placeholder="搜索关键词"
+    />
+    <view class="iconfont icon-cross"></view>
+  </view>
+</view>
