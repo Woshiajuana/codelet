@@ -4,16 +4,16 @@
   @extend %df;
   @extend %aic;
   @extend %jcc;
-  padding: j(16) 0;
+  padding: j(32) j(48);
 }
 
 .pro-end-divider {
   @extend %df;
   @extend %aic;
   @extend %jcc;
+  @extend %w100;
   color: #aaa;
   font-size: j(13);
-  padding: j(32) j(48);
   &::before,
   &::after {
     margin: 0 j(16);
