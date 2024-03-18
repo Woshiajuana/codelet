@@ -10,5 +10,9 @@ createComponent({
       type: Object,
       value: {},
     },
+    index: {
+      type: Number,
+      value: 0,
+    },
   },
 })

@@ -19,13 +19,27 @@
   @extend %aic;
   @extend %jcc;
   @extend %c6;
-  margin-right: j(12);
+  margin-right: j(16);
   width: j(40);
   height: j(40);
   font-size: j(32);
+  &.icon-0 {
+    color: #4784f6;
+  }
+  &.icon-1 {
+    color: #f0443e;
+  }
+  &.icon-2 {
+    color: #f6b92e;
+  }
+  &.icon-3 {
+    color: #3ba858;
+  }
 }
 .menu-info {
   @extend %df1;
+  margin-right: j(16);
+  line-height: 1.5;
 }
 .menu-name {
   @extend %c3;
@@ -33,6 +47,6 @@
 }
 .menu-desc {
   @extend %c9;
-  margin-top: j(2);
+  margin-top: j(4);
   font-size: j(13);
 }

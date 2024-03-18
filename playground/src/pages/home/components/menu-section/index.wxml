@@ -4,6 +4,7 @@
     wx:key="index"
     class="menu-item"
     item="{{ item }}"
+    index="{{ index }}"
     bindtap="transfer(item)"
   ></menu-item>
 </view>
