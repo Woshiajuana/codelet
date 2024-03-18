@@ -1,9 +1,12 @@
 @import '@/assets/scss/define';
 
+.menu-section {
+  padding: j(16);
+}
 .menu-item {
-  margin-top: j(16);
-  &:nth-child(1),
-  &:nth-child(2) {
+  @extend %db;
+  margin-top: j(10);
+  &:first-child {
     margin-top: 0;
   }
 }

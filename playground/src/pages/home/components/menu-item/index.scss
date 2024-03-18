@@ -2,23 +2,37 @@
 
 .menu-item {
   @extend %df;
-  @extend %fdc;
-  @extend %aic;
-  @extend %jcc;
   @extend %c3;
   @extend %ats;
   @extend %bsb;
+  @extend %aic;
+  padding: j(14) j(16);
   font-size: j(16);
-  width: j(163.5);
-  aspect-ratio: 1;
-  border-radius: j(24);
+  border-radius: j(8);
   background-color: #fff;
+  .icon-arrow {
+    @extend %cc;
+  }
 }
 .menu-icon {
-  @extend %br50;
   @extend %df;
   @extend %aic;
   @extend %jcc;
-  margin-bottom: j(16);
-  font-size: j(36);
+  @extend %c6;
+  margin-right: j(12);
+  width: j(40);
+  height: j(40);
+  font-size: j(32);
+}
+.menu-info {
+  @extend %df1;
+}
+.menu-name {
+  @extend %c3;
+  font-size: j(16);
+}
+.menu-desc {
+  @extend %c9;
+  margin-top: j(2);
+  font-size: j(13);
 }

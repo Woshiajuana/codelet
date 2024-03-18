@@ -1,4 +1,12 @@
 <view class="menu-item">
   <view class="menu-icon iconfont {{ item.icon }}"></view>
-  <text>{{ item.name }}</text>
+  <view class="menu-info">
+    <view class="menu-name">
+      <text>{{ item.name }}</text>
+    </view>
+    <view class="menu-desc">
+      <text>{{ item.desc }}快速抠图换底色</text>
+    </view>
+  </view>
+  <view class="iconfont icon-arrow"></view>
 </view>
