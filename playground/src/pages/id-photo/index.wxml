@@ -1,16 +1,15 @@
 <process-section></process-section>
 
-<view class="main-section">
+<view class="sticky-section">
   <search-box></search-box>
-
   <tab-bar></tab-bar>
-
-  <size-cell
-    wx:for="{{ 10 }}"
-    wx:key="index"
-    bindtap="transfer"
-    data-url="/pages/id-photo/take/index"
-  ></size-cell>
-
-  <pro-end></pro-end>
 </view>
+
+<size-cell
+  wx:for="{{ 10 }}"
+  wx:key="index"
+  bindtap="transfer"
+  data-url="/pages/id-photo/take/index"
+></size-cell>
+
+<pro-end></pro-end>

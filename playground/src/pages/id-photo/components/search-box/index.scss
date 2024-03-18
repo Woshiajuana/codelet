@@ -1,7 +1,7 @@
 @import '@/assets/scss/define';
 
 .search-box {
-  padding: j(12) j(16);
+  padding: j(12) j(16) j(6);
   background-color: #fff;
 }
 .search-content {
@@ -12,7 +12,7 @@
   border-radius: j(6);
   padding-left: j(12);
   background-color: $color-background;
-  height: j(44);
+  height: j(40);
   .icon-search {
     margin-right: j(6);
   }

@@ -1,7 +1,7 @@
 @import '@/assets/scss/define';
 
 .process-section {
-  padding: j(12) j(16);
+  padding: j(12) j(16) 0;
   background-color: #fff;
 }
 .process-content {
@@ -10,7 +10,7 @@
   @extend %jcs;
   padding: j(12) j(16);
   background-color: $color-background;
-  border-radius: j(8);
+  border-radius: j(6);
 }
 .process-title {
   @extend %df;

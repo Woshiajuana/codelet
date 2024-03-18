@@ -1,1 +1,58 @@
 @import '@/assets/scss/define';
+
+.tab-bar {
+  @extend %df;
+  @extend %w100;
+  height: j(40);
+  background-color: #fff;
+  // &::after,
+  // &::before {
+  //   @extend %pa;
+  //   @extend %t0;
+  //   @extend %b0;
+  //   @extend %pen;
+  //   z-index: 1;
+  //   content: '';
+  //   width: j(32);
+  // }
+  // &::after {
+  //   @extend %r0;
+  //   background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+  // }
+  // &::before {
+  //   @extend %l0;
+  //   background-image: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+  // }
+}
+.tab-bar-content {
+  @extend %wsn;
+  @extend %bsb;
+  @extend %h100;
+  padding-left: j(16);
+}
+.tab-bar-item {
+  @extend %dif;
+  @extend %fdc;
+  @extend %aic;
+  @extend %jcc;
+  @extend %c6;
+  @extend %wsn;
+  @extend %pr;
+  @extend %cp;
+  @extend %h100;
+  font-size: j(14);
+  margin-right: j(16);
+  &.is-active {
+    @extend %fwb;
+    color: $color-primary;
+    &::after {
+      content: '';
+      @extend %pa;
+      @extend %b0;
+      width: j(16);
+      height: j(4);
+      border-radius: j(2);
+      background-color: $color-primary;
+    }
+  }
+}
