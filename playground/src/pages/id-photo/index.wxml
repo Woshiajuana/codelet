@@ -1,8 +1,16 @@
-<size-cell
-  wx:for="{{ 10 }}"
-  wx:key="index"
-  bindtap="transfer"
-  data-url="/pages/id-photo/take/index"
-></size-cell>
+<process-section></process-section>
 
-<pro-end loading></pro-end>
+<view class="main-section">
+  <search-box></search-box>
+
+  <tab-bar></tab-bar>
+
+  <size-cell
+    wx:for="{{ 10 }}"
+    wx:key="index"
+    bindtap="transfer"
+    data-url="/pages/id-photo/take/index"
+  ></size-cell>
+
+  <pro-end></pro-end>
+</view>
