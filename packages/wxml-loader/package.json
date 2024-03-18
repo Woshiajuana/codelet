@@ -1,6 +1,6 @@
 {
   "name": "@codelet/wxml-loader",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "webpack loader",
   "scripts": {
     "build": "npm run clean && tsc -p ./tsconfig.lib.json",
@@ -27,6 +27,7 @@
     "mini"
   ],
   "author": "woshiajuana",
+  "homepage": "https://github.com/Woshiajuana/codelet#readme",
   "license": "MIT",
   "peerDependencies": {
     "webpack": ">=5.0.0 <6.0.0"

@@ -1,6 +1,6 @@
 {
   "name": "@codelet/cli-service",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "cli-service",
   "scripts": {
     "build": "npm run clean && tsc -p ./tsconfig.lib.json",
@@ -30,6 +30,7 @@
     "mini"
   ],
   "author": "woshiajuana",
+  "homepage": "https://github.com/Woshiajuana/codelet#readme",
   "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.23.7",
