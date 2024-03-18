@@ -1,0 +1,4 @@
+<button class="share-button" open-type="share">
+  <view class="iconfont icon-share"></view>
+  <text>分享</text>
+</button>
