@@ -1,20 +1,21 @@
 import type { Loose } from '@daysnap/types'
+
 import type {
-  IntersectionBehavior,
-  UnwrapBehaviorsType,
-  OptionBehavior,
   BehaviorOptionsBase,
+  IntersectionBehavior,
+  OptionBehavior,
+  UnwrapBehaviorsType,
 } from './options'
 import type {
-  DataOption,
-  MethodOption,
-  ComponentPropertyOption,
-  ComponentOtherOption,
-  EnsureNonVoid,
   ComponentInstanceProperties,
-  PropertyOptionToData,
-  InstanceMethods,
   ComponentLifetimes,
+  ComponentOtherOption,
+  ComponentPropertyOption,
+  DataOption,
+  EnsureNonVoid,
+  InstanceMethods,
+  MethodOption,
+  PropertyOptionToData,
 } from './types'
 
 export type BehaviorOtherOption = Partial<Omit<ComponentOtherOption, 'behaviors' | 'options'>>

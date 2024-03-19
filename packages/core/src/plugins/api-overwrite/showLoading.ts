@@ -1,4 +1,5 @@
 import { isString } from '@daysnap/utils'
+
 import { definePlugin, promisify } from '../../utils'
 
 type ShowLoadingOptions = WechatMiniprogram.ShowLoadingOption | string

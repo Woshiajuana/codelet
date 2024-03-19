@@ -1,7 +1,8 @@
 import path from 'path'
 import type { LoaderContext } from 'webpack'
-import type { CopyLoaderOptions } from './types'
+
 import schema from './schema.json'
+import type { CopyLoaderOptions } from './types'
 
 export default function loader(this: LoaderContext<CopyLoaderOptions>, content: string) {
   const { entryPath = 'src' } = this.getOptions(schema as any)

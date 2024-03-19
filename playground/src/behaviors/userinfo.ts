@@ -1,6 +1,7 @@
+import { createBehavior } from '@codelet/core'
+
 import type { Userinfo } from '@/types'
 import { userinfoStorage } from '@/utils'
-import { createBehavior } from '@codelet/core'
 
 export const UserinfoBehavior = createBehavior({
   data: {

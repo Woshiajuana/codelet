@@ -3,8 +3,9 @@ import './index.wxml'
 import './index.scss'
 
 import col, { createPage } from '@codelet/core'
-import { userinfoStorage, withLoading } from '@/utils'
 import { sleep } from '@daysnap/utils'
+
+import { userinfoStorage, withLoading } from '@/utils'
 
 createPage({
   async handleSubmit() {

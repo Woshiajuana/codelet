@@ -1,7 +1,8 @@
 import { Curl, type CurlRequestConfig } from '@codelet/core'
+
 import { log } from './log'
 
-export const baseURL = 'https://gyzj.gongyujjh.org.cn/rare-disease-platform/'
+export const baseURL = ''
 
 const instance = new Curl({
   baseURL,

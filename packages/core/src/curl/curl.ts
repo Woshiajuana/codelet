@@ -1,5 +1,5 @@
-import type { CurlRequestConfig, CurlResponse } from './types'
 import { InterceptorManner } from './interceptor-manner'
+import type { CurlRequestConfig, CurlResponse } from './types'
 
 export const DEFAULT_OPTIONS = {
   baseURL: '',

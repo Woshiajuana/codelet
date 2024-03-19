@@ -1,5 +1,5 @@
 import path from 'path'
-import { Compiler, sources, Chunk, Compilation } from 'webpack'
+import { Chunk, Compilation, Compiler, sources } from 'webpack'
 
 const NAME = 'InjectChunkWebpackPlugin'
 

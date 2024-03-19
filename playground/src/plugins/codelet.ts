@@ -1,6 +1,7 @@
-import { userinfoStorage } from '@/utils/storage'
 import { definePlugin } from '@codelet/core'
 import plugins from '@codelet/core/plugins'
+
+import { userinfoStorage } from '@/utils/storage'
 
 // 需要登录的页面
 const NEED_LOGIN_PAGES = ['/pages/mine/index']

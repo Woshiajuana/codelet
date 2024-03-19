@@ -1,7 +1,7 @@
-import type { ASTAttr, ASTElement } from './types'
 import { parseHtml } from './html-parser.js'
-import { makeAttrsMap } from './utils.js'
 import { processBindEvent } from './process.js'
+import type { ASTAttr, ASTElement } from './types'
+import { makeAttrsMap } from './utils.js'
 
 export function createASTElement(
   tag: string,

@@ -1,9 +1,10 @@
-import path from 'path'
 import fg from 'fast-glob'
 import fs from 'fs'
-import merge from 'webpack-merge'
+import path from 'path'
 import type { Configuration } from 'webpack'
-import { getDefaultConfig, type Config } from './config'
+import merge from 'webpack-merge'
+
+import { type Config, getDefaultConfig } from './config'
 
 export const cmd = process.cwd()
 

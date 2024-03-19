@@ -1,6 +1,6 @@
+import { parseEvent } from '../utils'
 import { createBehavior } from './createBehavior'
 import { type Event } from './types'
-import { parseEvent } from '../utils'
 
 function dash2hump(value: string) {
   return value.replace(/-([a-z])/g, function (_, p1) {

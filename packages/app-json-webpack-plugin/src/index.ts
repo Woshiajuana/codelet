@@ -1,5 +1,5 @@
 import path from 'path'
-import { Compiler, Compilation, type EntryNormalized } from 'webpack'
+import { Compilation, Compiler, type EntryNormalized } from 'webpack'
 
 const NAME = 'AppJsonWebpackPlugin'
 

@@ -3,6 +3,7 @@ import './index.wxml'
 import './index.scss'
 
 import col, { createPage } from '@codelet/core'
+
 import { UserinfoBehavior } from '@/behaviors'
 
 createPage({

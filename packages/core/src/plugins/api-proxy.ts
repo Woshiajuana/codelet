@@ -1,4 +1,5 @@
 import { isFunction } from '@daysnap/utils'
+
 import { definePlugin, promisify } from '../utils'
 
 type GetFunctionKey<T> = {

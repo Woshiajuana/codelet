@@ -1,7 +1,7 @@
 export * from './behaviors'
 export * from './create'
-export * from './utils'
 export * from './curl'
+export * from './utils'
 
 import { col } from './codelet'
 

@@ -2,7 +2,7 @@ import './index.json'
 import './index.wxml'
 import './index.scss'
 
-import { ModelBehavior, createComponent } from '@codelet/core'
+import { createComponent, ModelBehavior } from '@codelet/core'
 
 createComponent({
   behaviors: [ModelBehavior],

@@ -1,6 +1,7 @@
-import { curl } from './curl'
-import { withLoading } from '@/utils'
 import type { Userinfo } from '@/types'
+import { withLoading } from '@/utils'
+
+import { curl } from './curl'
 
 // 登录
 export const doUserLoginByPassword = (data: { userId: string; password: string }) =>

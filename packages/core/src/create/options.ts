@@ -1,4 +1,4 @@
-import type { MethodOption, ComponentPropertyOption, DataOption } from './types'
+import type { ComponentPropertyOption, DataOption, MethodOption } from './types'
 
 export type OptionBehavior = BehaviorOptionsBase<any, any, any, any>
 

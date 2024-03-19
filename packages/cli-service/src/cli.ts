@@ -1,5 +1,6 @@
 import webpack, { Stats } from 'webpack'
-import { parseArgv, getConfig } from './utils'
+
+import { getConfig, parseArgv } from './utils'
 
 const argv = process.argv
 const options = parseArgv(argv)

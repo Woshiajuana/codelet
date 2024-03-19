@@ -1,5 +1,6 @@
-import config from './config.js'
 import JSON5 from 'json5'
+
+import config from './config.js'
 
 const mode = 'wx'
 const eventIdentifier = '__codelet_event__'

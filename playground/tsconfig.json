@@ -29,14 +29,9 @@
     /* Completeness */
     "skipLibCheck": true,
 
-     // <https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#verbatimmodulesyntax>
-    "verbatimModuleSyntax": true,
+    // <https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#verbatimmodulesyntax>
+    "verbatimModuleSyntax": true
   },
-  "include": [
-    "src/**/*.ts", 
-    "typings/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-  ],
+  "include": ["src/**/*.ts", "typings/**/*.ts"],
+  "exclude": ["node_modules"]
 }

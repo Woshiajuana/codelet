@@ -2,14 +2,15 @@ import './index.json'
 import './index.wxml'
 import './index.scss'
 
-import { formatPathParams } from '@daysnap/utils'
 import col, {
   createPage,
+  type Event,
   getPageByPosition,
   parseEvent,
-  type Event,
   parseQuery,
 } from '@codelet/core'
+import { formatPathParams } from '@daysnap/utils'
+
 import { userinfoStorage } from '@/utils'
 
 createPage({

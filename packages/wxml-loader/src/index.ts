@@ -1,9 +1,11 @@
-import path from 'path'
 import fs from 'node:fs/promises'
+
+import path from 'path'
 import type { LoaderContext } from 'webpack'
-import type { WxmlLoaderOptions } from './types'
+
 import compiler from './compiler'
 import schema from './schema.json'
+import type { WxmlLoaderOptions } from './types'
 
 const filepathCaches: string[] = []
 

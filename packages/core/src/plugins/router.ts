@@ -1,5 +1,6 @@
 import type { Awaitable } from '@daysnap/types'
 import { isString } from '@daysnap/utils'
+
 import { definePlugin, getPageByPosition, parseLocation, parseQuery } from '../utils'
 
 declare module '../codelet' {

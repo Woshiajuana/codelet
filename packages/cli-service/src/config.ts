@@ -1,10 +1,11 @@
-import WebpackBar from 'webpackbar'
-import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import AppJsonWebpackPlugin from '@codelet/app-json-webpack-plugin'
 import HMRWebpackPlugin from '@codelet/hmr-webpack-plugin'
 import InjectChunkWebpackPlugin from '@codelet/inject-chunk-webpack-plugin'
-import AppJsonWebpackPlugin from '@codelet/app-json-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import TerserWebpackPlugin from 'terser-webpack-plugin'
 import type { Configuration } from 'webpack'
+import WebpackBar from 'webpackbar'
+
 import { resolve } from './utils'
 
 export interface Config {

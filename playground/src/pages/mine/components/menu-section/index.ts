@@ -2,7 +2,7 @@ import './index.json'
 import './index.wxml'
 import './index.scss'
 
-import { TransferBehavior, createComponent } from '@codelet/core'
+import { createComponent, TransferBehavior } from '@codelet/core'
 
 createComponent({
   behaviors: [TransferBehavior],

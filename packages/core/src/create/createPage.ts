@@ -1,5 +1,8 @@
-import type { IntersectionBehavior, OptionBehavior, UnwrapBehaviorsType } from './options'
 import type { AnyObject, Loose } from '@daysnap/types'
+
+import { mergeOptions } from '../utils'
+import type { IntersectionBehavior, OptionBehavior, UnwrapBehaviorsType } from './options'
+import { RuntimeBehavior } from './runtime'
 import type {
   ComponentPropertyOption,
   DataOption,
@@ -9,8 +12,6 @@ import type {
   PageLifetimes,
   PropertyOptionToData,
 } from './types'
-import { mergeOptions } from '../utils'
-import { RuntimeBehavior } from './runtime'
 
 export type PageOtherOptions = {
   options?: WechatMiniprogram.Component.ComponentOptions
