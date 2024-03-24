@@ -1,23 +1,11 @@
-export type Method =
-  | 'GET'
-  | 'DELETE'
-  | 'HEAD'
-  | 'OPTIONS'
-  | 'POST'
-  | 'PUT'
-  | 'PATCH'
-  | 'PURGE'
-  | 'LINK'
-  | 'UNLINK'
-  | 'TRACE'
-  | 'CONNECT'
+export type Method = 'OPTIONS' | 'GET' | 'HEAD' | 'POST' | 'PUT' | 'DELETE' | 'TRACE' | 'CONNECT'
 
 export interface CurlRequestConfig {
   url?: string
   baseURL?: string
   fn?: 'request' | 'uploadFile'
   data?: any
-  method?: Method | string
+  method?: Method
   header?: { [key: string]: string }
   timeout?: number
   dataType?: string
