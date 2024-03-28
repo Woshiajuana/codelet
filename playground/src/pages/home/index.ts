@@ -4,4 +4,6 @@ import './index.scss'
 
 import { createPage } from '@codelet/core'
 
-createPage()
+createPage({
+  async xx() {},
+})

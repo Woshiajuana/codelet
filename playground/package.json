@@ -19,10 +19,12 @@
   "author": "woshiajuana",
   "license": "MIT",
   "dependencies": {
+    "@babel/runtime": "^7.24.1",
     "@codelet/core": "workspace:^",
     "@daysnap/utils": "^0.0.85"
   },
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.24.3",
     "@codelet/cli-service": "workspace:^",
     "@codelet/copy-loader": "workspace:^",
     "@codelet/inject-chunk-webpack-plugin": "workspace:^",
