@@ -12,19 +12,11 @@ declare module '../codelet' {
   interface Codelet extends WX {}
 }
 
-const exclude = [
-  'getStorageSync',
-  'setStorageSync',
-  'removeStorageSync',
-  'getStorageInfoSync',
-  'clearStorageSync',
-  'batchSetStorageSync',
-  'batchGetStorageSync',
-]
+const exclude = ['getFileSystemManager', 'base64ToArrayBuffer']
 
 export const apiProxy = definePlugin((col) => {
   Object.entries(wx).forEach(([key, fn]) => {
-    if (exclude.includes(key)) {
+    if (exclude.includes(key) || key.endsWith('Sync')) {
       ;(col as any)[key] = fn.bind(wx)
     } else if (isFunction(fn)) {
       ;(col as any)[key] = promisify(fn).bind(wx)

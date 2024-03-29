@@ -11,8 +11,8 @@ export * from './router'
 
 // 插件
 const plugins = {
-  apiOverwrite,
   apiProxy,
+  apiOverwrite,
   promise,
   router,
 }

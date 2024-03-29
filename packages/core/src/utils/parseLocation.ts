@@ -14,7 +14,7 @@ export function parseLocation(
   }
   const { url, query = {}, ...rest } = location
   return {
-    url: `${url}?query=${encodeURIComponent(JSON.stringify(query))}`,
+    url: `${url}?query=${JSON.stringify(query)}`,
     ...rest,
   }
 }
