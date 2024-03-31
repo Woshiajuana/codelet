@@ -29,6 +29,10 @@ export function createWithError(options?: CreateWithOptions) {
       let ctx: WithErrorContext | null = null
       if (params.length > fn.length) {
         ctx = params[params.length - 1] as WithErrorContext
+        // 为了支持 withLoading
+        if ((ctx as any).setData) {
+          params.pop()
+        }
       }
       try {
         ctx?.setData?.({ error: '' })
