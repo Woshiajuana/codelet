@@ -19,13 +19,7 @@ const defaultOptions: Required<CreateWithOptions> = {
   excludeMessage: (message) => !message,
 }
 
-export function createWithError(options?: {
-  /** 格式化错误消息 */
-  formatMessage?: (err: unknown) => string
-
-  /** 排除指定错误消息 */
-  excludeMessage?: (message: string) => boolean
-}) {
+export function createWithError(options?: CreateWithOptions) {
   const { formatMessage, excludeMessage } = Object.assign(defaultOptions, options)
 
   return <T extends (...args: any[]) => Promise<any>>(fn: T) => {
