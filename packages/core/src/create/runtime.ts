@@ -10,9 +10,6 @@ function dash2hump(value: string) {
 
 // 运行时 拓展的一些辅助函数
 export const RuntimeBehavior = createBehavior({
-  data: {
-    error: '',
-  },
   methods: {
     __invoke($event: Event) {
       const { type } = $event
