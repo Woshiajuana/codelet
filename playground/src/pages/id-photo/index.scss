@@ -1,8 +1,0 @@
-@import '@/assets/scss/define';
-
-.sticky-section {
-  @extend %ps;
-  @extend %t0;
-  @extend %bwb;
-  z-index: 2;
-}

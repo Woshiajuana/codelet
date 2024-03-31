@@ -7,7 +7,6 @@
   },
   "lazyCodeLoading": "requiredComponents",
   "usingComponents": {
-    "share-button": "/components/share-button/index",
     "pro-end": "/components/pro-end/index"
   },
   "tabBar": {

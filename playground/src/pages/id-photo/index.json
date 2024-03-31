@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText": "证件照",
-  "usingComponents": {
-    "process-section": "./components/process-section/index",
-    "search-box": "./components/search-box/index",
-    "tab-bar": "./components/tab-bar/index",
-    "size-cell": "./components/size-cell/index"
-  }
-}

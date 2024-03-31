@@ -1,13 +1,21 @@
-import { formatMessage, isFunction, isString } from '@daysnap/utils'
+import type { Loose } from '@daysnap/types'
+import { formatMessage, isFunction, isObject, isString } from '@daysnap/utils'
 
 import { col } from '../codelet'
 import { definePlugin } from '../utils'
 
-type ToastCallback = ((err: unknown, message: string) => boolean | void) | string
+type ToastCallbackObject = Loose<{
+  setData: (data?: Record<string, any>) => void
+}>
+
+type ToastCallback =
+  | ((err: unknown, message: string) => boolean | void)
+  | string
+  | ToastCallbackObject
 
 declare global {
   interface Promise<T> {
-    toast(cb?: ToastCallback): Promise<T>
+    toast(cb?: ToastCallback, isThrow?: boolean): Promise<T>
     null(): Promise<T>
     fix(): Promise<T>
   }
@@ -36,7 +44,7 @@ const defaultOptions: Required<PromiseOptions> = {
 export const promise = definePlugin((_, options?: PromiseOptions) => {
   const { excludeMessage, formatMessage, showToast } = Object.assign(defaultOptions, options)
 
-  Promise.prototype.toast = async function (cb) {
+  Promise.prototype.toast = async function (cb, isThrow) {
     try {
       return await this
     } catch (err) {
@@ -49,7 +57,15 @@ export const promise = definePlugin((_, options?: PromiseOptions) => {
       if (isString(cb)) {
         showToast?.(cb)
       } else if (!excludeMessage(message)) {
-        showToast?.(message)
+        if (isObject(cb)) {
+          ;(cb as ToastCallbackObject).setData({ error: message })
+        }
+
+        if (isThrow) {
+          throw err
+        } else {
+          showToast?.(message)
+        }
       }
     }
   }
