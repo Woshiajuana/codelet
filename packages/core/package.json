@@ -1,6 +1,6 @@
 {
   "name": "@codelet/core",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "mini core",
   "scripts": {
     "build": "npm run clean && tsc",
@@ -50,10 +50,13 @@
   "homepage": "https://github.com/Woshiajuana/codelet#readme",
   "dependencies": {
     "@daysnap/types": "^0.0.5",
-    "@daysnap/utils": "^0.0.85",
     "miniprogram-api-typings": "^3.12.2"
   },
   "devDependencies": {
-    "rimraf": "^5.0.5"
+    "rimraf": "^5.0.5",
+    "@daysnap/utils": "^0.0.88"
+  },
+  "peerDependencies": {
+    "@daysnap/utils": ">=0.0.88"
   }
 }
