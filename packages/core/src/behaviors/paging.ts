@@ -88,6 +88,7 @@ export const PagingBehavior = createBehavior({
     /**
      * 请求配置方法
      */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async pagingFetchData(_: PagingParams, __?: any): Promise<PagingResult<any>> {
       // 请在页面中实现
       return [] as any

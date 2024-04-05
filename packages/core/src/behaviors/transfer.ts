@@ -7,7 +7,7 @@ export const TransferBehavior = createBehavior({
     /**
      * 处理点击事件的
      */
-    async transfer(e: any) {
+    transfer(e: any) {
       const { item, ...rest } = parseEvent(e)
       const { url, disabled, query, event, fn } = Object.assign({}, rest, item)
 
