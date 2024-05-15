@@ -2,6 +2,7 @@ import type { Compiler } from 'webpack'
 
 const NAME = 'HMRWebpackPlugin'
 
+// https://github.com/NervJS/taro/pull/14854
 export default class HMRWebpackPlugin {
   apply(compiler: Compiler) {
     compiler.hooks.thisCompilation.tap(NAME, (compilation) => {
