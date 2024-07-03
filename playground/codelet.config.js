@@ -4,8 +4,8 @@ module.exports = defineConfig({
   pageIndex: 'pages/home/index',
   source: [
     'app.(js|ts)',
-    'pages/**/*.(js|ts)',
-    'components/**/*.(js|ts)',
-    'subpackage/**/*.(js|ts)',
+    'pages/**/index.(js|ts)',
+    'components/**/index.(js|ts)',
+    'subpackage/**/index.(js|ts)',
   ],
 })
