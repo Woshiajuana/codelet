@@ -24,8 +24,10 @@ export async function requestAuthorize(options: {
     if (res.confirm) {
       const { authSetting } = await col.openSetting()
       if (!authSetting[scope]) {
-        throw '进行此操作，需要授权'
+        throw message || '进行此操作，需要授权'
       }
+    } else {
+      throw 'auth fail: cancel'
     }
   }
 }
