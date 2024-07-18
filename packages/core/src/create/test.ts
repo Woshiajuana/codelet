@@ -1,4 +1,5 @@
 // 用于测试
+import { PagingBehavior } from '../behaviors'
 import { createApp, createBehavior, createComponent, createPage } from '.'
 
 createApp({
@@ -21,6 +22,7 @@ Behavior({
 
 // 行为
 const a = createBehavior({
+  behaviors: [PagingBehavior],
   data: {
     a: 'a',
   },

@@ -2,17 +2,17 @@ import type { Loose } from '@daysnap/types'
 import { isBoolean, isFunction, isObject } from '@daysnap/utils'
 
 import { createBehavior } from '../create/createBehavior'
-import { defineData, parseEvent } from '../utils'
+import { parseEvent } from '../utils'
 
 export const PagingBehavior = createBehavior({
-  data: defineData({
+  data: {
     pagingIndex: 1,
     pagingSize: 10,
     pagingTotal: -1,
-    pagingData: [], // 二维数组
+    pagingData: [] as any[], // 二维数组
     pagingIsLoading: false,
     pagingNumTotal: -1, // 加载的 total
-  }),
+  },
   methods: {
     /**
      * 刷新
