@@ -72,6 +72,11 @@ export function getDefaultConfig(
       new TerserWebpackPlugin({
         // 不生成 license 文件
         extractComments: false,
+        terserOptions: {
+          format: {
+            comments: false, // 删除注释
+          },
+        },
       }),
     ]
   }
