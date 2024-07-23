@@ -1,3 +1,8 @@
 import { createWithError } from '@codelet/core'
 
-export const withError = createWithError()
+import { excludeMessage } from './excludeMessage'
+
+export const withError = createWithError({
+  excludeMessage,
+  formatMessage: (err: any) => err?.reason ?? err,
+})

@@ -1,3 +1,4 @@
+export * from './cache'
 export * from './createStorage'
 export * from './createWithError'
 export * from './defineData'
