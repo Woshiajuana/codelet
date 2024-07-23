@@ -27,7 +27,7 @@ export async function requestAuthorize(options: {
         throw message || '进行此操作，需要授权'
       }
     } else {
-      throw 'auth fail: cancel'
+      throw 'authorize fail: cancel'
     }
   }
 }
