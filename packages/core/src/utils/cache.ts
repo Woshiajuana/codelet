@@ -23,7 +23,7 @@ export const getAccountInfo = (() => {
   }
 })()
 
-export const isProd = (() => {
+export const IS_PROD = (() => {
   let result = true
   try {
     const accountInfo = getAccountInfo()
