@@ -31,17 +31,12 @@ export const PagingBehavior = createBehavior({
      * 请求数据
      */
     async pagingTrigger(pagingIndex: number, options: PagingOptions = {}) {
-      if (!this.pagingFetchData) {
-        return console.error('pagingFetchData is not defined')
-      }
-
       try {
         // eslint-disable-next-line prefer-const
         let { pagingSize, pagingData, pagingNumTotal } = this.data
         const [list, pagingTotal] = await this.pagingFetchData([pagingIndex, pagingSize], options)
         if (pagingIndex === 1) {
           pagingData = []
-          pagingNumTotal = 0
           pagingNumTotal = 0
           pagingNumTotal += list.length
           pagingData[0] = list
@@ -91,7 +86,7 @@ export const PagingBehavior = createBehavior({
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async pagingFetchData(_: PagingParams, __?: any): Promise<PagingResult<any>> {
       // 请在页面中实现
-      return [] as any
+      throw new Error('pagingFetchData is not defined')
     },
   },
 })
