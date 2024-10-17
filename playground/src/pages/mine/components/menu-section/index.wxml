@@ -1,8 +1,0 @@
-<pro-cell
-  wx:for="{{ menus }}"
-  wx:key="index"
-  arrow="{{ item.arrow }}"
-  label="{{ item.label }}"
-  icon="{{ item.icon }}"
-  bindtap="transfer(item)"
-></pro-cell>

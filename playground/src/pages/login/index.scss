@@ -1,11 +1,11 @@
-@import '@/assets/scss/define';
+@use '@/assets/scss/define' as *;
 
 page {
-  @extend %df;
-  @extend %fdc;
-  @extend %jcc;
-  @extend %bsb;
-  @extend %aic;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  flex-direction: column;
   background-color: #fff;
   padding: j(48) 0 j(64);
 }
@@ -15,20 +15,20 @@ page {
   height: j(100);
 }
 .title {
-  @extend %c3;
-  @extend %df;
-  @extend %aic;
+  color: #333;
+  display: flex;
+  align-items: center;
   font-size: j(22);
   padding: 0 j(32);
   line-height: j(30);
   margin-top: j(32);
   .strong {
-    @extend %fwb;
+    font-weight: bold;
     margin-left: j(10);
   }
 }
 .sub-title {
-  @extend %c3;
+  color: #333;
   padding: 0 j(32);
   margin-top: j(10);
   line-height: j(18);

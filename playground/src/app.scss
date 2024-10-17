@@ -1,20 +1,19 @@
-@import '@/assets/scss/define';
-@import '@/assets/scss/iconfont';
+@use '@/assets/scss/define' as *;
+@use '@/assets/scss/iconfont';
 
 page {
-  @extend %bsb;
+  box-sizing: border-box;
   background-color: $color-background;
   min-height: 100%;
 }
 
 .c-button {
-  @extend %df;
-  @extend %aic;
-  @extend %jcc;
-  @extend %cfff;
-  @extend %cp;
-  @extend %ma;
-  @extend %ats;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  margin: 0 auto;
   margin-top: auto;
   font-size: j(16);
   background-color: $color-primary;
@@ -28,7 +27,7 @@ page {
     background-color: #ddd !important;
   }
   &:after {
-    @extend %dn;
+    display: none;
   }
   &.is-mt {
     margin-top: j(48);
@@ -40,5 +39,5 @@ page {
 }
 
 .c-placeholder {
-  @extend %cc;
+  color: #ccc;
 }

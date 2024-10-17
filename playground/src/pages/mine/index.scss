@@ -1,4 +1,4 @@
-@import '@/assets/scss/define';
+@use '@/assets/scss/define' as *;
 
 page {
   padding-bottom: j(64);

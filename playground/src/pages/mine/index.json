@@ -2,8 +2,5 @@
   "navigationBarTitleText": "",
   "backgroundColor": "#f3f8f9",
   "navigationBarBackgroundColor": "#f3f8f9",
-  "usingComponents": {
-    "user-section": "./components/user-section/index",
-    "menu-section": "./components/menu-section/index"
-  }
+  "usingComponents": {}
 }

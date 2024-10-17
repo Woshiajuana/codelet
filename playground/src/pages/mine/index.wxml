@@ -1,3 +1,1 @@
-<user-section userinfo="{{ userinfo }}"></user-section>
-
-<menu-section></menu-section>
+<view>个人中心</view>

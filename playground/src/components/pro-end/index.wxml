@@ -1,6 +1,0 @@
-<view class="pro-end-wrap">
-  <pro-loading wx:if="{{ loading }}"></pro-loading>
-  <view wx:else class="pro-end-divider">
-    <text>没有更多了</text>
-  </view>
-</view>
