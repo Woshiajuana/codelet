@@ -5,14 +5,14 @@ import './project.config.json'
 
 import col, { createApp } from '@codelet/core'
 
-import { handlerError } from './utils'
+import { handleError } from './utils'
 ;((s) => s.keys().forEach((k: any) => s(k).default && col.use(s(k).default)))(
   (require as unknown as NodeRequire).context('./plugins', true, /\.ts$/),
 )
 
 createApp({
-  onError: handlerError,
-  onUnhandledRejection: handlerError,
+  onError: handleError,
+  onUnhandledRejection: handleError,
   onPageNotFound() {
     col.switchTab('/pages/home/index')
   },

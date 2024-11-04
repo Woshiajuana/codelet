@@ -4,7 +4,7 @@ import { formatMessage, isString } from '@daysnap/utils'
 import { __DEV__ } from './constant'
 import { excludeMessage } from './excludeMessage'
 
-export function handlerError(err: any) {
+export function handleError(err: any) {
   if (isString(err) && err.includes('MiniProgramError')) {
     const res = err.match(/MiniProgramError\n(.*?)\n/)
     // const res = err.match(/"(.*?)"/)
