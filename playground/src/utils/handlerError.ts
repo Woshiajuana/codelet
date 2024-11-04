@@ -6,7 +6,8 @@ import { excludeMessage } from './excludeMessage'
 
 export function handlerError(err: any) {
   if (isString(err) && err.includes('MiniProgramError')) {
-    const res = err.match(/"(.*?)"/)
+    const res = err.match(/MiniProgramError\n(.*?)\n/)
+    // const res = err.match(/"(.*?)"/)
     if (res) err = res[1]
   }
   const message = formatMessage(err?.reason ?? err)

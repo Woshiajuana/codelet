@@ -11,10 +11,11 @@
       "@/*": ["src/*"]
     },
     "moduleResolution": "bundler",
+    "resolveJsonModule": true,
     "types": ["miniprogram-api-typings"],
 
     /* JavaScript Support */
-    "allowJs": true,
+    // "allowJs": true,
 
     /* Emit */
     "declaration": true,
