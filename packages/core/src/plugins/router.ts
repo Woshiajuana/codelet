@@ -9,7 +9,9 @@ declare module '../codelet' {
     navigateTo(to: Location): Promise<void>
     redirectTo(to: Location): Promise<void>
     reLaunch(to: Location): Promise<void>
-    switchTab(to: Location): Promise<void>
+    // https://developers.weixin.qq.com/miniprogram/dev/api/route/wx.switchTab.html
+    // 需要跳转的 tabBar 页面的路径 (代码包路径)（需在 app.json 的 tabBar 字段定义的页面），路径后不能带参数。
+    switchTab(to: string): Promise<void>
   }
 }
 

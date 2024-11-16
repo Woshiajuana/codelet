@@ -12,9 +12,11 @@ export function parseLocation(
   if (isString(location)) {
     location = { url: location, query: {} }
   }
-  const { url, query = {}, ...rest } = location
-  return {
-    url: `${url}?query=${encodeURIComponent(JSON.stringify(query))}`,
-    ...rest,
+  // eslint-disable-next-line prefer-const
+  let { url, query, ...rest } = location
+  if (query) {
+    url = `${url}?query=${encodeURIComponent(JSON.stringify(query))}`
   }
+
+  return { url, ...rest }
 }
