@@ -8,9 +8,12 @@ export interface CurlRequestConfig {
   method?: Method
   header?: { [key: string]: string }
   timeout?: number
+  name?: string
+  filePath?: string
   dataType?: string
   formData?: any
   responseType?: 'text' | 'arraybuffer'
+  [key: string]: any
 }
 
 export interface CurlResponse<T = any> {

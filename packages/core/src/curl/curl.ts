@@ -32,7 +32,11 @@ export class Curl {
       config.url = baseURL + url
     }
     if (fn === 'uploadFile') {
-      config.formData = data
+      const { filePath, name, ...formData } = data
+      config.filePath = filePath || config.filePath
+      config.name = name || config.name
+      config.formData = formData || config.formData
+      delete config.data
     }
 
     const dispatchRequest = (options: any) =>
