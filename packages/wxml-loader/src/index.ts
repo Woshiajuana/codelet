@@ -7,7 +7,7 @@ import compiler from './compiler'
 import schema from './schema.json'
 import type { WxmlLoaderOptions } from './types'
 
-const filepathCaches: string[] = []
+const filepathCaches: Record<string, true> = {}
 
 export default function loader(
   this: LoaderContext<WxmlLoaderOptions>,
@@ -25,7 +25,13 @@ export default function loader(
   entryPath = path.resolve(this.rootContext, entryPath)
 
   const filepaths = result
-    .filter((src) => (src.startsWith('.') || src.startsWith('/')) && !filepathCaches.includes(src))
+    .filter((src) => {
+      if (src.startsWith('.') || src.startsWith('/')) {
+        const ext = path.extname(src)
+        return !(ext.startsWith('.wxs') || ext.startsWith('.wxml'))
+      }
+      return false
+    })
     .map((src) => {
       if (src.startsWith('.')) {
         return path.join(this.context, src)
@@ -33,6 +39,7 @@ export default function loader(
         return path.join(entryPath, src)
       }
     })
+    .filter((filepath) => !filepathCaches[filepath])
 
   let error: any = null
   Promise.all(
@@ -42,7 +49,11 @@ export default function loader(
       this.emitFile(outputPath, content)
     }),
   )
-    .then(() => filepathCaches.push(...filepaths))
+    .then(() => {
+      filepaths.forEach((filepath) => {
+        filepathCaches[filepath] = true
+      })
+    })
     .catch((err) => (error = err))
     .finally(() => {
       // 解析出后缀名
