@@ -7,8 +7,6 @@ import compiler from './compiler'
 import schema from './schema.json'
 import type { WxmlLoaderOptions } from './types'
 
-const filepathCaches: Record<string, true> = {}
-
 export default function loader(
   this: LoaderContext<WxmlLoaderOptions>,
   content: string,
@@ -39,7 +37,6 @@ export default function loader(
         return path.join(entryPath, src)
       }
     })
-    .filter((filepath) => !filepathCaches[filepath])
 
   let error: any = null
   Promise.all(
@@ -49,11 +46,6 @@ export default function loader(
       this.emitFile(outputPath, content)
     }),
   )
-    .then(() => {
-      filepaths.forEach((filepath) => {
-        filepathCaches[filepath] = true
-      })
-    })
     .catch((err) => (error = err))
     .finally(() => {
       // 解析出后缀名
