@@ -17,14 +17,14 @@ export const PagingBehavior = createBehavior({
     /**
      * 刷新
      */
-    pagingRefresh(event: any = {}) {
+    async pagingRefresh(event: any = {}) {
       const { loading, callback, ...rest } = isObject(event)
         ? parseEvent(event as any)
         : {
             loading: isBoolean(event) ? event : false,
             callback: isFunction(event) ? event : null,
           }
-      this.pagingTrigger(1, { ...rest, loading, callback })
+      await this.pagingTrigger(1, { ...rest, loading, callback })
     },
 
     /**
@@ -69,7 +69,7 @@ export const PagingBehavior = createBehavior({
     /**
      * 加载
      */
-    pagingLoad(options?: any) {
+    async pagingLoad(options?: any) {
       const { pagingTotal, pagingData, pagingNumTotal, pagingIsLoading, pagingIndex } = this.data
       if (pagingIsLoading) {
         return console.log('正在加载中...')
@@ -77,7 +77,7 @@ export const PagingBehavior = createBehavior({
       if (pagingData && pagingTotal <= pagingNumTotal) {
         return console.log('没有更多了...')
       }
-      this.pagingTrigger(pagingIndex + 1, options)
+      await this.pagingTrigger(pagingIndex + 1, options)
     },
 
     /**
