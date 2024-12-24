@@ -25,9 +25,9 @@ export const ModelBehavior = createBehavior({
 
       if (pattern) {
         if (isFunction(pattern)) {
-          value = pattern(value, item.value)
+          value = pattern(value, item?.value)
         } else if ((this as any)[pattern]) {
-          value = (this as any)[pattern](value, item.value)
+          value = (this as any)[pattern](value, item?.value)
         }
       }
 
