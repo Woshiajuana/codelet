@@ -88,6 +88,23 @@ export const PagingBehavior = createBehavior({
       // 请在页面中实现
       throw new Error('pagingFetchData is not defined')
     },
+
+    /**
+     * 根据查询条件找到 index，pagingData 是一个二维数组，返回的结果是一个数组的 index
+     * 如果没找到会返回成 [-1, -1]
+     */
+    pagingFindIndexBy(query: Record<string, any>) {
+      const { pagingData } = this.data
+      let twoIndex = -1
+      const oneIndex = pagingData.findIndex((data: Record<string, any>[]) => {
+        const index = data.findIndex((item) => {
+          return !Object.keys(query).find((key) => item[key] !== query[key])
+        })
+        if (index > -1) twoIndex = index
+        return index > -1
+      })
+      return [oneIndex, twoIndex]
+    },
   },
 })
 
