@@ -1,6 +1,6 @@
 {
   "name": "@codelet/core",
-  "version": "0.0.35",
+  "version": "0.0.36",
   "description": "mini core",
   "scripts": {
     "build": "npm run clean && tsc",
