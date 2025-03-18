@@ -33,28 +33,9 @@ export const PagingBehavior = createBehavior({
     async pagingTrigger(pagingIndex: number, options: PagingOptions = {}) {
       try {
         // eslint-disable-next-line prefer-const
-        let { pagingSize, pagingData, pagingNumTotal } = this.data
+        let { pagingSize } = this.data
         const [list, pagingTotal] = await this.pagingFetchData([pagingIndex, pagingSize], options)
-        if (pagingIndex === 1) {
-          pagingData = []
-          pagingNumTotal = 0
-          pagingNumTotal += list.length
-          pagingData[0] = list
-          this.setData({
-            pagingNumTotal,
-            pagingTotal,
-            pagingData,
-            pagingIndex,
-          })
-        } else {
-          pagingNumTotal += list.length
-          this.setData({
-            pagingNumTotal,
-            pagingTotal,
-            pagingIndex,
-            [`pagingData[${pagingIndex - 1}]`]: list,
-          })
-        }
+        await this.pagingProcessingData([pagingIndex, pagingSize], [list, pagingTotal])
         // eslint-disable-next-line no-useless-catch
       } catch (error) {
         throw error
@@ -63,6 +44,35 @@ export const PagingBehavior = createBehavior({
           options.callback()
         }
         this.setData({ pagingIsLoading: false })
+      }
+    },
+
+    /**
+     * 处理数据
+     */
+    async pagingProcessingData(params: PagingParams, result: PagingResult) {
+      const [pagingIndex] = params
+      let { pagingData, pagingNumTotal } = this.data
+      const [list, pagingTotal] = result
+      if (pagingIndex === 1) {
+        pagingData = []
+        pagingNumTotal = 0
+        pagingNumTotal += list.length
+        pagingData[0] = list
+        this.setData({
+          pagingNumTotal,
+          pagingTotal,
+          pagingData,
+          pagingIndex,
+        })
+      } else {
+        pagingNumTotal += list.length
+        this.setData({
+          pagingNumTotal,
+          pagingTotal,
+          pagingIndex,
+          [`pagingData[${pagingIndex - 1}]`]: list,
+        })
       }
     },
 
