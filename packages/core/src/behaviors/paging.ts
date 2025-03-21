@@ -35,7 +35,7 @@ export const PagingBehavior = createBehavior({
         // eslint-disable-next-line prefer-const
         let { pagingSize } = this.data
         const [list, pagingTotal] = await this.pagingFetchData([pagingIndex, pagingSize], options)
-        await this.pagingProcessingData([pagingIndex, pagingSize], [list, pagingTotal])
+        await this.pagingProcessingData([pagingIndex, pagingSize], [list, pagingTotal], options)
         // eslint-disable-next-line no-useless-catch
       } catch (error) {
         throw error
@@ -50,7 +50,8 @@ export const PagingBehavior = createBehavior({
     /**
      * 处理数据
      */
-    async pagingProcessingData(params: PagingParams, result: PagingResult) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    async pagingProcessingData(params: PagingParams, result: PagingResult, _: PagingOptions = {}) {
       const [pagingIndex] = params
       let { pagingData, pagingNumTotal } = this.data
       const [list, pagingTotal] = result
