@@ -116,6 +116,20 @@ export const PagingBehavior = createBehavior({
       })
       return [oneIndex, twoIndex]
     },
+
+    /**
+     * 重置状态
+     */
+    pagingReset() {
+      this.setData({
+        pagingIndex: 1,
+        pagingSize: 10,
+        pagingTotal: -1,
+        pagingData: [] as any[],
+        pagingIsLoading: false,
+        pagingNumTotal: -1,
+      })
+    },
   },
 })
 

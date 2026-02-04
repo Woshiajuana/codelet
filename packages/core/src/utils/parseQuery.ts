@@ -19,10 +19,11 @@ export function parseQuery<T extends Record<string, any>>(options: Record<string
     query = JSON.parse(query)
   }
   if (scene) {
+    scene = decodeURIComponent(scene)
     if (scene.includes('=')) {
       Object.assign(query, parseQueryString(scene))
     } else {
-      Object.assign(query, { scene: decodeURIComponent(scene) })
+      Object.assign(query, { scene })
     }
   }
   Object.assign(query, rest)
