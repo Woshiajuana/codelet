@@ -1,6 +1,6 @@
 {
   "name": "@codelet/cli-service",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "cli-service",
   "scripts": {
     "build": "npm run clean && tsc -p ./tsconfig.lib.json",
@@ -48,7 +48,7 @@
     "sass": "^1.80.1",
     "sass-loader": "^16.0.2",
     "terser-webpack-plugin": "^5.3.10",
-    "webpack": "^5.89.0",
+    "webpack": "5.89.0",
     "webpack-merge": "^5.10.0",
     "webpackbar": "^6.0.0"
   },
