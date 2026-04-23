@@ -44,3 +44,5 @@ export type BaseEvent = WechatMiniprogram.BaseEvent
 
 // 事件类型
 export type Event = Loose<WechatMiniprogram.CustomEvent | WechatMiniprogram.BaseEvent>
+
+export type WxEvent = Loose<WechatMiniprogram.CustomEvent | WechatMiniprogram.BaseEvent>
