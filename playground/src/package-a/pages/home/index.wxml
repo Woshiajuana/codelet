@@ -1,0 +1,6 @@
+<view>
+  <text wx:if="{{ error }}">error: {{ error }}</text>
+  <text wx:else>data => {{ data }}</text>
+</view>
+
+<button bindtap="fetchData">刷新</button>

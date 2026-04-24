@@ -6,9 +6,7 @@
     "navigationBarBackgroundColor": "#ffffff"
   },
   "lazyCodeLoading": "requiredComponents",
-  "usingComponents": {
-    "pro-end": "/components/pro-end/index"
-  },
+  "usingComponents": {},
   "tabBar": {
     "color": "#9EA6B9",
     "selectedColor": "#07c160",

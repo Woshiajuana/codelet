@@ -6,6 +6,7 @@ module.exports = defineConfig({
     'app.(js|ts)',
     'pages/**/index.(js|ts)',
     'components/**/index.(js|ts)',
+    'package-a/**/index.(js|ts)',
     'subpackage/**/index.(js|ts)',
   ],
 })

@@ -12,7 +12,7 @@ export const resolve = (...args: string[]) => path.resolve(cmd, ...args)
 
 export const parseDir = (entryPath: string, source: string[]) => {
   entryPath = resolve(entryPath)
-  const filepaths = fg.sync(source.map((item) => resolve(entryPath, item)))
+  const filepaths = fg.sync(source.map((item) => resolve(entryPath, item).replace(/\\/g, '/')))
   const entry = filepaths.reduce<Record<string, { import: string; runtime: string }>>(
     (res, filepath) => {
       const relPath = path.relative(entryPath, filepath)

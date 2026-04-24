@@ -3,6 +3,7 @@ import HMRWebpackPlugin from '@codelet/hmr-webpack-plugin'
 import InjectChunkWebpackPlugin from '@codelet/inject-chunk-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import TerserWebpackPlugin from 'terser-webpack-plugin'
+import CopyWebpackPlugin from 'copy-webpack-plugin'
 import type { Configuration } from 'webpack'
 import WebpackBar from 'webpackbar'
 
@@ -15,17 +16,20 @@ export interface Config {
   source?: string[]
   /** 第一页 */
   pageIndex?: string
+  /** 静态文件 */
+  publicDir?: string
   /** webpack 配置 */
   webpack?: Configuration
 }
 
 export function getDefaultConfig(
-  options?: Pick<Config, 'entryPath' | 'source' | 'pageIndex'> & { isDev?: boolean },
+  options?: Omit<Config, 'webpack'> & { isDev?: boolean },
 ): Required<Config> {
-  const { entryPath, source, pageIndex, isDev } = Object.assign(
+  const { entryPath, source, pageIndex, publicDir, isDev } = Object.assign(
     {
       isDev: false,
       pageIndex: '',
+      publicDir: 'public',
       entryPath: './src',
       source: ['app.(js|ts)', 'pages/**/*.(js|ts)', 'components/**/*.(js|ts)'],
     },
@@ -43,6 +47,15 @@ export function getDefaultConfig(
     new InjectChunkWebpackPlugin(),
     new AppJsonWebpackPlugin({
       pageIndex,
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: publicDir, // 源目录
+          to: './', // 复制到输出目录（dist）的根路径
+          noErrorOnMissing: true, // 若 public 目录不存在时不报错
+        },
+      ],
     }),
     new WebpackBar(),
   ]
@@ -87,6 +100,8 @@ export function getDefaultConfig(
     entryPath,
 
     source,
+
+    publicDir,
 
     webpack: {
       mode,
