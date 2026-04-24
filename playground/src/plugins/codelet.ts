@@ -25,6 +25,7 @@ export default definePlugin((col) => {
           // 已登录
           if (UN_NEED_LOGIN_PAGES.includes(url)) {
             // 已登录，如果是登录页，则不处理
+            next()
           } else {
             next()
           }

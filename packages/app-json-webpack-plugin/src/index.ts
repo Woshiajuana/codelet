@@ -66,10 +66,16 @@ export default class AppJsonWebpackPlugin {
       if (item.startsWith('pages/')) {
         pages.push(item)
       } else {
-        const [name, ...rest] = item.split('/')
+        let [root, ...rest] = item.split('/')
+        // 需要兼容 packages ，推荐用户把分包都放到 packages 目录下
+        let name = root
+        if (root === 'packages') {
+          name = rest.shift() ?? ''
+          root = `packages/${name}`
+        }
         let subpackage = subpackages.find((item) => item.name === name)
         if (!subpackage) {
-          subpackage = { name, root: name, pages: [] }
+          subpackage = { name, root, pages: [] }
           subpackages.push(subpackage)
         }
         subpackage.pages.push(rest.join('/'))
@@ -81,6 +87,8 @@ export default class AppJsonWebpackPlugin {
       pages = pages.filter((item) => item !== this.options.pageIndex)
       pages.unshift(this.options.pageIndex)
     }
+
+    console.log('subpackages => ', subpackages)
 
     return { pages, subpackages }
   }

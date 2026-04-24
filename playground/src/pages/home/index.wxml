@@ -1,6 +1,5 @@
-<view>
-  <text wx:if="{{ error }}">error: {{ error }}</text>
-  <text wx:else>data => {{ data }}</text>
-</view>
+<button class="button" bindtap="handleLogin">跳转到主包登录页面</button>
 
-<button bindtap="fetchData">刷新</button>
+<button class="button" bindtap="handleGotoActivity">跳转到分包活动页面</button>
+
+<button class="button" bindtap="handleGotoUser">跳转到分包用户页面</button>
