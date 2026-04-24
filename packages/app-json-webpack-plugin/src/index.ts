@@ -88,8 +88,6 @@ export default class AppJsonWebpackPlugin {
       pages.unshift(this.options.pageIndex)
     }
 
-    console.log('subpackages => ', subpackages)
-
     return { pages, subpackages }
   }
 }
