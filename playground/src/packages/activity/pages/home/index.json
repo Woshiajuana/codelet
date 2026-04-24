@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "活动中心",
-  "usingComponents": {}
+  "usingComponents": {
+    "demo": "/packages/activity/components/demo/index"
+  }
 }

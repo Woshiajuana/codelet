@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "用户中心",
-  "usingComponents": {}
+  "usingComponents": {
+    "demo": "/packages/user/components/demo/index"
+  }
 }
