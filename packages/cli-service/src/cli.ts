@@ -22,7 +22,6 @@ const callback = (err?: Error | null, stats?: Stats) => {
 }
 
 if (config.watch) {
-  console.log('config => ', config)
   webpack(config, callback)
 } else {
   webpack(config).run(callback)
