@@ -53,10 +53,10 @@
     "miniprogram-api-typings": "^3.12.2"
   },
   "devDependencies": {
-    "rimraf": "^5.0.5",
-    "@daysnap/utils": "^0.0.88"
+    "@daysnap/utils": "^0.1.29",
+    "rimraf": "^5.0.5"
   },
   "peerDependencies": {
-    "@daysnap/utils": ">=0.0.88"
+    "@daysnap/utils": ">=0.1.29"
   }
 }

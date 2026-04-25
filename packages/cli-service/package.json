@@ -54,6 +54,10 @@
     "webpackbar": "^6.0.0"
   },
   "devDependencies": {
+    "@daysnap/utils": "^0.1.29",
     "rimraf": "^5.0.5"
+  },
+  "peerDependencies": {
+    "@daysnap/utils": ">=0.1.29"
   }
 }
