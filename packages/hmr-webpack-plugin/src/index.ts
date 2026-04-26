@@ -8,7 +8,7 @@ export default class HMRWebpackPlugin {
     compiler.hooks.thisCompilation.tap(NAME, (compilation) => {
       compilation.hooks.beforeChunkAssets.tap(NAME, () => {
         compilation.chunks.forEach((chunk) => {
-          if (chunk.hasRuntime() && chunk.name === 'bundle') {
+          if (chunk.hasRuntime() && chunk.name === 'runtime') {
             const runtimeModules = compilation.chunkGraph.getChunkRuntimeModulesInOrder(chunk)
             for (const module of runtimeModules) {
               if (module.name === 'jsonp chunk loading') {

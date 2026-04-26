@@ -4,7 +4,7 @@ import InjectChunkWebpackPlugin from '@codelet/inject-chunk-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import TerserWebpackPlugin from 'terser-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
-import type { Configuration } from 'webpack'
+import type { Chunk, Configuration } from 'webpack'
 import WebpackBar from 'webpackbar'
 
 import { resolve } from './utils'
@@ -64,12 +64,56 @@ export function getDefaultConfig(
   }
 
   // 优化
+  const packageRootPattern = /[\\/]src[\\/]packages[\\/]([^\\/]+)[\\/]/
+  const getPackageBundleName = (name: string) => {
+    const normalizedName = name.replace(/\\/g, '/')
+    if (normalizedName.startsWith('packages/')) {
+      const [, packageName] = normalizedName.split('/')
+      if (packageName) {
+        return `packages/${packageName}/bundle`
+      }
+    }
+    return null
+  }
+  const getModuleResource = (module: unknown) => {
+    if (!module || typeof module !== 'object') {
+      return ''
+    }
+    return 'resource' in module && typeof module.resource === 'string' ? module.resource : ''
+  }
   const optimization: Configuration['optimization'] = {
     splitChunks: {
       chunks: 'all',
       minChunks: 2,
       minSize: 0,
       cacheGroups: {
+        subpackage: {
+          test(module: unknown) {
+            return Boolean(getModuleResource(module).match(packageRootPattern))
+          },
+          name(module: unknown, chunks: Chunk[]) {
+            const match = getModuleResource(module).match(packageRootPattern)
+            if (!match) {
+              return 'bundle'
+            }
+
+            const packageBundleName = `packages/${match[1]}/bundle`
+            const bundleNames = new Set(
+              chunks
+                .map((chunk) => chunk.name)
+                .filter((name): name is string => typeof name === 'string' && Boolean(name))
+                .map((name) => getPackageBundleName(name))
+                .filter((name): name is string => typeof name === 'string' && Boolean(name)),
+            )
+
+            return bundleNames.size <= 1 && bundleNames.has(packageBundleName)
+              ? packageBundleName
+              : 'bundle'
+          },
+          priority: 10,
+          minChunks: 2,
+          chunks: 'all',
+        },
         main: {
           name: 'bundle',
           minChunks: 2,

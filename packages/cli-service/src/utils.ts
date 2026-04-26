@@ -19,7 +19,7 @@ export const parseDir = (entryPath: string, source: string[]) => {
       const { dir, name } = path.parse(relPath)
       res[path.join(dir, name)] = {
         import: filepath,
-        runtime: 'bundle',
+        runtime: 'runtime',
       }
       return res
     },

@@ -29,6 +29,13 @@ export default class InjectChunkWebpackPlugin {
             return path.replace(/\\/g, '/')
           }
 
+          function toRequirePath(relativePath: string) {
+            if (!relativePath.startsWith('.') && !relativePath.startsWith('/')) {
+              return `./${relativePath}`
+            }
+            return relativePath
+          }
+
           function getChunkFile(chunk: Chunk) {
             return Array.from(chunk.files).find((item) => ['.js'].includes(path.extname(item)))
           }
@@ -51,6 +58,7 @@ export default class InjectChunkWebpackPlugin {
               let relativePath = getTargetFile(relativeChunkFile)
               relativePath = path.relative(path.dirname(chunkPath), relativePath)
               relativePath = toPosix(relativePath)
+              relativePath = toRequirePath(relativePath)
               if (index === 0) {
                 source.add(
                   `${globalObject}[${chunkLoadingGlobalStr}] = require("${relativePath}");\n`,

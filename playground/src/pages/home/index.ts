@@ -5,6 +5,9 @@ import './index.scss'
 import col, { createPage } from '@codelet/core'
 
 createPage({
+  onLoad() {
+    console.log('1')
+  },
   handleLogin() {
     col.navigateTo({
       url: '/pages/login/index',
