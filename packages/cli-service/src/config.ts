@@ -31,7 +31,11 @@ export function getDefaultConfig(
       pageIndex: '',
       publicDir: 'public',
       entryPath: './src',
-      source: ['app.(js|ts)', 'pages/**/*.(js|ts)', 'components/**/*.(js|ts)'],
+      source: [
+        'app.(js|ts)',
+        '(pages|components)/**/index.(js|ts)',
+        'packages/*/(pages|components)/**/index.(js|ts)',
+      ],
     },
     options,
   )

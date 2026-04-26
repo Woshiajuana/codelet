@@ -1,6 +1,6 @@
 {
   "name": "@codelet/cli-service",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "cli-service",
   "scripts": {
     "build": "npm run clean && tsc -p ./tsconfig.lib.json",
