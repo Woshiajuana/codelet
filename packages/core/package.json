@@ -48,6 +48,7 @@
   "author": "woshiajuana",
   "license": "MIT",
   "homepage": "https://github.com/Woshiajuana/codelet#readme",
+  "sideEffects": false,
   "dependencies": {
     "@daysnap/types": "^0.0.5",
     "miniprogram-api-typings": "^3.12.2"
