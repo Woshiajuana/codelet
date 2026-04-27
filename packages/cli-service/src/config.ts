@@ -1,9 +1,11 @@
+import fg from 'fast-glob'
 import AppJsonWebpackPlugin from '@codelet/app-json-webpack-plugin'
 import HMRWebpackPlugin from '@codelet/hmr-webpack-plugin'
 import InjectChunkWebpackPlugin from '@codelet/inject-chunk-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import TerserWebpackPlugin from 'terser-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
+import path from 'path'
 import type { Chunk, Configuration } from 'webpack'
 import WebpackBar from 'webpackbar'
 
@@ -14,6 +16,8 @@ export interface Config {
   entryPath?: string
   /** 入口文件 */
   source?: string[]
+  /** 不参与打包、运行时 require 的外部脚本 */
+  externalSource?: string[]
   /** 第一页 */
   pageIndex?: string
   /** 静态文件 */
@@ -25,11 +29,12 @@ export interface Config {
 export function getDefaultConfig(
   options?: Omit<Config, 'webpack'> & { isDev?: boolean },
 ): Required<Config> {
-  const { entryPath, source, pageIndex, publicDir, isDev } = Object.assign(
+  const { entryPath, source, externalSource, pageIndex, publicDir, isDev } = Object.assign(
     {
       isDev: false,
       pageIndex: '',
       publicDir: 'public',
+      externalSource: [],
       entryPath: './src',
       source: [
         'app.(js|ts)',
@@ -39,6 +44,34 @@ export function getDefaultConfig(
     },
     options,
   )
+  const entryRoot = resolve(entryPath)
+  const srcAliasRoot = resolve('src')
+  const externalFiles = fg
+    .sync(externalSource.map((item) => path.join(entryRoot, item).replace(/\\/g, '/')))
+    .map((filepath) => path.resolve(filepath))
+  const externalFileSet = new Set(externalFiles)
+  const resolveExternalFile = (context: string, request: string) => {
+    const candidates: string[] = []
+
+    if (request.startsWith('@/')) {
+      candidates.push(path.join(srcAliasRoot, request.slice(2)))
+    } else if (request.startsWith('.')) {
+      candidates.push(path.resolve(context, request))
+    } else {
+      return ''
+    }
+
+    for (const basePath of candidates) {
+      for (const ext of ['', '.js']) {
+        const candidate = ext ? `${basePath}${ext}` : basePath
+        if (externalFileSet.has(path.resolve(candidate))) {
+          return path.resolve(candidate)
+        }
+      }
+    }
+
+    return ''
+  }
 
   // 模式
   const mode = isDev ? 'development' : 'production'
@@ -59,6 +92,12 @@ export function getDefaultConfig(
           to: './', // 复制到输出目录（dist）的根路径
           noErrorOnMissing: true, // 若 public 目录不存在时不报错
         },
+        ...externalSource.map((pattern) => ({
+          context: entryRoot,
+          from: pattern,
+          to: '[path][name][ext]',
+          noErrorOnMissing: true,
+        })),
       ],
     }),
     new WebpackBar(),
@@ -149,6 +188,8 @@ export function getDefaultConfig(
 
     source,
 
+    externalSource,
+
     publicDir,
 
     webpack: {
@@ -156,8 +197,29 @@ export function getDefaultConfig(
 
       devtool: false,
 
-      // externalsType: 'commonjs',
-      // externals: ,
+      externalsType: 'commonjs',
+      externals: [
+        ({ context, request }, callback) => {
+          if (!context || !request) {
+            callback()
+            return
+          }
+
+          const targetFile = resolveExternalFile(context, request)
+          if (!targetFile) {
+            callback()
+            return
+          }
+
+          const relativeRequest = path
+            .relative(context, targetFile)
+            .replace(/\\/g, '/')
+            .replace(/\.js$/, '')
+            .replace(/^(?!\.)/, './')
+
+          callback(null, `commonjs ${relativeRequest}`)
+        },
+      ],
 
       output: {
         filename: '[name].js',
