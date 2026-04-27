@@ -156,6 +156,9 @@ export function getDefaultConfig(
 
       devtool: false,
 
+      // externalsType: 'commonjs',
+      // externals: ,
+
       output: {
         filename: '[name].js',
         path: resolve('dist'),

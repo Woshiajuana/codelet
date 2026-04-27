@@ -5,7 +5,8 @@ import './index.scss'
 import col, { createPage } from '@codelet/core'
 import { sleep } from '@daysnap/utils'
 
-import { getMainTitle, userinfoStorage, withLoading, xxText } from '@/utils'
+import { getMainTitle, userinfoStorage, withLoading } from '@/utils'
+import { xxText } from '@/utils/xxLib'
 
 createPage({
   onLoad() {

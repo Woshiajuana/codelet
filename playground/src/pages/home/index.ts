@@ -3,7 +3,8 @@ import './index.wxml'
 import './index.scss'
 
 import col, { createPage } from '@codelet/core'
-import { getMainTitle, xxText } from '@/utils'
+import { getMainTitle } from '@/utils'
+import { xxText } from '@/utils/xxLib'
 
 createPage({
   onLoad() {
