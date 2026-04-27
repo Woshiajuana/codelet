@@ -3,11 +3,11 @@ import './index.wxml'
 import './index.scss'
 
 import col, { createPage } from '@codelet/core'
-import { getMainTitle } from '@/utils'
+import { getMainTitle, xxText } from '@/utils'
 
 createPage({
   onLoad() {
-    console.log('query => ', getMainTitle('1', '2', '3'))
+    console.log('query => ', getMainTitle('1', '2', '3'), xxText('111'))
   },
   handleLogin() {
     col.navigateTo({

@@ -5,9 +5,12 @@ import './index.scss'
 import col, { createPage } from '@codelet/core'
 import { sleep } from '@daysnap/utils'
 
-import { userinfoStorage, withLoading } from '@/utils'
+import { getMainTitle, userinfoStorage, withLoading, xxText } from '@/utils'
 
 createPage({
+  onLoad() {
+    console.log('query => ', getMainTitle('1', '2', '3'), xxText('111'))
+  },
   async handleSubmit() {
     await withLoading(async () => {
       await sleep(1000)
