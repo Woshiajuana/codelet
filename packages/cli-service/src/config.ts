@@ -122,29 +122,32 @@ export function getDefaultConfig(
       mode,
 
       devtool: false,
+      ...(externalSource.length > 0
+        ? {
+            externalsType: 'commonjs' as const,
+            externals: [
+              ({ context, request }, callback) => {
+                if (!context || !request) {
+                  callback()
+                  return
+                }
 
-      externalsType: 'commonjs',
-      externals: [
-        ({ context, request }, callback) => {
-          if (!context || !request) {
-            callback()
-            return
+                const targetFile = resolveExternalFile(context, request)
+                if (!targetFile) {
+                  callback()
+                  return
+                }
+
+                const targetRequest = path
+                  .relative(resolve(entryPath), targetFile)
+                  .replace(/\\/g, '/')
+                  .replace(/\.js$/, '')
+
+                callback(null, `commonjs ${externalRequestPlaceholderPrefix}${targetRequest}`)
+              },
+            ],
           }
-
-          const targetFile = resolveExternalFile(context, request)
-          if (!targetFile) {
-            callback()
-            return
-          }
-
-          const targetRequest = path
-            .relative(resolve(entryPath), targetFile)
-            .replace(/\\/g, '/')
-            .replace(/\.js$/, '')
-
-          callback(null, `commonjs ${externalRequestPlaceholderPrefix}${targetRequest}`)
-        },
-      ],
+        : {}),
 
       output: {
         filename: '[name].js',
