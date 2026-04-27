@@ -1,7 +1,8 @@
 import fg from 'fast-glob'
 import fs from 'fs'
 import path from 'path'
-import type { Configuration } from 'webpack'
+import type { ObjectPattern } from 'copy-webpack-plugin'
+import type { Chunk, Configuration } from 'webpack'
 import merge from 'webpack-merge'
 
 import { type Config, getDefaultConfig } from './config'
@@ -10,8 +11,12 @@ export const cmd = process.cwd()
 
 export const resolve = (...args: string[]) => path.resolve(cmd, ...args)
 
+export const resolveEntryRoot = (entryPath: string) => resolve(entryPath)
+
+export const resolveSourceRoot = (entryPath: string) => resolveEntryRoot(entryPath)
+
 export const parseDir = (entryPath: string, source: string[]) => {
-  entryPath = resolve(entryPath)
+  entryPath = resolveEntryRoot(entryPath)
   const filepaths = fg.sync(source.map((item) => resolve(entryPath, item).replace(/\\/g, '/')))
   const entry = filepaths.reduce<Record<string, { import: string; runtime: string }>>(
     (res, filepath) => {
@@ -27,6 +32,120 @@ export const parseDir = (entryPath: string, source: string[]) => {
   )
 
   return { entry }
+}
+
+export const resolveExternalFiles = (entryPath: string, externalSource: string[]) => {
+  const entryRoot = resolveEntryRoot(entryPath)
+  return fg
+    .sync(externalSource.map((item) => path.join(entryRoot, item).replace(/\\/g, '/')))
+    .map((filepath) => path.resolve(filepath))
+}
+
+export const createExternalCopyPatterns = (
+  entryPath: string,
+  externalSource: string[],
+): ObjectPattern[] => {
+  const entryRoot = resolveEntryRoot(entryPath)
+  return externalSource.map((pattern) => ({
+    context: entryRoot,
+    from: pattern,
+    to: '[path][name][ext]',
+    noErrorOnMissing: true,
+  }))
+}
+
+export const createExternalRequestResolver = (options: {
+  entryPath: string
+  externalFiles: string[]
+}) => {
+  const entryRoot = resolveEntryRoot(options.entryPath)
+  const externalFileSet = new Set(options.externalFiles)
+
+  return (context: string, request: string) => {
+    const candidates: string[] = []
+
+    // Support alias imports like "@/libs/foo" and relative imports like "./libs/foo".
+    if (request.startsWith('@/')) {
+      candidates.push(path.join(entryRoot, request.slice(2)))
+    } else if (request.startsWith('.')) {
+      candidates.push(path.resolve(context, request))
+    } else {
+      return ''
+    }
+
+    for (const basePath of candidates) {
+      for (const ext of ['', '.js']) {
+        const candidate = ext ? `${basePath}${ext}` : basePath
+        if (externalFileSet.has(path.resolve(candidate))) {
+          return path.resolve(candidate)
+        }
+      }
+    }
+
+    return ''
+  }
+}
+
+export const createOptimization = (): NonNullable<Configuration['optimization']> => {
+  const packageRootPattern = /[\\/]src[\\/]packages[\\/]([^\\/]+)[\\/]/
+  const getPackageBundleName = (name: string) => {
+    const normalizedName = name.replace(/\\/g, '/')
+    if (normalizedName.startsWith('packages/')) {
+      const [, packageName] = normalizedName.split('/')
+      if (packageName) {
+        return `packages/${packageName}/bundle`
+      }
+    }
+    return null
+  }
+  const getModuleResource = (module: unknown) => {
+    if (!module || typeof module !== 'object') {
+      return ''
+    }
+    return 'resource' in module && typeof module.resource === 'string' ? module.resource : ''
+  }
+
+  return {
+    splitChunks: {
+      chunks: 'all',
+      minChunks: 2,
+      minSize: 0,
+      cacheGroups: {
+        subpackage: {
+          test(module: unknown) {
+            return Boolean(getModuleResource(module).match(packageRootPattern))
+          },
+          name(module: unknown, chunks: Chunk[]) {
+            const match = getModuleResource(module).match(packageRootPattern)
+            if (!match) {
+              return 'bundle'
+            }
+
+            const packageBundleName = `packages/${match[1]}/bundle`
+            const bundleNames = new Set(
+              chunks
+                .map((chunk) => chunk.name)
+                .filter((name): name is string => typeof name === 'string' && Boolean(name))
+                .map((name) => getPackageBundleName(name))
+                .filter((name): name is string => typeof name === 'string' && Boolean(name)),
+            )
+
+            return bundleNames.size <= 1 && bundleNames.has(packageBundleName)
+              ? packageBundleName
+              : 'bundle'
+          },
+          priority: 10,
+          minChunks: 2,
+          chunks: 'all',
+        },
+        main: {
+          name: 'bundle',
+          minChunks: 2,
+          chunks: 'all',
+        },
+      },
+    },
+  }
 }
 
 export function getOptionValue(argv: string[], option: string) {

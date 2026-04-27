@@ -1,4 +1,3 @@
-import fg from 'fast-glob'
 import AppJsonWebpackPlugin from '@codelet/app-json-webpack-plugin'
 import HMRWebpackPlugin from '@codelet/hmr-webpack-plugin'
 import InjectChunkWebpackPlugin from '@codelet/inject-chunk-webpack-plugin'
@@ -6,10 +5,16 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import TerserWebpackPlugin from 'terser-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import path from 'path'
-import type { Chunk, Configuration } from 'webpack'
+import type { Configuration } from 'webpack'
 import WebpackBar from 'webpackbar'
 
-import { resolve } from './utils'
+import {
+  createExternalCopyPatterns,
+  createExternalRequestResolver,
+  createOptimization,
+  resolve,
+  resolveExternalFiles,
+} from './utils'
 
 export interface Config {
   /** 开发路径默认 src */
@@ -44,34 +49,11 @@ export function getDefaultConfig(
     },
     options,
   )
-  const entryRoot = resolve(entryPath)
-  const srcAliasRoot = resolve('src')
-  const externalFiles = fg
-    .sync(externalSource.map((item) => path.join(entryRoot, item).replace(/\\/g, '/')))
-    .map((filepath) => path.resolve(filepath))
-  const externalFileSet = new Set(externalFiles)
-  const resolveExternalFile = (context: string, request: string) => {
-    const candidates: string[] = []
-
-    if (request.startsWith('@/')) {
-      candidates.push(path.join(srcAliasRoot, request.slice(2)))
-    } else if (request.startsWith('.')) {
-      candidates.push(path.resolve(context, request))
-    } else {
-      return ''
-    }
-
-    for (const basePath of candidates) {
-      for (const ext of ['', '.js']) {
-        const candidate = ext ? `${basePath}${ext}` : basePath
-        if (externalFileSet.has(path.resolve(candidate))) {
-          return path.resolve(candidate)
-        }
-      }
-    }
-
-    return ''
-  }
+  const externalFiles = resolveExternalFiles(entryPath, externalSource)
+  const resolveExternalFile = createExternalRequestResolver({
+    entryPath,
+    externalFiles,
+  })
 
   // 模式
   const mode = isDev ? 'development' : 'production'
@@ -92,12 +74,7 @@ export function getDefaultConfig(
           to: './', // 复制到输出目录（dist）的根路径
           noErrorOnMissing: true, // 若 public 目录不存在时不报错
         },
-        ...externalSource.map((pattern) => ({
-          context: entryRoot,
-          from: pattern,
-          to: '[path][name][ext]',
-          noErrorOnMissing: true,
-        })),
+        ...createExternalCopyPatterns(entryPath, externalSource),
       ],
     }),
     new WebpackBar(),
@@ -107,64 +84,8 @@ export function getDefaultConfig(
   }
 
   // 优化
-  const packageRootPattern = /[\\/]src[\\/]packages[\\/]([^\\/]+)[\\/]/
-  const getPackageBundleName = (name: string) => {
-    const normalizedName = name.replace(/\\/g, '/')
-    if (normalizedName.startsWith('packages/')) {
-      const [, packageName] = normalizedName.split('/')
-      if (packageName) {
-        return `packages/${packageName}/bundle`
-      }
-    }
-    return null
-  }
-  const getModuleResource = (module: unknown) => {
-    if (!module || typeof module !== 'object') {
-      return ''
-    }
-    return 'resource' in module && typeof module.resource === 'string' ? module.resource : ''
-  }
-  const optimization: Configuration['optimization'] = {
-    splitChunks: {
-      chunks: 'all',
-      minChunks: 2,
-      minSize: 0,
-      cacheGroups: {
-        subpackage: {
-          test(module: unknown) {
-            return Boolean(getModuleResource(module).match(packageRootPattern))
-          },
-          name(module: unknown, chunks: Chunk[]) {
-            const match = getModuleResource(module).match(packageRootPattern)
-            if (!match) {
-              return 'bundle'
-            }
-
-            const packageBundleName = `packages/${match[1]}/bundle`
-            const bundleNames = new Set(
-              chunks
-                .map((chunk) => chunk.name)
-                .filter((name): name is string => typeof name === 'string' && Boolean(name))
-                .map((name) => getPackageBundleName(name))
-                .filter((name): name is string => typeof name === 'string' && Boolean(name)),
-            )
-
-            return bundleNames.size <= 1 && bundleNames.has(packageBundleName)
-              ? packageBundleName
-              : 'bundle'
-          },
-          priority: 10,
-          minChunks: 2,
-          chunks: 'all',
-        },
-        main: {
-          name: 'bundle',
-          minChunks: 2,
-          chunks: 'all',
-        },
-      },
-    },
-  }
+  // Keep splitChunks assembly outside this file so getDefaultConfig only wires pieces together.
+  const optimization: NonNullable<Configuration['optimization']> = createOptimization()
   // 生产环境
   if (!isDev) {
     optimization.minimize = true
