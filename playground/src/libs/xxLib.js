@@ -1,3 +1,3 @@
-export const xxText = (...args: any[]) => {
+export const xxText = (...args) => {
   return `XXXXXXXXXXXXXXXXXXXXXXXX => ${args.join('、')}`
 }

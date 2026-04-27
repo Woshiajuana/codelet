@@ -33,6 +33,6 @@
     // <https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#verbatimmodulesyntax>
     "verbatimModuleSyntax": true
   },
-  "include": ["src/**/*.ts", "typings/**/*.ts"],
+  "include": ["src/**/*.ts", "typings/**/*.ts", "src/libs/xxLib.js"],
   "exclude": ["node_modules"]
 }

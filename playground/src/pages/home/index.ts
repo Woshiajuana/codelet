@@ -4,7 +4,7 @@ import './index.scss'
 
 import col, { createPage } from '@codelet/core'
 import { getMainTitle } from '@/utils'
-import { xxText } from '@/utils/xxLib'
+import { xxText } from '@/libs/xxLib'
 
 createPage({
   onLoad() {

@@ -6,7 +6,7 @@ import col, { createPage } from '@codelet/core'
 import { sleep } from '@daysnap/utils'
 
 import { getMainTitle, userinfoStorage, withLoading } from '@/utils'
-import { xxText } from '@/utils/xxLib'
+import { xxText } from '@/libs/xxLib'
 
 createPage({
   onLoad() {
