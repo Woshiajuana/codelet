@@ -2,12 +2,13 @@ import fg from 'fast-glob'
 import fs from 'fs'
 import path from 'path'
 import type { ObjectPattern } from 'copy-webpack-plugin'
-import type { Chunk, Configuration } from 'webpack'
+import { Compilation, sources, type Chunk, type Compiler, type Configuration } from 'webpack'
 import merge from 'webpack-merge'
 
 import { type Config, getDefaultConfig } from './config'
 
 export const cmd = process.cwd()
+export const externalRequestPlaceholderPrefix = '__CODELET_EXTERNAL__/'
 
 export const resolve = (...args: string[]) => path.resolve(cmd, ...args)
 
@@ -83,6 +84,45 @@ export const createExternalRequestResolver = (options: {
     }
 
     return ''
+  }
+}
+
+export class RewriteExternalRequestPlugin {
+  apply(compiler: Compiler) {
+    compiler.hooks.thisCompilation.tap('RewriteExternalRequestPlugin', (compilation) => {
+      compilation.hooks.processAssets.tap(
+        {
+          name: 'RewriteExternalRequestPlugin',
+          stage: Compilation.PROCESS_ASSETS_STAGE_OPTIMIZE_COMPATIBILITY,
+        },
+        (assets) => {
+          for (const assetName of Object.keys(assets)) {
+            if (!assetName.endsWith('.js')) {
+              continue
+            }
+
+            const source = assets[assetName].source().toString()
+            if (!source.includes(externalRequestPlaceholderPrefix)) {
+              continue
+            }
+
+            // Recalculate each external require from the final emitted file location,
+            // so shared chunks like bundle.js get a correct runtime path too.
+            const rewritten = source.replace(
+              /__CODELET_EXTERNAL__\/([^"'`]+)/g,
+              (_match, target) => {
+                return path
+                  .relative(path.dirname(assetName), target)
+                  .replace(/\\/g, '/')
+                  .replace(/^(?!\.)/, './')
+              },
+            )
+
+            assets[assetName] = new sources.RawSource(rewritten)
+          }
+        },
+      )
+    })
   }
 }
 

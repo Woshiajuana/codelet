@@ -12,8 +12,10 @@ import {
   createExternalCopyPatterns,
   createExternalRequestResolver,
   createOptimization,
+  externalRequestPlaceholderPrefix,
   resolve,
   resolveExternalFiles,
+  RewriteExternalRequestPlugin,
 } from './utils'
 
 export interface Config {
@@ -67,6 +69,7 @@ export function getDefaultConfig(
     new AppJsonWebpackPlugin({
       pageIndex,
     }),
+    new RewriteExternalRequestPlugin(),
     new CopyWebpackPlugin({
       patterns: [
         {
@@ -84,7 +87,7 @@ export function getDefaultConfig(
   }
 
   // 优化
-  // Keep splitChunks assembly outside this file so getDefaultConfig only wires pieces together.
+  // 将 splitChunks 的组装逻辑放到 utils 中，保持这里专注于默认配置拼装。
   const optimization: NonNullable<Configuration['optimization']> = createOptimization()
   // 生产环境
   if (!isDev) {
@@ -132,13 +135,12 @@ export function getDefaultConfig(
             return
           }
 
-          const relativeRequest = path
-            .relative(context, targetFile)
+          const targetRequest = path
+            .relative(resolve(entryPath), targetFile)
             .replace(/\\/g, '/')
             .replace(/\.js$/, '')
-            .replace(/^(?!\.)/, './')
 
-          callback(null, `commonjs ${relativeRequest}`)
+          callback(null, `commonjs ${externalRequestPlaceholderPrefix}${targetRequest}`)
         },
       ],
 
@@ -151,7 +153,7 @@ export function getDefaultConfig(
 
       resolve: {
         alias: {
-          '@': resolve('src'),
+          '@': resolve(entryPath),
         },
         extensions: ['.js', '.ts'],
       },
