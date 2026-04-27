@@ -69,7 +69,6 @@ export function getDefaultConfig(
     new AppJsonWebpackPlugin({
       pageIndex,
     }),
-    new RewriteExternalRequestPlugin(),
     new CopyWebpackPlugin({
       patterns: [
         {
@@ -82,6 +81,9 @@ export function getDefaultConfig(
     }),
     new WebpackBar(),
   ]
+  if (externalSource.length > 0) {
+    plugins.push(new RewriteExternalRequestPlugin())
+  }
   if (isDev) {
     plugins.push(new HMRWebpackPlugin())
   }
