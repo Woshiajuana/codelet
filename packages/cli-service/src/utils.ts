@@ -65,7 +65,7 @@ export const createExternalRequestResolver = (options: {
   return (context: string, request: string) => {
     const candidates: string[] = []
 
-    // Support alias imports like "@/libs/foo" and relative imports like "./libs/foo".
+    // 同时支持 "@/libs/foo" 这类别名引用和 "./libs/foo" 这类相对引用。
     if (request.startsWith('@/')) {
       candidates.push(path.join(entryRoot, request.slice(2)))
     } else if (request.startsWith('.')) {
@@ -106,8 +106,8 @@ export class RewriteExternalRequestPlugin {
               continue
             }
 
-            // Recalculate each external require from the final emitted file location,
-            // so shared chunks like bundle.js get a correct runtime path too.
+            // 基于最终产物文件的位置重新计算外部 require 路径，
+            // 这样像 bundle.js 这类公共 chunk 也能拿到正确的运行时相对路径。
             const rewritten = source.replace(
               /__CODELET_EXTERNAL__\/([^"'`]+)/g,
               (_match, target) => {
