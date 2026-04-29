@@ -55,15 +55,15 @@ export const createExternalCopyPatterns = (
   }))
 }
 
-export const createMiniprogramNpmCopyPatterns = (miniprogramNpmDir: string): ObjectPattern[] => {
-  if (!miniprogramNpmDir) {
+export const createNpmDirCopyPatterns = (npmDir: string): ObjectPattern[] => {
+  if (!npmDir) {
     return []
   }
 
   return [
     {
-      from: resolve(miniprogramNpmDir),
-      to: path.basename(miniprogramNpmDir),
+      from: resolve(npmDir),
+      to: path.basename(npmDir),
       noErrorOnMissing: true,
     },
   ]
@@ -101,8 +101,8 @@ export const createExternalRequestResolver = (options: {
   }
 }
 
-export const createMiniprogramNpmRequestResolver = (miniprogramNpmDir: string) => {
-  const miniprogramNpmRoot = resolve(miniprogramNpmDir)
+export const createNpmDirRequestResolver = (npmDir: string) => {
+  const npmRoot = resolve(npmDir)
 
   return (request: string) => {
     if (
@@ -116,11 +116,11 @@ export const createMiniprogramNpmRequestResolver = (miniprogramNpmDir: string) =
 
     const requestPath = request.replace(/\\/g, '/')
     const candidates = [
-      path.join(miniprogramNpmRoot, requestPath),
-      path.join(miniprogramNpmRoot, `${requestPath}.js`),
-      path.join(miniprogramNpmRoot, `${requestPath}.json`),
-      path.join(miniprogramNpmRoot, requestPath, 'index.js'),
-      path.join(miniprogramNpmRoot, requestPath, 'index.json'),
+      path.join(npmRoot, requestPath),
+      path.join(npmRoot, `${requestPath}.js`),
+      path.join(npmRoot, `${requestPath}.json`),
+      path.join(npmRoot, requestPath, 'index.js'),
+      path.join(npmRoot, requestPath, 'index.json'),
     ]
 
     return candidates.some((candidate) => fs.existsSync(candidate)) ? request : ''

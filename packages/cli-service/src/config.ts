@@ -11,8 +11,8 @@ import WebpackBar from 'webpackbar'
 import {
   createExternalCopyPatterns,
   createExternalRequestResolver,
-  createMiniprogramNpmCopyPatterns,
-  createMiniprogramNpmRequestResolver,
+  createNpmDirCopyPatterns,
+  createNpmDirRequestResolver,
   createOptimization,
   externalRequestPlaceholderPrefix,
   resolve,
@@ -27,8 +27,8 @@ export interface Config {
   source?: string[]
   /** 不参与打包、运行时 require 的外部脚本 */
   externalSource?: string[]
-  /** 微信构建后的 miniprogram_npm 目录，会原样复制到 dist，并按裸模块外部引入 */
-  miniprogramNpmDir?: string
+  /** 微信构建后的 npm 目录，会原样复制到 dist，并按裸模块外部引入 */
+  npmDir?: string
   /** 第一页 */
   pageIndex?: string
   /** 静态文件 */
@@ -40,14 +40,14 @@ export interface Config {
 export function getDefaultConfig(
   options?: Omit<Config, 'webpack'> & { isDev?: boolean },
 ): Required<Config> {
-  const { entryPath, source, externalSource, miniprogramNpmDir, pageIndex, publicDir, isDev } =
+  const { entryPath, source, externalSource, npmDir, pageIndex, publicDir, isDev } =
     Object.assign(
       {
         isDev: false,
         pageIndex: '',
         publicDir: 'public',
         externalSource: [],
-        miniprogramNpmDir: '',
+        npmDir: '',
         entryPath: './src',
         source: [
           'app.(js|ts)',
@@ -62,8 +62,8 @@ export function getDefaultConfig(
     entryPath,
     externalFiles,
   })
-  const resolveMiniprogramNpmRequest = miniprogramNpmDir
-    ? createMiniprogramNpmRequestResolver(miniprogramNpmDir)
+  const resolveNpmDirRequest = npmDir
+    ? createNpmDirRequestResolver(npmDir)
     : () => ''
 
   // 模式
@@ -86,7 +86,7 @@ export function getDefaultConfig(
           noErrorOnMissing: true, // 若 public 目录不存在时不报错
         },
         ...createExternalCopyPatterns(entryPath, externalSource),
-        ...createMiniprogramNpmCopyPatterns(miniprogramNpmDir),
+        ...createNpmDirCopyPatterns(npmDir),
       ],
     }),
     new WebpackBar(),
@@ -126,7 +126,7 @@ export function getDefaultConfig(
 
     externalSource,
 
-    miniprogramNpmDir,
+    npmDir,
 
     publicDir,
 
@@ -134,7 +134,7 @@ export function getDefaultConfig(
       mode,
 
       devtool: false,
-      ...(externalSource.length > 0 || Boolean(miniprogramNpmDir)
+      ...(externalSource.length > 0 || Boolean(npmDir)
         ? {
             externalsType: 'commonjs' as const,
             externals: [
@@ -144,9 +144,9 @@ export function getDefaultConfig(
                   return
                 }
 
-                const miniprogramNpmRequest = resolveMiniprogramNpmRequest(request)
-                if (miniprogramNpmRequest) {
-                  callback(null, `commonjs ${miniprogramNpmRequest}`)
+                const npmRequest = resolveNpmDirRequest(request)
+                if (npmRequest) {
+                  callback(null, `commonjs ${npmRequest}`)
                   return
                 }
 
