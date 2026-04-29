@@ -14,6 +14,7 @@ import {
   createNpmDirCopyPatterns,
   createNpmDirRequestResolver,
   createOptimization,
+  createWatchIgnored,
   externalRequestPlaceholderPrefix,
   resolve,
   resolveExternalFiles,
@@ -169,6 +170,10 @@ export function getDefaultConfig(
         path: resolve('dist'),
         publicPath: '/',
         clean: true,
+      },
+
+      watchOptions: {
+        ignored: createWatchIgnored([publicDir, npmDir]),
       },
 
       resolve: {

@@ -127,6 +127,12 @@ export const createNpmDirRequestResolver = (npmDir: string) => {
   }
 }
 
+export const createWatchIgnored = (
+  dirs: string[],
+): NonNullable<NonNullable<Configuration['watchOptions']>['ignored']> => {
+  return dirs.filter(Boolean).map((dir) => resolve(dir).replace(/\\/g, '/'))
+}
+
 export class RewriteExternalRequestPlugin {
   apply(compiler: Compiler) {
     compiler.hooks.thisCompilation.tap('RewriteExternalRequestPlugin', (compilation) => {
