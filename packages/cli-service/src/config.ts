@@ -40,31 +40,28 @@ export interface Config {
 export function getDefaultConfig(
   options?: Omit<Config, 'webpack'> & { isDev?: boolean },
 ): Required<Config> {
-  const { entryPath, source, externalSource, npmDir, pageIndex, publicDir, isDev } =
-    Object.assign(
-      {
-        isDev: false,
-        pageIndex: '',
-        publicDir: 'public',
-        externalSource: [],
-        npmDir: '',
-        entryPath: './src',
-        source: [
-          'app.(js|ts)',
-          '(pages|components)/**/index.(js|ts)',
-          'packages/*/(pages|components)/**/index.(js|ts)',
-        ],
-      },
-      options,
-    )
+  const { entryPath, source, externalSource, npmDir, pageIndex, publicDir, isDev } = Object.assign(
+    {
+      isDev: false,
+      pageIndex: '',
+      publicDir: 'public',
+      externalSource: [],
+      npmDir: '',
+      entryPath: './src',
+      source: [
+        'app.(js|ts)',
+        '(pages|components)/**/index.(js|ts)',
+        'packages/*/(pages|components)/**/index.(js|ts)',
+      ],
+    },
+    options,
+  )
   const externalFiles = resolveExternalFiles(entryPath, externalSource)
   const resolveExternalFile = createExternalRequestResolver({
     entryPath,
     externalFiles,
   })
-  const resolveNpmDirRequest = npmDir
-    ? createNpmDirRequestResolver(npmDir)
-    : () => ''
+  const resolveNpmDirRequest = npmDir ? createNpmDirRequestResolver(npmDir) : () => ''
 
   // 模式
   const mode = isDev ? 'development' : 'production'
