@@ -11,6 +11,8 @@ import WebpackBar from 'webpackbar'
 import {
   createExternalCopyPatterns,
   createExternalRequestResolver,
+  createMiniprogramNpmCopyPatterns,
+  createMiniprogramNpmRequestResolver,
   createOptimization,
   externalRequestPlaceholderPrefix,
   resolve,
@@ -25,6 +27,8 @@ export interface Config {
   source?: string[]
   /** 不参与打包、运行时 require 的外部脚本 */
   externalSource?: string[]
+  /** 微信构建后的 miniprogram_npm 目录，会原样复制到 dist，并按裸模块外部引入 */
+  miniprogramNpmDir?: string
   /** 第一页 */
   pageIndex?: string
   /** 静态文件 */
@@ -36,26 +40,31 @@ export interface Config {
 export function getDefaultConfig(
   options?: Omit<Config, 'webpack'> & { isDev?: boolean },
 ): Required<Config> {
-  const { entryPath, source, externalSource, pageIndex, publicDir, isDev } = Object.assign(
-    {
-      isDev: false,
-      pageIndex: '',
-      publicDir: 'public',
-      externalSource: [],
-      entryPath: './src',
-      source: [
-        'app.(js|ts)',
-        '(pages|components)/**/index.(js|ts)',
-        'packages/*/(pages|components)/**/index.(js|ts)',
-      ],
-    },
-    options,
-  )
+  const { entryPath, source, externalSource, miniprogramNpmDir, pageIndex, publicDir, isDev } =
+    Object.assign(
+      {
+        isDev: false,
+        pageIndex: '',
+        publicDir: 'public',
+        externalSource: [],
+        miniprogramNpmDir: '',
+        entryPath: './src',
+        source: [
+          'app.(js|ts)',
+          '(pages|components)/**/index.(js|ts)',
+          'packages/*/(pages|components)/**/index.(js|ts)',
+        ],
+      },
+      options,
+    )
   const externalFiles = resolveExternalFiles(entryPath, externalSource)
   const resolveExternalFile = createExternalRequestResolver({
     entryPath,
     externalFiles,
   })
+  const resolveMiniprogramNpmRequest = miniprogramNpmDir
+    ? createMiniprogramNpmRequestResolver(miniprogramNpmDir)
+    : () => ''
 
   // 模式
   const mode = isDev ? 'development' : 'production'
@@ -77,6 +86,7 @@ export function getDefaultConfig(
           noErrorOnMissing: true, // 若 public 目录不存在时不报错
         },
         ...createExternalCopyPatterns(entryPath, externalSource),
+        ...createMiniprogramNpmCopyPatterns(miniprogramNpmDir),
       ],
     }),
     new WebpackBar(),
@@ -116,19 +126,27 @@ export function getDefaultConfig(
 
     externalSource,
 
+    miniprogramNpmDir,
+
     publicDir,
 
     webpack: {
       mode,
 
       devtool: false,
-      ...(externalSource.length > 0
+      ...(externalSource.length > 0 || Boolean(miniprogramNpmDir)
         ? {
             externalsType: 'commonjs' as const,
             externals: [
               ({ context, request }, callback) => {
                 if (!context || !request) {
                   callback()
+                  return
+                }
+
+                const miniprogramNpmRequest = resolveMiniprogramNpmRequest(request)
+                if (miniprogramNpmRequest) {
+                  callback(null, `commonjs ${miniprogramNpmRequest}`)
                   return
                 }
 

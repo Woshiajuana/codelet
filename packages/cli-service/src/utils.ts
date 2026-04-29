@@ -55,6 +55,20 @@ export const createExternalCopyPatterns = (
   }))
 }
 
+export const createMiniprogramNpmCopyPatterns = (miniprogramNpmDir: string): ObjectPattern[] => {
+  if (!miniprogramNpmDir) {
+    return []
+  }
+
+  return [
+    {
+      from: resolve(miniprogramNpmDir),
+      to: path.basename(miniprogramNpmDir),
+      noErrorOnMissing: true,
+    },
+  ]
+}
+
 export const createExternalRequestResolver = (options: {
   entryPath: string
   externalFiles: string[]
@@ -84,6 +98,32 @@ export const createExternalRequestResolver = (options: {
     }
 
     return ''
+  }
+}
+
+export const createMiniprogramNpmRequestResolver = (miniprogramNpmDir: string) => {
+  const miniprogramNpmRoot = resolve(miniprogramNpmDir)
+
+  return (request: string) => {
+    if (
+      !request ||
+      request.startsWith('.') ||
+      request.startsWith('@/') ||
+      path.isAbsolute(request)
+    ) {
+      return ''
+    }
+
+    const requestPath = request.replace(/\\/g, '/')
+    const candidates = [
+      path.join(miniprogramNpmRoot, requestPath),
+      path.join(miniprogramNpmRoot, `${requestPath}.js`),
+      path.join(miniprogramNpmRoot, `${requestPath}.json`),
+      path.join(miniprogramNpmRoot, requestPath, 'index.js'),
+      path.join(miniprogramNpmRoot, requestPath, 'index.json'),
+    ]
+
+    return candidates.some((candidate) => fs.existsSync(candidate)) ? request : ''
   }
 }
 
