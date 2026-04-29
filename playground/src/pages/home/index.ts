@@ -5,10 +5,11 @@ import './index.scss'
 import col, { createPage } from '@codelet/core'
 import { getMainTitle } from '@/utils'
 import { xxText } from '@/libs/xxLib'
+import { x } from 'jq'
 
 createPage({
   onLoad() {
-    console.log('query => ', getMainTitle('1', '2', '3'), xxText('111'))
+    console.log('query => ', getMainTitle('1', '2', '3'), xxText('111'), x())
   },
   handleLogin() {
     col.navigateTo({
