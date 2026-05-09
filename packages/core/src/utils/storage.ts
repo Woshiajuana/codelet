@@ -1,15 +1,35 @@
 import { isArray, isObject } from '@daysnap/utils'
 import { col } from '../codelet'
 
+type DefaultVal<T> = T extends Record<string, any> ? Partial<T> : T
+
+interface StorageOptions<T = any> {
+  initialValue?: T
+  debug: boolean
+  cached: boolean
+}
+
 export class Storage<T = any> {
   private readonly key: string
   private value: T | null = null
+  private options: StorageOptions<T> = { debug: false, cached: true }
 
-  constructor(key: string, initialValue?: T) {
+  constructor(key: string, options?: Partial<StorageOptions<T>>) {
+    const { initialValue, ...rest } = options || {}
     this.key = key
 
-    if (initialValue) {
+    if (options) {
+      Object.assign(this.options, rest)
+    }
+
+    if (initialValue != undefined) {
       this.setItem(initialValue)
+    }
+  }
+
+  _debug(...args: string[]) {
+    if (this.options.debug) {
+      console.log(`【Storage】=> `, ...args)
     }
   }
 
@@ -18,7 +38,9 @@ export class Storage<T = any> {
    */
   setItem(val: T) {
     col.setStorageSync(this.key, val)
-    this.value = this.getItem()
+    if (this.options.cached) {
+      this.value = this.getItem()
+    }
     return val
   }
 
@@ -26,7 +48,7 @@ export class Storage<T = any> {
    * 获取值
    */
   getItem(): T | null
-  getItem(defaultVal: Partial<T>): T
+  getItem(defaultVal: DefaultVal<T>): T
   getItem(defaultVal?: any): any {
     const val = col.getStorageSync(this.key) ?? null
     if (val === null) {
@@ -79,13 +101,18 @@ export class Storage<T = any> {
   getItemWithCache(defaultVal: Partial<T>): T
   getItemWithCache(defaultVal?: any): any {
     if (this.value !== null) {
+      this._debug(`${this.key}: 命中缓存！`)
       return this.value
     }
+
+    this._debug(`${this.key}: 读取存储！`)
     const val = this.getItem()
     if (val === null) {
       return defaultVal ?? null
     }
+
     this.value = val
+
     return this.value
   }
 
