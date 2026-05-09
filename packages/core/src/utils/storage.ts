@@ -12,7 +12,7 @@ interface StorageOptions<T = any> {
 export class Storage<T = any> {
   private readonly key: string
   private value: T | null = null
-  private options: StorageOptions<T> = { debug: false, cached: true }
+  private options: StorageOptions<T> = { debug: false, cached: false }
 
   constructor(key: string, options?: Partial<StorageOptions<T>>) {
     const { initialValue, ...rest } = options || {}
