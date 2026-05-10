@@ -68,7 +68,7 @@ export class Storage<T = any> {
   /**
    * 更新值
    */
-  updateItem(val: Partial<T>) {
+  updateItem(val: DefaultVal<T>) {
     this.value = null
 
     const oldVal = this.getItem()
@@ -85,7 +85,7 @@ export class Storage<T = any> {
    * 获取值后，删除存储的值
    */
   getItemOnce(): T | null
-  getItemOnce(defaultVal: Partial<T>): T
+  getItemOnce(defaultVal: DefaultVal<T>): T
   getItemOnce(defaultVal?: any): any {
     const val = this.getItem(defaultVal)
 
@@ -98,7 +98,7 @@ export class Storage<T = any> {
    * 优先从缓存中获取值
    */
   getItemWithCache(): T | null
-  getItemWithCache(defaultVal: Partial<T>): T
+  getItemWithCache(defaultVal: DefaultVal<T>): T
   getItemWithCache(defaultVal?: any): any {
     if (this.value !== null) {
       this._debug(`${this.key}: 命中缓存！`)
