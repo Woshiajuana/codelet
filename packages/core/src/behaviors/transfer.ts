@@ -1,6 +1,8 @@
+import { isString } from '@daysnap/utils/isString'
 import { col } from '../codelet'
 import { createBehavior } from '../create'
 import { parseEvent } from '../utils'
+import { isFunction } from '@daysnap/utils/isFunction'
 
 let config: TransferBehaviorConfig = {
   checker: () => true,
@@ -43,7 +45,11 @@ export const TransferBehavior = createBehavior({
 
         // 执行自定义方法
         if (fn) {
-          ;(this as any)[fn](params)
+          if (isString(fn)) {
+            ;(this as any)[fn](params)
+          } else if (isFunction(fn)) {
+            fn.apply(this, params)
+          }
         }
       }
 
