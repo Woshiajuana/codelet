@@ -1,8 +1,7 @@
-import { isString } from '@daysnap/utils/isString'
+import { isString, isFunction } from '@daysnap/utils'
 import { col } from '../codelet'
 import { createBehavior } from '../create'
 import { parseEvent } from '../utils'
-import { isFunction } from '@daysnap/utils/isFunction'
 
 let config: TransferBehaviorConfig = {
   checker: () => true,
