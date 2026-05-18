@@ -1,6 +1,6 @@
 import { isString, isFunction } from '@daysnap/utils'
 import { col } from '../codelet'
-import { createBehavior } from '../create'
+import { createBehavior, type MiniEvent } from '../create'
 import { parseEvent } from '../utils'
 
 let config: TransferBehaviorConfig = {
@@ -8,7 +8,16 @@ let config: TransferBehaviorConfig = {
 }
 
 interface TransferBehaviorConfig {
-  checker: (data: any) => boolean | Promise<boolean>
+  checker: (data: {
+    url?: string
+    disabled?: boolean
+    query?: Record<string, any>
+    fn?: string
+    item?: any
+    event: MiniEvent
+    auth: string
+    guard: string
+  }) => boolean | Promise<boolean>
 }
 
 export function setupTransferBehavior(cfg: Partial<TransferBehaviorConfig>) {
@@ -22,7 +31,7 @@ export const TransferBehavior = createBehavior({
      */
     transfer(e: any) {
       const { item, ...rest } = parseEvent(e)
-      const { url, disabled, query, event, fn, auth } = Object.assign({}, rest, item)
+      const { url, disabled, query, event, fn, auth, guard } = Object.assign({}, rest, item)
 
       // 如果是禁用状态，则不处理
       if (disabled) {
@@ -52,9 +61,9 @@ export const TransferBehavior = createBehavior({
         }
       }
 
-      if (auth) {
+      if (auth || guard) {
         ;(async () => {
-          if (await config.checker({ url, disabled, query, event, fn, auth, item })) {
+          if (await config.checker({ url, disabled, query, event, fn, auth, item, guard })) {
             task()
           }
         })()
