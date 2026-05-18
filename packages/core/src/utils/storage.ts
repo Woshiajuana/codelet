@@ -50,7 +50,7 @@ export class Storage<T = any> {
   getItem(): T | null
   getItem(defaultVal: DefaultVal<T>): T
   getItem(defaultVal?: any): any {
-    const val = col.getStorageSync(this.key) ?? null
+    const val = col.getStorageSync(this.key) || null
     if (val === null) {
       return defaultVal ?? null
     }
