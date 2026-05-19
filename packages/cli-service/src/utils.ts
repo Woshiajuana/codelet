@@ -52,6 +52,9 @@ export const createExternalCopyPatterns = (
     from: pattern,
     to: '[path][name][ext]',
     noErrorOnMissing: true,
+    info: {
+      minimized: true,
+    },
   }))
 }
 
@@ -65,6 +68,9 @@ export const createNpmDirCopyPatterns = (npmDir: string): ObjectPattern[] => {
       from: resolve(npmDir),
       to: path.basename(npmDir),
       noErrorOnMissing: true,
+      info: {
+        minimized: true,
+      },
     },
   ]
 }

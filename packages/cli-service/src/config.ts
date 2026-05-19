@@ -82,6 +82,9 @@ export function getDefaultConfig(
           from: publicDir, // 源目录
           to: './', // 复制到输出目录（dist）的根路径
           noErrorOnMissing: true, // 若 public 目录不存在时不报错
+          info: {
+            minimized: true,
+          },
         },
         ...createExternalCopyPatterns(entryPath, externalSource),
         ...createNpmDirCopyPatterns(npmDir),
