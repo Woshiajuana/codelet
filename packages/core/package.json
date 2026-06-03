@@ -1,6 +1,6 @@
 {
   "name": "@codelet/core",
-  "version": "0.0.52",
+  "version": "0.0.53",
   "description": "mini core",
   "scripts": {
     "build": "npm run clean && tsc",
@@ -54,10 +54,10 @@
     "miniprogram-api-typings": "^3.12.2"
   },
   "devDependencies": {
-    "@daysnap/utils": "^0.1.29",
+    "@daysnap/utils": "^0.1.32",
     "rimraf": "^5.0.5"
   },
   "peerDependencies": {
-    "@daysnap/utils": ">=0.1.29"
+    "@daysnap/utils": ">=0.1.32"
   }
 }
